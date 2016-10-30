@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 public class AssembledActivity extends AppCompatActivity {
 
+    //test comment
     //numbers to keep track of the currently displayed image
     int currentFeetImage = 3;
     int currentLegsImage = 3;
