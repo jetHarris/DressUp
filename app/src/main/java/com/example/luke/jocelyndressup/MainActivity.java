@@ -78,13 +78,49 @@ public class MainActivity extends AppCompatActivity {
         if( getIntent().getExtras() != null)
         {
             String oName = getIntent().getExtras().getString("OutfitName");
-            if (oName != "")
+            if (oName != null)
             {
                 setOutfitByName(oName);
+            }
+            else
+            {
+                if (getIntent().getExtras().getString("type") != "")
+                {
+                    currentHeadImage = heads.indexOf(getIntent().getExtras().getInt("head"));
+                    currentTorsoImage = torsos.indexOf(getIntent().getExtras().getInt("torso"));
+                    currentLegsImage = legs.indexOf(getIntent().getExtras().getInt("legs"));
+                    currentFeetImage = feet.indexOf(getIntent().getExtras().getInt("feet"));
+                }
             }
         }
 
 
+        setImages();
+
+
+    }
+
+    public void setImages()
+    {
+        ImageView iv = (ImageView) findViewById(R.id.imageHead);
+        String fileName = "a" + heads.get(currentHeadImage);
+        int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+        iv.setImageResource(resID);
+
+        ImageView iv1 = (ImageView) findViewById(R.id.imageTorso);
+        String fileName1 = "a" + torsos.get(currentTorsoImage);
+        int resID1 = getResources().getIdentifier(fileName1, "drawable", getPackageName());
+        iv1.setImageResource(resID1);
+
+        ImageView iv2 = (ImageView) findViewById(R.id.imageLegs);
+        String fileName2 = "a" + legs.get(currentLegsImage);
+        int resID2 = getResources().getIdentifier(fileName2, "drawable", getPackageName());
+        iv2.setImageResource(resID2);
+
+        ImageView iv3 = (ImageView) findViewById(R.id.imageFeet);
+        String fileName3 = "a" + feet.get(currentFeetImage);
+        int resID3 = getResources().getIdentifier(fileName3, "drawable", getPackageName());
+        iv3.setImageResource(resID3);
     }
 
     public void setArrays()
@@ -135,27 +171,6 @@ public class MainActivity extends AppCompatActivity {
         numberOfHeads = heads.size() -1;
 
 
-        ImageView iv = (ImageView) findViewById(R.id.imageHead);
-        String fileName = "a" + heads.get(currentHeadImage);
-        int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-        iv.setImageResource(resID);
-
-        ImageView iv1 = (ImageView) findViewById(R.id.imageTorso);
-        String fileName1 = "a" + torsos.get(currentTorsoImage);
-        int resID1 = getResources().getIdentifier(fileName1, "drawable", getPackageName());
-        iv1.setImageResource(resID1);
-
-        ImageView iv2 = (ImageView) findViewById(R.id.imageLegs);
-        String fileName2 = "a" + legs.get(currentLegsImage);
-        int resID2 = getResources().getIdentifier(fileName2, "drawable", getPackageName());
-        iv2.setImageResource(resID2);
-
-        ImageView iv3 = (ImageView) findViewById(R.id.imageFeet);
-        String fileName3 = "a" + feet.get(currentFeetImage);
-        int resID3 = getResources().getIdentifier(fileName3, "drawable", getPackageName());
-        iv3.setImageResource(resID3);
-
-
         db.close();
     }
 
@@ -202,25 +217,25 @@ public class MainActivity extends AppCompatActivity {
         if(c.moveToFirst()){
 
             //get the id's from the database then set the appropriate images
-            currentHeadImage = c.getInt(2);
+            currentHeadImage = heads.indexOf(c.getInt(2));
             ImageView iv = (ImageView) findViewById(R.id.imageHead);
             String fileName = "a" + c.getInt(2);
             int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
             iv.setImageResource(resID);
 
-            currentTorsoImage = c.getInt(3);
+            currentTorsoImage = torsos.indexOf(c.getInt(3));
             ImageView iv1 = (ImageView) findViewById(R.id.imageTorso);
             String fileName1 = "a" + c.getInt(3);
             int resID1 = getResources().getIdentifier(fileName1, "drawable", getPackageName());
             iv1.setImageResource(resID1);
 
-            currentLegsImage = c.getInt(4);
+            currentLegsImage = legs.indexOf(c.getInt(4));
             ImageView iv2 = (ImageView) findViewById(R.id.imageLegs);
             String fileName2 = "a" + c.getInt(4);
             int resID2 = getResources().getIdentifier(fileName2, "drawable", getPackageName());
             iv2.setImageResource(resID2);
 
-            currentFeetImage = c.getInt(5);
+            currentFeetImage = feet.indexOf(c.getInt(5));
             ImageView iv3 = (ImageView) findViewById(R.id.imageFeet);
             String fileName3 = "a" + c.getInt(5);
             int resID3 = getResources().getIdentifier(fileName3, "drawable", getPackageName());
@@ -400,21 +415,37 @@ public class MainActivity extends AppCompatActivity {
             case R.id.imageHead:
                 Intent i4 = new Intent(this, ItemListActivity.class);
                 i4.putExtra("type", "head");
+                i4.putExtra("head", heads.get(currentHeadImage));
+                i4.putExtra("torso", torsos.get(currentTorsoImage));
+                i4.putExtra("legs", legs.get(currentLegsImage));
+                i4.putExtra("feet", feet.get(currentFeetImage));
                 startActivity(i4);
                 break;
             case R.id.imageTorso:
                 Intent i5 = new Intent(this, ItemListActivity.class);
-                i5.putExtra("type", "head");
+                i5.putExtra("type", "torso");
+                i5.putExtra("head", heads.get(currentHeadImage));
+                i5.putExtra("torso", torsos.get(currentTorsoImage));
+                i5.putExtra("legs", legs.get(currentLegsImage));
+                i5.putExtra("feet", feet.get(currentFeetImage));
                 startActivity(i5);
                 break;
             case R.id.imageLegs:
                 Intent i6 = new Intent(this, ItemListActivity.class);
-                i6.putExtra("type", "head");
+                i6.putExtra("type", "legs");
+                i6.putExtra("head", heads.get(currentHeadImage));
+                i6.putExtra("torso", torsos.get(currentTorsoImage));
+                i6.putExtra("legs", legs.get(currentLegsImage));
+                i6.putExtra("feet", feet.get(currentFeetImage));
                 startActivity(i6);
                 break;
-            case R.id.image:
+            case R.id.imageFeet:
                 Intent i7 = new Intent(this, ItemListActivity.class);
-                i7.putExtra("type", "head");
+                i7.putExtra("type", "feet");
+                i7.putExtra("head", heads.get(currentHeadImage));
+                i7.putExtra("torso", torsos.get(currentTorsoImage));
+                i7.putExtra("legs", legs.get(currentLegsImage));
+                i7.putExtra("feet", feet.get(currentFeetImage));
                 startActivity(i7);
                 break;
 
