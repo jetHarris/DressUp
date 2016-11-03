@@ -26,6 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     //variables to keep track of the total number of items for each category
@@ -35,13 +36,17 @@ public class MainActivity extends AppCompatActivity {
     int numberOfHeads = 3;
 
     //variables to keep track of what images are currently displayed
-    int currentFeetImage = 3;
-    int currentLegsImage = 3;
-    int currentTorsoImage = 3;
-    int currentHeadImage = 3;
+    int currentFeetImage = 0;
+    int currentLegsImage = 0;
+    int currentTorsoImage = 0;
+    int currentHeadImage = 0;
 
     private String m_Text = "";
     private DBAdapter db;
+    ArrayList<Integer> heads = new ArrayList<Integer>();
+    ArrayList<Integer> feet = new ArrayList<Integer>();
+    ArrayList<Integer> legs = new ArrayList<Integer>();
+    ArrayList<Integer> torsos = new ArrayList<Integer>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
 
+        setArrays();
+
         //get intent which would be from the outfits page
         //then use the outfit name to set the images appropriately
         if( getIntent().getExtras() != null)
@@ -76,6 +83,80 @@ public class MainActivity extends AppCompatActivity {
                 setOutfitByName(oName);
             }
         }
+
+
+    }
+
+    public void setArrays()
+    {
+        db.open();
+        Cursor c;
+        //get all the head id's
+        c = db.getItemsByType("head");
+        if(c.moveToFirst())
+        {
+            do {
+                heads.add(c.getInt(0));
+                //DisplayContact(c);
+            }while(c.moveToNext());
+        }
+        //get all the torso ids
+        c = db.getItemsByType("torso");
+        if(c.moveToFirst())
+        {
+            do {
+                torsos.add(c.getInt(0));
+                //DisplayContact(c);
+            }while(c.moveToNext());
+        }
+        //get all the leg ids
+        c = db.getItemsByType("legs");
+        if(c.moveToFirst())
+        {
+            do {
+                legs.add(c.getInt(0));
+                //DisplayContact(c);
+            }while(c.moveToNext());
+        }
+        //get all the feet ids
+        c = db.getItemsByType("feet");
+        if(c.moveToFirst())
+        {
+            do {
+                feet.add(c.getInt(0));
+                //DisplayContact(c);
+            }while(c.moveToNext());
+        }
+
+
+        numberOfFeet = feet.size() -1;
+        numberOfLegs = legs.size() -1;
+        numberOfTorsos = torsos.size() -1;
+        numberOfHeads = heads.size() -1;
+
+
+        ImageView iv = (ImageView) findViewById(R.id.imageHead);
+        String fileName = "a" + heads.get(currentHeadImage);
+        int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+        iv.setImageResource(resID);
+
+        ImageView iv1 = (ImageView) findViewById(R.id.imageTorso);
+        String fileName1 = "a" + torsos.get(currentTorsoImage);
+        int resID1 = getResources().getIdentifier(fileName1, "drawable", getPackageName());
+        iv1.setImageResource(resID1);
+
+        ImageView iv2 = (ImageView) findViewById(R.id.imageLegs);
+        String fileName2 = "a" + legs.get(currentLegsImage);
+        int resID2 = getResources().getIdentifier(fileName2, "drawable", getPackageName());
+        iv2.setImageResource(resID2);
+
+        ImageView iv3 = (ImageView) findViewById(R.id.imageFeet);
+        String fileName3 = "a" + feet.get(currentFeetImage);
+        int resID3 = getResources().getIdentifier(fileName3, "drawable", getPackageName());
+        iv3.setImageResource(resID3);
+
+
+        db.close();
     }
 
     //used to create the menu
@@ -121,27 +202,27 @@ public class MainActivity extends AppCompatActivity {
         if(c.moveToFirst()){
 
             //get the id's from the database then set the appropriate images
-            currentHeadImage = Integer.parseInt(c.getString(2));
+            currentHeadImage = c.getInt(2);
             ImageView iv = (ImageView) findViewById(R.id.imageHead);
-            String fileName = "head" + currentHeadImage;
+            String fileName = "a" + c.getInt(2);
             int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
             iv.setImageResource(resID);
 
-            currentTorsoImage = Integer.parseInt(c.getString(3));
+            currentTorsoImage = c.getInt(3);
             ImageView iv1 = (ImageView) findViewById(R.id.imageTorso);
-            String fileName1 = "torso" + currentTorsoImage;
+            String fileName1 = "a" + c.getInt(3);
             int resID1 = getResources().getIdentifier(fileName1, "drawable", getPackageName());
             iv1.setImageResource(resID1);
 
-            currentLegsImage = Integer.parseInt(c.getString(4));
+            currentLegsImage = c.getInt(4);
             ImageView iv2 = (ImageView) findViewById(R.id.imageLegs);
-            String fileName2 = "legs" + currentLegsImage;
+            String fileName2 = "a" + c.getInt(4);
             int resID2 = getResources().getIdentifier(fileName2, "drawable", getPackageName());
             iv2.setImageResource(resID2);
 
-            currentFeetImage = Integer.parseInt(c.getString(5));
+            currentFeetImage = c.getInt(5);
             ImageView iv3 = (ImageView) findViewById(R.id.imageFeet);
-            String fileName3 = "feet" + currentFeetImage;
+            String fileName3 = "a" + c.getInt(5);
             int resID3 = getResources().getIdentifier(fileName3, "drawable", getPackageName());
             iv3.setImageResource(resID3);
         }
@@ -162,26 +243,6 @@ public class MainActivity extends AppCompatActivity {
         outputStream.close();
     }
 
-    //test method that should be implimented in the future
-    //idea being to switch layout of this page when it goes through an orientation switch
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        System.out.println("TRIIIIIIGGGGERREED");
-        super.onConfigurationChanged(newConfig);
-
-        currentHeadImage = 1;
-        ImageView iv = (ImageView) findViewById(R.id.imageHead);
-        String fileName = "head" + currentHeadImage;
-        int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-        iv.setImageResource(resID);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     //onClick method to handle all the click events from the buttons on the page.
     public void onClick(View view) {
@@ -191,23 +252,23 @@ public class MainActivity extends AppCompatActivity {
                 if(currentHeadImage < numberOfHeads)
                     ++currentHeadImage;
                 else
-                    currentHeadImage = 1;
+                    currentHeadImage = 0;
                 {
                 ImageView iv = (ImageView) findViewById(R.id.imageHead);
-                String fileName = "head" + currentHeadImage;
+                String fileName = "a" + heads.get(currentHeadImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
                  }
                 break;
             //if the prev head button is clicked then switch the image of the head to the previous one
             case R.id.prevHeadBtn:
-                if(currentHeadImage > 1)
+                if(currentHeadImage > 0)
                     --currentHeadImage;
                 else
                     currentHeadImage = numberOfHeads;
                 {
                 ImageView iv = (ImageView) findViewById(R.id.imageHead);
-                String fileName = "head" + currentHeadImage;
+                String fileName = "a" + heads.get(currentHeadImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
                  }
@@ -217,23 +278,23 @@ public class MainActivity extends AppCompatActivity {
                 if(currentTorsoImage < numberOfTorsos)
                     ++currentTorsoImage;
                 else
-                    currentTorsoImage = 1;
+                    currentTorsoImage = 0;
             {
                 ImageView iv = (ImageView) findViewById(R.id.imageTorso);
-                String fileName = "torso" + currentTorsoImage;
+                String fileName = "a" + torsos.get(currentTorsoImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
                 break;
             //if the prev torso button is clicked then switch the image of the torso to the previous one
             case R.id.prevTorsoBtn:
-                if(currentTorsoImage > 1)
+                if(currentTorsoImage > 0)
                     --currentTorsoImage;
                 else
                     currentTorsoImage = numberOfTorsos;
             {
                 ImageView iv = (ImageView) findViewById(R.id.imageTorso);
-                String fileName = "torso" + currentTorsoImage;
+                String fileName = "a" + torsos.get(currentTorsoImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
@@ -243,23 +304,23 @@ public class MainActivity extends AppCompatActivity {
                 if(currentLegsImage < numberOfLegs)
                     ++currentLegsImage;
                 else
-                    currentLegsImage = 1;
+                    currentLegsImage = 0;
             {
                 ImageView iv = (ImageView) findViewById(R.id.imageLegs);
-                String fileName = "legs" + currentLegsImage;
+                String fileName = "a" + legs.get(currentLegsImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
                 break;
             //if the prev legs button is clicked then switch the image of the legs to the previous one
             case R.id.prevLegsBtn:
-                if(currentLegsImage > 1)
+                if(currentLegsImage > 0)
                     --currentLegsImage;
                 else
                     currentLegsImage = numberOfLegs;
             {
                 ImageView iv = (ImageView) findViewById(R.id.imageLegs);
-                String fileName = "legs" + currentLegsImage;
+                String fileName = "a" + legs.get(currentLegsImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
@@ -269,23 +330,23 @@ public class MainActivity extends AppCompatActivity {
                 if(currentFeetImage < numberOfFeet)
                     ++currentFeetImage;
                 else
-                    currentFeetImage = 1;
+                    currentFeetImage = 0;
             {
                 ImageView iv = (ImageView) findViewById(R.id.imageFeet);
-                String fileName = "feet" + currentFeetImage;
+                String fileName = "a" + feet.get(currentFeetImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
                 break;
             //if the prev feet button is clicked then switch the image of the feet to the previous one
             case R.id.prevFeetBtn:
-                if(currentFeetImage > 1)
+                if(currentFeetImage > 0)
                     --currentFeetImage;
                 else
                     currentFeetImage = numberOfFeet;
             {
                 ImageView iv = (ImageView) findViewById(R.id.imageFeet);
-                String fileName = "feet" + currentFeetImage;
+                String fileName = "a" + feet.get(currentFeetImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
@@ -310,7 +371,8 @@ public class MainActivity extends AppCompatActivity {
                         //add a contact into the database
                         if(m_Text != "") {
                             db.open();
-                            long id = db.insertOutfit(m_Text,currentHeadImage,currentTorsoImage,currentLegsImage,currentFeetImage);
+                            long id = db.insertOutfit(m_Text,heads.get(currentHeadImage),torsos.get(currentTorsoImage),
+                                    legs.get(currentLegsImage),feet.get(currentFeetImage));
                             db.close();
                         }
                     }
@@ -334,6 +396,26 @@ public class MainActivity extends AppCompatActivity {
                 i3.putExtra("legs", currentLegsImage);
                 i3.putExtra("feet", currentFeetImage);
                 startActivity(i3);
+                break;
+            case R.id.imageHead:
+                Intent i4 = new Intent(this, ItemListActivity.class);
+                i4.putExtra("type", "head");
+                startActivity(i4);
+                break;
+            case R.id.imageTorso:
+                Intent i5 = new Intent(this, ItemListActivity.class);
+                i5.putExtra("type", "head");
+                startActivity(i5);
+                break;
+            case R.id.imageLegs:
+                Intent i6 = new Intent(this, ItemListActivity.class);
+                i6.putExtra("type", "head");
+                startActivity(i6);
+                break;
+            case R.id.image:
+                Intent i7 = new Intent(this, ItemListActivity.class);
+                i7.putExtra("type", "head");
+                startActivity(i7);
                 break;
 
         }

@@ -25,11 +25,12 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageHead"
-            android:src="@drawable/head3"
+            android:src="@drawable/a6"
             android:layout_marginBottom="10dp"
             android:background="#000000"
             android:padding="1dp"
-            android:layout_weight="0.03" />
+            android:layout_weight="0.03"
+            android:onClick="onClick" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -37,10 +38,11 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageTorso"
-            android:src="@drawable/torso3"
+            android:src="@drawable/a12"
             android:background="#000000"
             android:padding="1dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:onClick="onClick" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -48,10 +50,11 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageLegs"
-            android:src="@drawable/legs3"
+            android:src="@drawable/a9"
             android:background="#000000"
             android:padding="1dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:onClick="onClick" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -61,7 +64,8 @@
             android:id="@+id/imageFeet"
             android:background="#000000"
             android:padding="1dp"
-            android:src="@drawable/feet3" />
+            android:src="@drawable/a3"
+            android:onClick="onClick" />
     </LinearLayout>
 
 

@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:id="@+id/imageHead"
-        android:src="@drawable/head3"
+        android:src="@drawable/a6"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:background="#ffffff" />
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="110dp"
         android:id="@+id/imageTorso"
-        android:src="@drawable/torso3"
+        android:src="@drawable/a12"
         android:layout_below="@+id/imageHead"
         android:layout_alignParentStart="true"
         android:background="#ffffff" />
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="180dp"
         android:id="@+id/imageLegs"
-        android:src="@drawable/legs3"
+        android:src="@drawable/a9"
         android:layout_below="@+id/imageTorso"
         android:layout_centerHorizontal="true"
         android:background="#ffffff" />
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/imageFeet"
-        android:src="@drawable/feet3"
+        android:src="@drawable/a3"
         android:layout_below="@+id/imageLegs"
         android:layout_centerHorizontal="true"
         android:background="#ffffff" />
