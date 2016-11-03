@@ -275,7 +275,7 @@ public class DBAdapter {
     public Cursor getItem(long rowId) throws SQLException
     {
         Cursor mCursor =
-                db.query(true, DATABASE_TABLE_OUTFITS, new String[] {KEY_ROWID,
+                db.query(true, DATABASE_TABLE_ITEMS, new String[] {KEY_ROWID,
                                 KEY_ITEM_NAME, KEY_PRICE, KEY_VENDOR_NAME,KEY_SENDER_ID,KEY_TYPE}, KEY_ROWID + "=" + rowId, null,
                         null, null, null, null);
         if (mCursor != null) {
@@ -331,7 +331,7 @@ public class DBAdapter {
         args.put(KEY_VENDOR_NAME, vendName);
         args.put(KEY_SENDER_ID, senderID);
         args.put(KEY_TYPE, type);
-        return db.update(DATABASE_TABLE_OUTFITS, args, KEY_ROWID + "=" + rowId, null) > 0;
+        return db.update(DATABASE_TABLE_ITEMS, args, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
 }

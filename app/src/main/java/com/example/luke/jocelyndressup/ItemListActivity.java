@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -59,6 +60,50 @@ public class ItemListActivity extends AppCompatActivity {
 
             }
         });
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+
+                sendToDetails(pos);
+                return true;
+            }
+        });
+    }
+
+    public void sendToDetails(int position){
+        Intent i = new Intent(this, ItemDetailActivity.class);
+        i.putExtra("id", itemIDs.get(position));
+        i.putExtra("type", type);
+        switch(type) {
+            //if the next head button is clicked then switch the image of the head to the next one
+            case "head":
+                i.putExtra("head", itemIDs.get(position));
+                i.putExtra("torso", torsoID);
+                i.putExtra("legs", legsID);
+                i.putExtra("feet", feetID);
+                break;
+            case "torso":
+                i.putExtra("head", headID);
+                i.putExtra("torso", itemIDs.get(position));
+                i.putExtra("legs", legsID);
+                i.putExtra("feet", feetID);
+                break;
+            case "legs":
+                i.putExtra("head", headID);
+                i.putExtra("torso", torsoID);
+                i.putExtra("legs", itemIDs.get(position));
+                i.putExtra("feet", feetID);
+                break;
+            case "feet":
+                i.putExtra("head", headID);
+                i.putExtra("torso", torsoID);
+                i.putExtra("legs", legsID);
+                i.putExtra("feet", itemIDs.get(position));
+                break;
+        }
+        startActivity(i);
     }
 
     public void sendToMain(int position) {

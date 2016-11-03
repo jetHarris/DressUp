@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -47,45 +48,51 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> feet = new ArrayList<Integer>();
     ArrayList<Integer> legs = new ArrayList<Integer>();
     ArrayList<Integer> torsos = new ArrayList<Integer>();
+    ArrayList<Float> headPrices = new ArrayList<Float>();
+    ArrayList<Float> feetPrices = new ArrayList<Float>();
+    ArrayList<Float> legPrices = new ArrayList<Float>();
+    ArrayList<Float> torsoPrices = new ArrayList<Float>();
+    TextView priceView;
+    TextView taxView;
+    TextView totalView;
+
+    private float runningPrice = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = new DBAdapter(this);
         //get the existing database file or from assets folder if doesn't exist
-        try
-        {
+        try {
             String destPath = "/data/data/" + getPackageName() + "/databases";
             File f = new File(destPath);
-            if(!f.exists()){
+            if (!f.exists()) {
                 f.mkdirs();
                 f.createNewFile();
                 //copy from the db from the assets fodler
                 CopyDB(getBaseContext().getAssets().open("mydb"), new FileOutputStream(destPath + "/MyDB"));
             }
-        }
-        catch(FileNotFoundException ex){
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
-        catch(IOException ex){
-            ex.printStackTrace();
-        }
+
+        priceView = (TextView) findViewById(R.id.priceText);
+        taxView = (TextView) findViewById(R.id.taxText);
+        totalView = (TextView) findViewById(R.id.totalText);
 
         setArrays();
 
         //get intent which would be from the outfits page
         //then use the outfit name to set the images appropriately
-        if( getIntent().getExtras() != null)
-        {
+        if (getIntent().getExtras() != null) {
             String oName = getIntent().getExtras().getString("OutfitName");
-            if (oName != null)
-            {
+            if (oName != null) {
                 setOutfitByName(oName);
-            }
-            else
-            {
-                if (getIntent().getExtras().getString("type") != "")
-                {
+            } else {
+                if (getIntent().getExtras().getString("type") != "") {
                     currentHeadImage = heads.indexOf(getIntent().getExtras().getInt("head"));
                     currentTorsoImage = torsos.indexOf(getIntent().getExtras().getInt("torso"));
                     currentLegsImage = legs.indexOf(getIntent().getExtras().getInt("legs"));
@@ -95,13 +102,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        recalculatePrice();
         setImages();
 
 
     }
 
-    public void setImages()
-    {
+    public void recalculatePrice() {
+        runningPrice = 0;
+        runningPrice += headPrices.get(currentHeadImage);
+        runningPrice += torsoPrices.get(currentTorsoImage);
+        runningPrice += legPrices.get(currentLegsImage);
+        runningPrice += feetPrices.get(currentFeetImage);
+
+        double roundedPrice = Math.round(runningPrice * 100.0) / 100.0;
+        double tax = Math.round((runningPrice*0.13) * 100.0) / 100.0;
+        double total = Math.round((runningPrice*1.13) * 100.0) / 100.0;
+        priceView.setText("" + roundedPrice);
+        taxView.setText("" + tax);
+        totalView.setText("" + total);
+
+    }
+
+    public void setImages() {
         ImageView iv = (ImageView) findViewById(R.id.imageHead);
         String fileName = "a" + heads.get(currentHeadImage);
         int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
@@ -123,52 +146,51 @@ public class MainActivity extends AppCompatActivity {
         iv3.setImageResource(resID3);
     }
 
-    public void setArrays()
-    {
+    public void setArrays() {
         db.open();
         Cursor c;
         //get all the head id's
         c = db.getItemsByType("head");
-        if(c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             do {
                 heads.add(c.getInt(0));
+                headPrices.add(c.getFloat(2));
                 //DisplayContact(c);
-            }while(c.moveToNext());
+            } while (c.moveToNext());
         }
         //get all the torso ids
         c = db.getItemsByType("torso");
-        if(c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             do {
                 torsos.add(c.getInt(0));
+                torsoPrices.add(c.getFloat(2));
                 //DisplayContact(c);
-            }while(c.moveToNext());
+            } while (c.moveToNext());
         }
         //get all the leg ids
         c = db.getItemsByType("legs");
-        if(c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             do {
                 legs.add(c.getInt(0));
+                legPrices.add(c.getFloat(2));
                 //DisplayContact(c);
-            }while(c.moveToNext());
+            } while (c.moveToNext());
         }
         //get all the feet ids
         c = db.getItemsByType("feet");
-        if(c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             do {
                 feet.add(c.getInt(0));
+                feetPrices.add(c.getFloat(2));
                 //DisplayContact(c);
-            }while(c.moveToNext());
+            } while (c.moveToNext());
         }
 
 
-        numberOfFeet = feet.size() -1;
-        numberOfLegs = legs.size() -1;
-        numberOfTorsos = torsos.size() -1;
-        numberOfHeads = heads.size() -1;
+        numberOfFeet = feet.size() - 1;
+        numberOfLegs = legs.size() - 1;
+        numberOfTorsos = torsos.size() - 1;
+        numberOfHeads = heads.size() - 1;
 
 
         db.close();
@@ -188,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onOptionsItemSelected(item);
 
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             //if about was clicked then go to the about page
             case R.id.action_about:
                 Intent i = new Intent(this, AboutActivity.class);
@@ -207,14 +229,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //a method used to set all the images displaying an outfit, given the name of the outfit
-    public void setOutfitByName(String name)
-    {
+    public void setOutfitByName(String name) {
         //call the database method to first actually get outfit by name
         Cursor c;
         db.open();
         c = db.getOutfitByName(name);
 
-        if(c.moveToFirst()){
+        if (c.moveToFirst()) {
 
             //get the id's from the database then set the appropriate images
             currentHeadImage = heads.indexOf(c.getInt(2));
@@ -240,19 +261,19 @@ public class MainActivity extends AppCompatActivity {
             String fileName3 = "a" + c.getInt(5);
             int resID3 = getResources().getIdentifier(fileName3, "drawable", getPackageName());
             iv3.setImageResource(resID3);
-        }
-        else{
-            Toast.makeText(this,"Get failed on " + name , Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Get failed on " + name, Toast.LENGTH_SHORT).show();
         }
         db.close();
     }
+
     //copyDB method given to us in class
     public void CopyDB(InputStream inputStream, OutputStream outputStream) throws IOException {
         //Copy one byte at a time
         byte[] buffer = new byte[1024];
         int length;
-        while((length = inputStream.read(buffer)) > 0){
-            outputStream.write(buffer,0,length);
+        while ((length = inputStream.read(buffer)) > 0) {
+            outputStream.write(buffer, 0, length);
         }
         inputStream.close();  //close streams
         outputStream.close();
@@ -261,36 +282,38 @@ public class MainActivity extends AppCompatActivity {
 
     //onClick method to handle all the click events from the buttons on the page.
     public void onClick(View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             //if the next head button is clicked then switch the image of the head to the next one
             case R.id.nextHeadBtn:
-                if(currentHeadImage < numberOfHeads)
+                if (currentHeadImage < numberOfHeads)
                     ++currentHeadImage;
                 else
                     currentHeadImage = 0;
-                {
+            {
                 ImageView iv = (ImageView) findViewById(R.id.imageHead);
                 String fileName = "a" + heads.get(currentHeadImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
-                 }
-                break;
+            }
+            recalculatePrice();
+            break;
             //if the prev head button is clicked then switch the image of the head to the previous one
             case R.id.prevHeadBtn:
-                if(currentHeadImage > 0)
+                if (currentHeadImage > 0)
                     --currentHeadImage;
                 else
                     currentHeadImage = numberOfHeads;
-                {
+            {
                 ImageView iv = (ImageView) findViewById(R.id.imageHead);
                 String fileName = "a" + heads.get(currentHeadImage);
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
-                 }
-                break;
+            }
+            recalculatePrice();
+            break;
             //if the next torso button is clicked then switch the image of the torso to the next one
             case R.id.nextTorsoBtn:
-                if(currentTorsoImage < numberOfTorsos)
+                if (currentTorsoImage < numberOfTorsos)
                     ++currentTorsoImage;
                 else
                     currentTorsoImage = 0;
@@ -300,10 +323,11 @@ public class MainActivity extends AppCompatActivity {
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
-                break;
+            recalculatePrice();
+            break;
             //if the prev torso button is clicked then switch the image of the torso to the previous one
             case R.id.prevTorsoBtn:
-                if(currentTorsoImage > 0)
+                if (currentTorsoImage > 0)
                     --currentTorsoImage;
                 else
                     currentTorsoImage = numberOfTorsos;
@@ -313,10 +337,11 @@ public class MainActivity extends AppCompatActivity {
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
-                break;
+            recalculatePrice();
+            break;
             //if the next legs button is clicked then switch the image of the legs to the next one
             case R.id.nextLegsBtn:
-                if(currentLegsImage < numberOfLegs)
+                if (currentLegsImage < numberOfLegs)
                     ++currentLegsImage;
                 else
                     currentLegsImage = 0;
@@ -326,10 +351,11 @@ public class MainActivity extends AppCompatActivity {
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
-                break;
+            recalculatePrice();
+            break;
             //if the prev legs button is clicked then switch the image of the legs to the previous one
             case R.id.prevLegsBtn:
-                if(currentLegsImage > 0)
+                if (currentLegsImage > 0)
                     --currentLegsImage;
                 else
                     currentLegsImage = numberOfLegs;
@@ -339,10 +365,11 @@ public class MainActivity extends AppCompatActivity {
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
-                break;
+            recalculatePrice();
+            break;
             //if the next feet button is clicked then switch the image of the feet to the next one
             case R.id.nextFeetBtn:
-                if(currentFeetImage < numberOfFeet)
+                if (currentFeetImage < numberOfFeet)
                     ++currentFeetImage;
                 else
                     currentFeetImage = 0;
@@ -352,10 +379,11 @@ public class MainActivity extends AppCompatActivity {
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
-                break;
+            recalculatePrice();
+            break;
             //if the prev feet button is clicked then switch the image of the feet to the previous one
             case R.id.prevFeetBtn:
-                if(currentFeetImage > 0)
+                if (currentFeetImage > 0)
                     --currentFeetImage;
                 else
                     currentFeetImage = numberOfFeet;
@@ -365,7 +393,8 @@ public class MainActivity extends AppCompatActivity {
                 int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 iv.setImageResource(resID);
             }
-                break;
+            recalculatePrice();
+            break;
 
             //if the save button is clicked
             case R.id.buttonSave:
@@ -384,10 +413,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         m_Text = input.getText().toString();
                         //add a contact into the database
-                        if(m_Text != "") {
+                        if (m_Text != "") {
                             db.open();
-                            long id = db.insertOutfit(m_Text,heads.get(currentHeadImage),torsos.get(currentTorsoImage),
-                                    legs.get(currentLegsImage),feet.get(currentFeetImage));
+                            long id = db.insertOutfit(m_Text, heads.get(currentHeadImage), torsos.get(currentTorsoImage),
+                                    legs.get(currentLegsImage), feet.get(currentFeetImage));
                             db.close();
                         }
                     }
@@ -406,10 +435,10 @@ public class MainActivity extends AppCompatActivity {
             //if the assemble button is pressed then the record the current state of the images and send that to the assembled page
             case R.id.buttonAssemble:
                 Intent i3 = new Intent(this, AssembledActivity.class);
-                i3.putExtra("head", currentHeadImage);
-                i3.putExtra("torso", currentTorsoImage);
-                i3.putExtra("legs", currentLegsImage);
-                i3.putExtra("feet", currentFeetImage);
+                i3.putExtra("head", heads.get(currentHeadImage));
+                i3.putExtra("torso", torsos.get(currentTorsoImage));
+                i3.putExtra("legs", legs.get(currentLegsImage));
+                i3.putExtra("feet", feet.get(currentFeetImage));
                 startActivity(i3);
                 break;
             case R.id.imageHead:

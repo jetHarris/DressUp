@@ -30,22 +30,22 @@ public class AssembledActivity extends AppCompatActivity {
 
             //using the image choices, set the appropriate image
             ImageView iv = (ImageView) findViewById(R.id.imageHead);
-            String fileName = "head" + currentHeadImage;
+            String fileName = "a" + currentHeadImage;
             int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
             iv.setImageResource(resID);
 
             ImageView iv2 = (ImageView) findViewById(R.id.imageTorso);
-            String fileName2 = "torso" + currentTorsoImage;
+            String fileName2 = "a" + currentTorsoImage;
             int resID2 = getResources().getIdentifier(fileName2, "drawable", getPackageName());
             iv2.setImageResource(resID2);
 
             ImageView iv3 = (ImageView) findViewById(R.id.imageLegs);
-            String fileName3 = "legs" + currentLegsImage;
+            String fileName3 = "a" + currentLegsImage;
             int resID3 = getResources().getIdentifier(fileName3, "drawable", getPackageName());
             iv3.setImageResource(resID3);
 
             ImageView iv4 = (ImageView) findViewById(R.id.imageFeet);
-            String fileName4 = "feet" + currentFeetImage;
+            String fileName4 = "a" + currentFeetImage;
             int resID4 = getResources().getIdentifier(fileName4, "drawable", getPackageName());
             iv4.setImageResource(resID4);
         }

@@ -22,7 +22,8 @@
             android:name=".AssembledActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".OutfitsActivity" />
-        <activity android:name=".ItemListActivity"></activity>
+        <activity android:name=".ItemListActivity" />
+        <activity android:name=".ItemDetailActivity"></activity>
     </application>
 
 </manifest>
