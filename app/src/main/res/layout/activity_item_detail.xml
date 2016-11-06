@@ -80,4 +80,13 @@
         android:layout_toStartOf="@+id/detailImage"
         android:onClick="cancelClicked" />
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vendText"
+        android:id="@+id/typeSpinner"
+        android:entries="@array/type_arrays"
+        android:prompt="@string/type_promt"
+        android:layout_toStartOf="@+id/detailImage" />
+
 </RelativeLayout>

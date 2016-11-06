@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">JocelynDressUp</string>
+
+    <string name="type_promt">Type</string>
+
+    <string-array name="type_arrays">
+        <item>Head</item>
+        <item>Torso</item>
+        <item>Legs</item>
+        <item>Feet</item>
+    </string-array>
 </resources>

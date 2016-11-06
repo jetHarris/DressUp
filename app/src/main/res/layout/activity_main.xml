@@ -74,7 +74,8 @@
         android:layout_height="match_parent"
         android:id="@+id/linearLayout2"
         android:orientation="vertical"
-        android:layout_toRightOf="@id/linearLayout1">
+        android:layout_toRightOf="@id/linearLayout1"
+        android:weightSum="1">
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
@@ -119,6 +120,7 @@
             android:onClick="onClick"
             android:layout_alignTop="@+id/nextFeetBtn"
             android:layout_marginTop="70dp"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -243,5 +245,35 @@
         android:layout_below="@+id/textView9"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/textView9" />
+
+    <TextView
+        android:text="Outfit:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/totalText"
+        android:id="@+id/outfitLabel"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/outfitLabel"
+        android:layout_alignStart="@+id/outfitLabel"
+        android:id="@+id/outfitNameText"
+        android:visibility="invisible"
+        android:text="blah" />
+
+    <Button
+        android:text="Remove Outfit"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/removeOutfitBtn"
+        android:layout_weight="0.00"
+        android:layout_alignBaseline="@+id/buttonAssemble"
+        android:layout_alignBottom="@+id/buttonAssemble"
+        android:layout_toEndOf="@+id/buttonAssemble"
+        android:visibility="invisible"
+        android:onClick="onClick" />
 
 </RelativeLayout>

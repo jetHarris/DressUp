@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     TextView totalView;
 
     private float runningPrice = 0;
+    boolean outfitOnDisplay = false;
+    String oName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +90,10 @@ public class MainActivity extends AppCompatActivity {
         //get intent which would be from the outfits page
         //then use the outfit name to set the images appropriately
         if (getIntent().getExtras() != null) {
-            String oName = getIntent().getExtras().getString("OutfitName");
+            oName = getIntent().getExtras().getString("OutfitName");
             if (oName != null) {
                 setOutfitByName(oName);
+                outfitOnDisplay = true;
             } else {
                 if (getIntent().getExtras().getString("type") != "") {
                     currentHeadImage = heads.indexOf(getIntent().getExtras().getInt("head"));
@@ -99,6 +102,16 @@ public class MainActivity extends AppCompatActivity {
                     currentFeetImage = feet.indexOf(getIntent().getExtras().getInt("feet"));
                 }
             }
+        }
+
+        if(outfitOnDisplay){
+            TextView label = (TextView)findViewById(R.id.outfitLabel);
+            TextView nameLabel = (TextView)findViewById(R.id.outfitNameText);
+            Button removeOutfit = (Button)findViewById(R.id.removeOutfitBtn);
+            removeOutfit.setVisibility(View.VISIBLE);
+            label.setVisibility(View.VISIBLE);
+            nameLabel.setVisibility(View.VISIBLE);
+            nameLabel.setText(oName);
         }
 
 
@@ -477,6 +490,17 @@ public class MainActivity extends AppCompatActivity {
                 i7.putExtra("feet", feet.get(currentFeetImage));
                 startActivity(i7);
                 break;
+            case R.id.removeOutfitBtn:
+                db.open();
+                db.deleteOutfitByName(oName);
+                db.close();
+                TextView label = (TextView)findViewById(R.id.outfitLabel);
+                TextView nameLabel = (TextView)findViewById(R.id.outfitNameText);
+                Button removeOutfit = (Button)findViewById(R.id.removeOutfitBtn);
+                removeOutfit.setVisibility(View.INVISIBLE);
+                label.setVisibility(View.INVISIBLE);
+                nameLabel.setVisibility(View.INVISIBLE);
+            break;
 
         }
     }

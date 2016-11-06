@@ -5,10 +5,14 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
-public class ItemDetailActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class ItemDetailActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     int headId;
     int torsoId;
@@ -24,6 +28,8 @@ public class ItemDetailActivity extends AppCompatActivity {
     EditText nameText;
     EditText priceText;
     EditText vendorText;
+    Spinner typeSpinner;
+    ArrayList<String> types = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +48,14 @@ public class ItemDetailActivity extends AppCompatActivity {
         nameText = (EditText)findViewById(R.id.nameText);
         priceText = (EditText)findViewById(R.id.priceText);
         vendorText = (EditText)findViewById(R.id.vendText);
+        typeSpinner = (Spinner)findViewById(R.id.typeSpinner);
+        typeSpinner.setOnItemSelectedListener(this);
+        types.add("head");
+        types.add("torso");
+        types.add("legs");
+        types.add("feet");
+
+        typeSpinner.setSelection(types.indexOf(type));
 
         getItem();
     }
@@ -106,5 +120,15 @@ public class ItemDetailActivity extends AppCompatActivity {
         i.putExtra("legs", legsId);
         i.putExtra("feet", feetId);
         startActivity(i);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        type = types.get(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

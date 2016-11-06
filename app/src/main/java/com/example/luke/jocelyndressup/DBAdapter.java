@@ -285,6 +285,12 @@ public class DBAdapter {
     }
 
     //gets an outfit by name from the database
+    public boolean deleteOutfitByName(String outfitName) throws SQLException
+    {
+        return db.delete(DATABASE_TABLE_OUTFITS, "name = \""+outfitName+ "\"", null) > 0;
+    }
+
+    //deletes an outfit by name from the database
     public Cursor getOutfitByName(String outfitName) throws SQLException
     {
         Cursor mCursor =
