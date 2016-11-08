@@ -1,18 +1,23 @@
 package com.example.luke.jocelyndressup;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,6 +33,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+
+import static android.R.attr.tag;
 
 public class MainActivity extends AppCompatActivity {
     //variables to keep track of the total number of items for each category
@@ -55,10 +62,17 @@ public class MainActivity extends AppCompatActivity {
     TextView priceView;
     TextView taxView;
     TextView totalView;
+    ImageView headImage;
+    ImageView torsoImage;
+    ImageView legsImage;
+    ImageView feetImage;
 
     private float runningPrice = 0;
     boolean outfitOnDisplay = false;
     String oName;
+    private Context context;
+
+    private final GestureDetector gdt = new GestureDetector(this.context, new GestureListener());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +95,47 @@ public class MainActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
 
+
         priceView = (TextView) findViewById(R.id.priceText);
         taxView = (TextView) findViewById(R.id.taxText);
         totalView = (TextView) findViewById(R.id.totalText);
+        headImage = (ImageView) findViewById(R.id.imageHead);
+        torsoImage = (ImageView) findViewById(R.id.imageTorso);
+        legsImage = (ImageView) findViewById(R.id.imageLegs);
+        feetImage = (ImageView) findViewById(R.id.imageFeet);
+
+//        headImage.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(final View view, final MotionEvent event) {
+//                gdt.onTouchEvent(event);
+//                return true;
+//            }
+//        });
+//
+//        torsoImage.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(final View view, final MotionEvent event) {
+//                gdt.onTouchEvent(event);
+//                return true;
+//            }
+//        });
+//
+//        legsImage.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(final View view, final MotionEvent event) {
+//                gdt.onTouchEvent(event);
+//                return true;
+//            }
+//        });
+//
+//        feetImage.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(final View view, final MotionEvent event) {
+//                gdt.onTouchEvent(event);
+//                return true;
+//            }
+//        });
+
 
         setArrays();
 
@@ -104,10 +156,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if(outfitOnDisplay){
-            TextView label = (TextView)findViewById(R.id.outfitLabel);
-            TextView nameLabel = (TextView)findViewById(R.id.outfitNameText);
-            Button removeOutfit = (Button)findViewById(R.id.removeOutfitBtn);
+        if (outfitOnDisplay) {
+            TextView label = (TextView) findViewById(R.id.outfitLabel);
+            TextView nameLabel = (TextView) findViewById(R.id.outfitNameText);
+            Button removeOutfit = (Button) findViewById(R.id.removeOutfitBtn);
             removeOutfit.setVisibility(View.VISIBLE);
             label.setVisibility(View.VISIBLE);
             nameLabel.setVisibility(View.VISIBLE);
@@ -129,8 +181,8 @@ public class MainActivity extends AppCompatActivity {
         runningPrice += feetPrices.get(currentFeetImage);
 
         double roundedPrice = Math.round(runningPrice * 100.0) / 100.0;
-        double tax = Math.round((runningPrice*0.13) * 100.0) / 100.0;
-        double total = Math.round((runningPrice*1.13) * 100.0) / 100.0;
+        double tax = Math.round((runningPrice * 0.13) * 100.0) / 100.0;
+        double total = Math.round((runningPrice * 1.13) * 100.0) / 100.0;
         priceView.setText("" + roundedPrice);
         taxView.setText("" + tax);
         totalView.setText("" + total);
@@ -309,7 +361,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setImageResource(resID);
             }
             recalculatePrice();
-            break;
+                break;
             //if the prev head button is clicked then switch the image of the head to the previous one
             case R.id.prevHeadBtn:
                 if (currentHeadImage > 0)
@@ -323,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setImageResource(resID);
             }
             recalculatePrice();
-            break;
+                break;
             //if the next torso button is clicked then switch the image of the torso to the next one
             case R.id.nextTorsoBtn:
                 if (currentTorsoImage < numberOfTorsos)
@@ -337,7 +389,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setImageResource(resID);
             }
             recalculatePrice();
-            break;
+                break;
             //if the prev torso button is clicked then switch the image of the torso to the previous one
             case R.id.prevTorsoBtn:
                 if (currentTorsoImage > 0)
@@ -351,7 +403,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setImageResource(resID);
             }
             recalculatePrice();
-            break;
+                break;
             //if the next legs button is clicked then switch the image of the legs to the next one
             case R.id.nextLegsBtn:
                 if (currentLegsImage < numberOfLegs)
@@ -365,7 +417,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setImageResource(resID);
             }
             recalculatePrice();
-            break;
+                break;
             //if the prev legs button is clicked then switch the image of the legs to the previous one
             case R.id.prevLegsBtn:
                 if (currentLegsImage > 0)
@@ -379,7 +431,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setImageResource(resID);
             }
             recalculatePrice();
-            break;
+                break;
             //if the next feet button is clicked then switch the image of the feet to the next one
             case R.id.nextFeetBtn:
                 if (currentFeetImage < numberOfFeet)
@@ -393,7 +445,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setImageResource(resID);
             }
             recalculatePrice();
-            break;
+                break;
             //if the prev feet button is clicked then switch the image of the feet to the previous one
             case R.id.prevFeetBtn:
                 if (currentFeetImage > 0)
@@ -407,7 +459,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setImageResource(resID);
             }
             recalculatePrice();
-            break;
+                break;
 
             //if the save button is clicked
             case R.id.buttonSave:
@@ -454,6 +506,18 @@ public class MainActivity extends AppCompatActivity {
                 i3.putExtra("feet", feet.get(currentFeetImage));
                 startActivity(i3);
                 break;
+            case R.id.removeOutfitBtn:
+                db.open();
+                db.deleteOutfitByName(oName);
+                db.close();
+                TextView label = (TextView) findViewById(R.id.outfitLabel);
+                TextView nameLabel = (TextView) findViewById(R.id.outfitNameText);
+                Button removeOutfit = (Button) findViewById(R.id.removeOutfitBtn);
+                removeOutfit.setVisibility(View.INVISIBLE);
+                label.setVisibility(View.INVISIBLE);
+                nameLabel.setVisibility(View.INVISIBLE);
+                break;
+
             case R.id.imageHead:
                 Intent i4 = new Intent(this, ItemListActivity.class);
                 i4.putExtra("type", "head");
@@ -490,18 +554,206 @@ public class MainActivity extends AppCompatActivity {
                 i7.putExtra("feet", feet.get(currentFeetImage));
                 startActivity(i7);
                 break;
-            case R.id.removeOutfitBtn:
-                db.open();
-                db.deleteOutfitByName(oName);
-                db.close();
-                TextView label = (TextView)findViewById(R.id.outfitLabel);
-                TextView nameLabel = (TextView)findViewById(R.id.outfitNameText);
-                Button removeOutfit = (Button)findViewById(R.id.removeOutfitBtn);
-                removeOutfit.setVisibility(View.INVISIBLE);
-                label.setVisibility(View.INVISIBLE);
-                nameLabel.setVisibility(View.INVISIBLE);
-            break;
 
         }
     }
+
+    public void clickClothing(String type) {
+        Intent i4 = new Intent(this, ItemListActivity.class);
+        i4.putExtra("type", type);
+        i4.putExtra("head", heads.get(currentHeadImage));
+        i4.putExtra("torso", torsos.get(currentTorsoImage));
+        i4.putExtra("legs", legs.get(currentLegsImage));
+        i4.putExtra("feet", feet.get(currentFeetImage));
+        startActivity(i4);
+    }
+
+    public void flingClothing(boolean rightFling, String type) {
+        if (rightFling) {
+            switch (type) {
+                case "head":
+                    if (currentHeadImage < numberOfHeads)
+                        ++currentHeadImage;
+                    else
+                        currentHeadImage = 0;
+                {
+                    ImageView iv = (ImageView) findViewById(R.id.imageHead);
+                    String fileName = "a" + heads.get(currentHeadImage);
+                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+                    iv.setImageResource(resID);
+                }
+                recalculatePrice();
+                break;
+                case "torso":
+                    if (currentTorsoImage < numberOfTorsos)
+                        ++currentTorsoImage;
+                    else
+                        currentTorsoImage = 0;
+                {
+                    ImageView iv = (ImageView) findViewById(R.id.imageTorso);
+                    String fileName = "a" + torsos.get(currentTorsoImage);
+                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+                    iv.setImageResource(resID);
+                }
+                recalculatePrice();
+                break;
+                case "legs":
+                    if (currentLegsImage < numberOfLegs)
+                        ++currentLegsImage;
+                    else
+                        currentLegsImage = 0;
+                {
+                    ImageView iv = (ImageView) findViewById(R.id.imageLegs);
+                    String fileName = "a" + legs.get(currentLegsImage);
+                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+                    iv.setImageResource(resID);
+                }
+                recalculatePrice();
+                break;
+                case "feet":
+                    if (currentFeetImage < numberOfFeet)
+                        ++currentFeetImage;
+                    else
+                        currentFeetImage = 0;
+                {
+                    ImageView iv = (ImageView) findViewById(R.id.imageFeet);
+                    String fileName = "a" + feet.get(currentFeetImage);
+                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+                    iv.setImageResource(resID);
+                }
+                recalculatePrice();
+                break;
+            }
+
+        } else {
+            switch (type) {
+                case "head":
+                    if (currentHeadImage > 0)
+                        --currentHeadImage;
+                    else
+                        currentHeadImage = numberOfHeads;
+                {
+                    ImageView iv = (ImageView) findViewById(R.id.imageHead);
+                    String fileName = "a" + heads.get(currentHeadImage);
+                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+                    iv.setImageResource(resID);
+                }
+                recalculatePrice();
+                break;
+                case "torso":
+                    if (currentTorsoImage > 0)
+                        --currentTorsoImage;
+                    else
+                        currentTorsoImage = numberOfTorsos;
+                {
+                    ImageView iv = (ImageView) findViewById(R.id.imageTorso);
+                    String fileName = "a" + torsos.get(currentTorsoImage);
+                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+                    iv.setImageResource(resID);
+                }
+                recalculatePrice();
+                break;
+                case "legs":
+                    if (currentLegsImage > 0)
+                        --currentLegsImage;
+                    else
+                        currentLegsImage = numberOfLegs;
+                {
+                    ImageView iv = (ImageView) findViewById(R.id.imageLegs);
+                    String fileName = "a" + legs.get(currentLegsImage);
+                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+                    iv.setImageResource(resID);
+                }
+                recalculatePrice();
+                break;
+                case "feet":
+                    if (currentFeetImage > 0)
+                        --currentFeetImage;
+                    else
+                        currentFeetImage = numberOfFeet;
+                {
+                    ImageView iv = (ImageView) findViewById(R.id.imageFeet);
+                    String fileName = "a" + feet.get(currentFeetImage);
+                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+                    iv.setImageResource(resID);
+                }
+                recalculatePrice();
+                break;
+            }
+        }
+
+    }
+
+
+    private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        private static final int SWIPE_MIN_DISTANCE = 60;
+        private static final int SWIPE_THRESHOLD_VELOCITY = 100;
+
+
+        public boolean onDown(MotionEvent evt) {
+            return true;
+        }
+
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            if (isPointInsideView(e.getX(), e.getY(), headImage)) {
+                clickClothing("head");
+            } else if (isPointInsideView(e.getX(), e.getY(), torsoImage)) {
+                clickClothing("torso");
+            } else if (isPointInsideView(e.getX(), e.getY(), legsImage)) {
+                clickClothing("legs");
+            } else if (isPointInsideView(e.getX(), e.getY(), feetImage)) {
+                clickClothing("feet");
+            }
+            return true;
+        }
+
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                onRightToLeft(e1.getX(), e1.getY());
+                return true;
+            } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                onLeftToRight(e1.getX(), e1.getY());
+                return true;
+            }
+            return true;
+        }
+    }
+
+
+    public void onRightToLeft(float x, float y) {
+        if (isPointInsideView(x, y, headImage)) {
+            flingClothing(false, "head");
+        } else if (isPointInsideView(x, y, torsoImage)) {
+            flingClothing(false, "torso");
+        } else if (isPointInsideView(x, y, legsImage)) {
+            flingClothing(false, "legs");
+        } else if (isPointInsideView(x, y, feetImage)) {
+            flingClothing(false, "feet");
+        }
+    }
+
+    public void onLeftToRight(float x, float y) {
+        if (isPointInsideView(x, y, headImage)) {
+            flingClothing(true, "head");
+        } else if (isPointInsideView(x, y, torsoImage)) {
+            flingClothing(true, "torso");
+        } else if (isPointInsideView(x, y, legsImage)) {
+            flingClothing(true, "legs");
+        } else if (isPointInsideView(x, y, feetImage)) {
+            flingClothing(true, "feet");
+        }
+    }
+
+    private boolean isPointInsideView(float x, float y, View view) {
+        Rect rect = new Rect();
+        view.getDrawingRect(rect);
+        return rect.contains((int) x, (int) y);
+    }
+
+
 }
