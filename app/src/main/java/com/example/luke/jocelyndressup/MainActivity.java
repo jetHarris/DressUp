@@ -66,13 +66,18 @@ public class MainActivity extends AppCompatActivity {
     ImageView torsoImage;
     ImageView legsImage;
     ImageView feetImage;
+    private static final int SWIPE_MIN_DISTANCE = 20;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 50;
 
     private float runningPrice = 0;
     boolean outfitOnDisplay = false;
     String oName;
     private Context context;
 
-    private final GestureDetector gdt = new GestureDetector(this.context, new GestureListener());
+    private final GestureDetector headDetector = new GestureDetector(this.context, new GestureListenerHead());
+    private final GestureDetector torsoDetector = new GestureDetector(this.context, new GestureListenerTorso());
+    private final GestureDetector legsDetector = new GestureDetector(this.context, new GestureListenerLegs());
+    private final GestureDetector feetDetector = new GestureDetector(this.context, new GestureListenerFeet());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,37 +109,37 @@ public class MainActivity extends AppCompatActivity {
         legsImage = (ImageView) findViewById(R.id.imageLegs);
         feetImage = (ImageView) findViewById(R.id.imageFeet);
 
-//        headImage.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(final View view, final MotionEvent event) {
-//                gdt.onTouchEvent(event);
-//                return true;
-//            }
-//        });
-//
-//        torsoImage.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(final View view, final MotionEvent event) {
-//                gdt.onTouchEvent(event);
-//                return true;
-//            }
-//        });
-//
-//        legsImage.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(final View view, final MotionEvent event) {
-//                gdt.onTouchEvent(event);
-//                return true;
-//            }
-//        });
-//
-//        feetImage.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(final View view, final MotionEvent event) {
-//                gdt.onTouchEvent(event);
-//                return true;
-//            }
-//        });
+        headImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(final View view, final MotionEvent event) {
+                headDetector.onTouchEvent(event);
+                return true;
+            }
+        });
+
+        torsoImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(final View view, final MotionEvent event) {
+                torsoDetector.onTouchEvent(event);
+                return true;
+            }
+        });
+
+        legsImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(final View view, final MotionEvent event) {
+                legsDetector.onTouchEvent(event);
+                return true;
+            }
+        });
+
+        feetImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(final View view, final MotionEvent event) {
+                feetDetector.onTouchEvent(event);
+                return true;
+            }
+        });
 
 
         setArrays();
@@ -685,28 +690,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
-
-        private static final int SWIPE_MIN_DISTANCE = 60;
-        private static final int SWIPE_THRESHOLD_VELOCITY = 100;
-
-
-        public boolean onDown(MotionEvent evt) {
-            return true;
-        }
-
+    private final class GestureListenerHead extends GestureDetector.SimpleOnGestureListener {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            if (isPointInsideView(e.getX(), e.getY(), headImage)) {
-                clickClothing("head");
-            } else if (isPointInsideView(e.getX(), e.getY(), torsoImage)) {
-                clickClothing("torso");
-            } else if (isPointInsideView(e.getX(), e.getY(), legsImage)) {
-                clickClothing("legs");
-            } else if (isPointInsideView(e.getX(), e.getY(), feetImage)) {
-                clickClothing("feet");
-            }
+            clickClothing("head");
             return true;
         }
 
@@ -714,45 +702,80 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                onRightToLeft(e1.getX(), e1.getY());
+                flingClothing(true,"head");
                 return true;
             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                onLeftToRight(e1.getX(), e1.getY());
+                flingClothing(false,"head");
                 return true;
             }
             return true;
         }
     }
 
+    private final class GestureListenerTorso extends GestureDetector.SimpleOnGestureListener {
 
-    public void onRightToLeft(float x, float y) {
-        if (isPointInsideView(x, y, headImage)) {
-            flingClothing(false, "head");
-        } else if (isPointInsideView(x, y, torsoImage)) {
-            flingClothing(false, "torso");
-        } else if (isPointInsideView(x, y, legsImage)) {
-            flingClothing(false, "legs");
-        } else if (isPointInsideView(x, y, feetImage)) {
-            flingClothing(false, "feet");
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            clickClothing("torso");
+            return true;
+        }
+
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                flingClothing(true,"torso");
+                return true;
+            } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                flingClothing(false,"torso");
+                return true;
+            }
+            return true;
         }
     }
 
-    public void onLeftToRight(float x, float y) {
-        if (isPointInsideView(x, y, headImage)) {
-            flingClothing(true, "head");
-        } else if (isPointInsideView(x, y, torsoImage)) {
-            flingClothing(true, "torso");
-        } else if (isPointInsideView(x, y, legsImage)) {
-            flingClothing(true, "legs");
-        } else if (isPointInsideView(x, y, feetImage)) {
-            flingClothing(true, "feet");
+    private final class GestureListenerLegs extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            clickClothing("legs");
+            return true;
+        }
+
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                flingClothing(true,"legs");
+                return true;
+            } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                flingClothing(false,"legs");
+                return true;
+            }
+            return true;
         }
     }
 
-    private boolean isPointInsideView(float x, float y, View view) {
-        Rect rect = new Rect();
-        view.getDrawingRect(rect);
-        return rect.contains((int) x, (int) y);
+    private final class GestureListenerFeet extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            clickClothing("feet");
+            return true;
+        }
+
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                flingClothing(true,"feet");
+                return true;
+            } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                flingClothing(false,"feet");
+                return true;
+            }
+            return true;
+        }
     }
 
 
