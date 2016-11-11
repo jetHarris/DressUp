@@ -38,7 +38,7 @@ public class DBAdapter {
     static final String DATABASE_NAME = "MyDB";
     static final String DATABASE_TABLE_OUTFITS = "outfits";
     static final String DATABASE_TABLE_ITEMS = "items";
-    static final int DATABASE_VERSION = 4;
+    static final int DATABASE_VERSION = 5;
 
     static final String DATABASE_CREATE =
             "create table outfits (_id integer primary key autoincrement, "

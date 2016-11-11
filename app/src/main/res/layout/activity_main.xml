@@ -15,8 +15,65 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/linearLayout1"
+        android:id="@+id/linearLayout2"
         android:background="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitEnd"
+            android:adjustViewBounds="true"
+            android:id="@+id/imageHeadTemp"
+            android:src="@drawable/a6"
+            android:layout_marginBottom="10dp"
+            android:background="#000000"
+            android:padding="1dp"
+            android:layout_weight="0.03"
+            android:onClick="onClick" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitEnd"
+            android:adjustViewBounds="true"
+            android:id="@+id/imageTorsoTemp"
+            android:src="@drawable/a12"
+            android:background="#000000"
+            android:padding="1dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="onClick" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitEnd"
+            android:adjustViewBounds="true"
+            android:id="@+id/imageLegsTemp"
+            android:src="@drawable/a9"
+            android:background="#000000"
+            android:padding="1dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="onClick" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitEnd"
+            android:adjustViewBounds="true"
+            android:id="@+id/imageFeetTemp"
+            android:background="#000000"
+            android:padding="1dp"
+            android:src="@drawable/a3"
+            android:onClick="onClick" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout1"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:weightSum="1">
@@ -67,112 +124,6 @@
             android:padding="1dp"
             android:src="@drawable/a3"
             android:onClick="onClick" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:id="@+id/linearLayout2"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/linearLayout1"
-        android:weightSum="1">
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="&lt;-"
-            android:id="@+id/prevHeadBtn"
-            android:onClick="onClick"
-            android:layout_alignTop="@+id/nextHeadBtn"
-            android:layout_toStartOf="@+id/nextHeadBtn"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"/>
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="&lt;-"
-            android:id="@+id/prevTorsoBtn"
-            android:onClick="onClick"
-            android:layout_alignTop="@+id/nextTorsoBtn"
-            android:layout_toStartOf="@+id/nextTorsoBtn"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            />
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="&lt;-"
-            android:id="@+id/prevLegsBtn"
-            android:onClick="onClick"
-            android:layout_below="@+id/prevTorsoBtn"
-            android:layout_alignStart="@+id/prevFeetBtn"
-            android:layout_marginBottom="40dp"
-            android:layout_marginTop="40dp"/>
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="&lt;-"
-            android:id="@+id/prevFeetBtn"
-            android:onClick="onClick"
-            android:layout_alignTop="@+id/nextFeetBtn"
-            android:layout_marginTop="70dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:id="@+id/linearLayout3"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/linearLayout2">
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="->"
-            android:id="@+id/nextHeadBtn"
-            android:onClick="onClick"
-            android:nestedScrollingEnabled="true"
-            android:layout_above="@+id/prevTorsoBtn"
-            android:layout_toEndOf="@+id/prevFeetBtn"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"/>
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="->"
-            android:id="@+id/nextTorsoBtn"
-            android:onClick="onClick"
-            android:layout_toEndOf="@+id/prevHeadBtn"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"/>
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="->"
-            android:id="@+id/nextLegsBtn"
-            android:onClick="onClick"
-            android:layout_alignTop="@+id/buttonSave"
-            android:layout_toEndOf="@+id/prevFeetBtn"
-            android:layout_marginBottom="40dp"
-            android:layout_marginTop="40dp"/>
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="->"
-            android:id="@+id/nextFeetBtn"
-            android:onClick="onClick"
-            android:layout_below="@+id/nextLegsBtn"
-            android:layout_toEndOf="@+id/prevLegsBtn"
-            android:layout_marginTop="70dp"/>
     </LinearLayout>
 
     <Button
