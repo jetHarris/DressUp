@@ -6,25 +6,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.database.Cursor;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -40,9 +32,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import android.support.v7.app.AppCompatActivity;
-
-import static android.R.attr.tag;
 
 public class MainActivity extends AppCompatActivity {
     //variables to keep track of the total number of items for each category
@@ -500,13 +489,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i4);
     }
 
-    public void changeImage(ImageView iv, int resID){
+    public void changeImageLeft(ImageView iv, int resID){
         //sliding animation
         Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.slide);
         iv.startAnimation(animSlide);
 
         ChangeImageRunnable thread = new ChangeImageRunnable(iv,resID,this.context);
+        //thread.run();
+        iv.postDelayed(thread, 700);
+
+    }
+
+    public void changeImageRight(ImageView iv, int resID){
+        //sliding animation
+        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.slideleft);
+        iv.startAnimation(animSlide);
+
+        ChangeImageLeftRunnable thread = new ChangeImageLeftRunnable(iv,resID,this.context);
         //thread.run();
         iv.postDelayed(thread, 700);
 
@@ -528,7 +529,7 @@ public class MainActivity extends AppCompatActivity {
                     headImageHidden.setImageResource(resID);
                     //iv.setImageResource(resID);
 
-                    changeImage(headImage,resID);
+                    changeImageRight(headImage,resID);
 
                 }
                 recalculatePrice();
@@ -545,7 +546,7 @@ public class MainActivity extends AppCompatActivity {
                     torsoImageHidden.setImageResource(resID);
                     //iv.setImageResource(resID);
 
-                    changeImage(torsoImage,resID);
+                    changeImageRight(torsoImage,resID);
                 }
                 recalculatePrice();
                 break;
@@ -561,7 +562,7 @@ public class MainActivity extends AppCompatActivity {
                     legsImageHidden.setImageResource(resID);
                     //iv.setImageResource(resID);
 
-                    changeImage(legsImage,resID);
+                    changeImageRight(legsImage,resID);
                 }
                 recalculatePrice();
                 break;
@@ -577,7 +578,7 @@ public class MainActivity extends AppCompatActivity {
                     feetImageHidden.setImageResource(resID);
                     //iv.setImageResource(resID);
 
-                    changeImage(feetImage,resID);
+                    changeImageRight(feetImage,resID);
                 }
                 recalculatePrice();
                 break;
@@ -597,7 +598,7 @@ public class MainActivity extends AppCompatActivity {
                     headImageHidden.setImageResource(resID);
                     //iv.setImageResource(resID);
 
-                    changeImage(headImage,resID);
+                    changeImageLeft(headImage,resID);
                 }
                 recalculatePrice();
                 break;
@@ -613,7 +614,7 @@ public class MainActivity extends AppCompatActivity {
                     torsoImageHidden.setImageResource(resID);
                     //iv.setImageResource(resID);
 
-                    changeImage(torsoImage,resID);
+                    changeImageLeft(torsoImage,resID);
                 }
                 recalculatePrice();
                 break;
@@ -629,7 +630,7 @@ public class MainActivity extends AppCompatActivity {
                     legsImageHidden.setImageResource(resID);
                     //iv.setImageResource(resID);
 
-                    changeImage(legsImage,resID);
+                    changeImageLeft(legsImage,resID);
                 }
                 recalculatePrice();
                 break;
@@ -645,7 +646,7 @@ public class MainActivity extends AppCompatActivity {
                     feetImageHidden.setImageResource(resID);
                     //iv.setImageResource(resID);
 
-                    changeImage(feetImage,resID);
+                    changeImageLeft(feetImage,resID);
                 }
                 recalculatePrice();
                 break;
