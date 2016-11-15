@@ -44,18 +44,18 @@
         <shape>
             <gradient
                 android:endColor="#007701"
-                android:startColor="#007701"
+                android:startColor="#000000"
                 android:angle="270" />
             <stroke
-                android:width="3dp"
+                android:width="0dp"
                 android:color="#007701" />
             <corners
-                android:radius="3dp" />
+                android:radius="0dp" />
             <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp" />
         </shape>
     </item>
 </selector>
