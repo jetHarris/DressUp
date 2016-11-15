@@ -4,17 +4,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.luke.jocelyndressup.ItemListActivity">
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="com.example.luke.jocelyndressup.ItemListActivity"
+    android:background="@drawable/custom_button_highlight">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/linearLayout4"
+        android:background="#003300"
+        android:layout_marginBottom="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+        <Button
+            android:text="Home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/homeBtn"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"
+            android:textColor="@android:color/white"
+            android:onClick="onClick" />
+
+        <Button
+            android:text="Outfits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/OutfitsBtn"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"
+            android:textColor="@android:color/white"
+            android:onClick="onClick" />
+
+        <Button
+            android:text="About"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AboutBtn"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"
+            android:textColor="@android:color/white"
+            android:onClick="onClick" />
+    </LinearLayout>
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_below="@+id/linearLayout4">
     </ListView>
 
 </RelativeLayout>

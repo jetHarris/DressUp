@@ -96,7 +96,7 @@ public class OutfitsActivity extends AppCompatActivity implements AdapterView.On
 
         //use the array list to fill out the list view
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, outfitNames);
+                R.layout.custom_textview, outfitNames);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
 
@@ -125,14 +125,16 @@ public class OutfitsActivity extends AppCompatActivity implements AdapterView.On
     public void onClick(View view) {
         switch(view.getId()) {
             //if about is clicked then go to the about page
-            case R.id.buttonAbout:
+            case R.id.AboutBtn:
                 Intent i = new Intent(this, AboutActivity.class);
                 startActivity(i);
                 break;
             //if main is clicked then go to the main page
-            case R.id.buttonMain:
+            case R.id.homeBtn:
                 Intent i2 = new Intent(this, MainActivity.class);
                 startActivity(i2);
+                break;
+            case R.id.OutfitsBtn:
                 break;
         }
     }
