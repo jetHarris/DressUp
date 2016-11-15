@@ -25,23 +25,7 @@
         android:textSize="20sp"
         android:typeface="serif"
         android:fontFamily="serif"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_below="@+id/textView7"
-        android:id="@+id/taxText"
-        android:layout_alignStart="@+id/textView7"
-        android:layout_alignEnd="@+id/textView7"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="20sp"
-        android:typeface="serif"
-        android:textStyle="normal|bold"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorMainPricing"
         android:textColor="@android:color/white" />
 
     <TextView
@@ -57,7 +41,7 @@
         android:textSize="20sp"
         android:typeface="serif"
         android:textStyle="normal|bold"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorMainPricing"
         android:textColor="@android:color/white" />
 
     <TextView
@@ -74,7 +58,7 @@
         android:typeface="serif"
         android:textStyle="normal|bold"
         android:fontFamily="serif"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorMainPricing"
         android:textColor="@android:color/white" />
 
     <LinearLayout
@@ -352,7 +336,7 @@
         android:textSize="20sp"
         android:textStyle="normal|bold"
         android:fontFamily="serif"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorMainPricing"
         android:textColor="@android:color/white" />
 
     <TextView
@@ -369,7 +353,7 @@
         android:textSize="20sp"
         android:typeface="serif"
         android:fontFamily="sans-serif-medium"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorMainPricing"
         android:layout_alignStart="@+id/totalText"
         android:textColor="@android:color/white" />
 
@@ -411,7 +395,7 @@
         android:textSize="20sp"
         android:textStyle="normal|bold"
         android:typeface="serif"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorMainPricing"
         android:paddingLeft="0dp"
         android:layout_below="@+id/linearLayout4"
         android:layout_centerHorizontal="true"
@@ -430,9 +414,25 @@
         android:typeface="serif"
         android:textStyle="normal|bold"
         android:layout_below="@+id/outfitLabel"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorMainPricing"
         android:layout_alignStart="@+id/outfitLabel"
         android:layout_alignEnd="@+id/outfitLabel"
         android:textColor="@android:color/white" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/taxText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="20sp"
+        android:typeface="serif"
+        android:textStyle="normal|bold"
+        android:background="@color/colorMainPricing"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/textView7"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_alignEnd="@+id/textView7" />
 
 </RelativeLayout>
