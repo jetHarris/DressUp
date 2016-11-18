@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -26,12 +28,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+
+import static android.R.attr.path;
 
 public class MainActivity extends AppCompatActivity {
     //variables to keep track of the total number of items for each category
@@ -205,19 +210,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        heads = new ArrayList<Integer>();
-//        feet = new ArrayList<Integer>();
-//        legs = new ArrayList<Integer>();
-//        torsos = new ArrayList<Integer>();
-//        headPrices = new ArrayList<Float>();
-//        feetPrices = new ArrayList<Float>();
-//        legPrices = new ArrayList<Float>();
-//        torsoPrices = new ArrayList<Float>();
-//        headNames = new ArrayList<String>();
-//        feetNames = new ArrayList<String>();
-//        legNames = new ArrayList<String>();
-//        torsoNames = new ArrayList<String>();
-
 
         setArrays();
 
@@ -266,6 +258,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void setImage(ImageView view, String fileName){
+        try {
+            FileInputStream fin = openFileInput(fileName+".bmp");
+            Bitmap b = BitmapFactory.decodeStream(fin);
+            view.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public void recalculatePrice() {
         runningPrice = 0;
         runningPrice += headPrices.get(showHeadImage);
@@ -283,29 +287,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setImages() {
-        String fileNameHead = "a" + heads.get(currentHeadImage);
-        int resIDHead = getResources().getIdentifier(fileNameHead, "drawable", getPackageName());
-        headImage.setImageResource(resIDHead);
-        headImageDisplay.setImageResource(resIDHead);
-        currentHeadResId = resIDHead;
 
-        String fileNameTorso = "a" + torsos.get(currentTorsoImage);
-        int resIDTorso = getResources().getIdentifier(fileNameTorso, "drawable", getPackageName());
-        torsoImage.setImageResource(resIDTorso);
-        torsoImageDisplay.setImageResource(resIDTorso);
-        currentTorsoResId = resIDTorso;
+        setImage(headImageDisplay,headNames.get(currentHeadImage));
+        setImage(headImage,headNames.get(currentHeadImage));
 
-        String fileNameLegs = "a" + legs.get(currentLegsImage);
-        int resIDLegs = getResources().getIdentifier(fileNameLegs, "drawable", getPackageName());
-        legsImage.setImageResource(resIDLegs);
-        legsImageDisplay.setImageResource(resIDLegs);
-        currentLegsResId = resIDLegs;
+        setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage));
+        setImage(torsoImage,torsoNames.get(currentTorsoImage));
 
-        String fileNameFeet = "a" + feet.get(currentFeetImage);
-        int resIDFeet = getResources().getIdentifier(fileNameFeet, "drawable", getPackageName());
-        feetImage.setImageResource(resIDFeet);
-        feetImageDisplay.setImageResource(resIDFeet);
-        currentFeetResId = resIDFeet;
+        setImage(legsImageDisplay,legNames.get(currentLegsImage));
+        setImage(legsImage,legNames.get(currentLegsImage));
+
+        setImage(feetImageDisplay,feetNames.get(currentFeetImage));
+        setImage(feetImage,feetNames.get(currentFeetImage));
     }
 
     public void setArrays() {
@@ -415,31 +408,23 @@ public class MainActivity extends AppCompatActivity {
 
             //get the id's from the database then set the appropriate images
             currentHeadImage = heads.indexOf(c.getInt(2));
-            String fileName = "a" + c.getInt(2);
-            int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-            headImage.setImageResource(resID);
-            headImageDisplay.setImageResource(resID);
+            setImage(headImageDisplay,headNames.get(currentHeadImage));
+            setImage(headImage,headNames.get(currentHeadImage));
             showHeadImage = currentHeadImage;
 
             currentTorsoImage = torsos.indexOf(c.getInt(3));
-            String fileName1 = "a" + c.getInt(3);
-            int resID1 = getResources().getIdentifier(fileName1, "drawable", getPackageName());
-            torsoImage.setImageResource(resID1);
-            torsoImageDisplay.setImageResource(resID1);
+            setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage));
+            setImage(torsoImage,torsoNames.get(currentTorsoImage));
             showTorsoImage = currentTorsoImage;
 
             currentLegsImage = legs.indexOf(c.getInt(4));
-            String fileName2 = "a" + c.getInt(4);
-            int resID2 = getResources().getIdentifier(fileName2, "drawable", getPackageName());
-            legsImage.setImageResource(resID2);
-            legsImageDisplay.setImageResource(resID2);
+            setImage(legsImageDisplay,legNames.get(currentLegsImage));
+            setImage(legsImage,legNames.get(currentLegsImage));
             showLegsImage = currentLegsImage;
 
             currentFeetImage = feet.indexOf(c.getInt(5));
-            String fileName3 = "a" + c.getInt(5);
-            int resID3 = getResources().getIdentifier(fileName3, "drawable", getPackageName());
-            feetImage.setImageResource(resID3);
-            feetImageDisplay.setImageResource(resID3);
+            setImage(feetImageDisplay,feetNames.get(currentFeetImage));
+            setImage(feetImage,feetNames.get(currentFeetImage));
             showFeetImage = currentFeetImage;
         } else {
             Toast.makeText(this, "Get failed on " + name, Toast.LENGTH_SHORT).show();
@@ -536,25 +521,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i4);
     }
 
-    public void changeImageLeft(ImageView iv, int resID){
+    public void changeImageLeft(ImageView iv, String filename){
         //sliding animation
         Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.slide);
         iv.startAnimation(animSlide);
 
-        ChangeImageRunnable thread = new ChangeImageRunnable(iv,resID,this.context);
+        ChangeImageRunnable thread = new ChangeImageRunnable(iv,this.context, filename);
         //thread.run();
         iv.postDelayed(thread, 700);
 
     }
 
-    public void changeImageRight(ImageView iv, int resID){
+    public void changeImageRight(ImageView iv, String filename){
         //sliding animation
         Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.slideleft);
         iv.startAnimation(animSlide);
 
-        ChangeImageLeftRunnable thread = new ChangeImageLeftRunnable(iv,resID,this.context);
+        ChangeImageLeftRunnable thread = new ChangeImageLeftRunnable(iv,this.context, filename);
         //thread.run();
         iv.postDelayed(thread, 700);
 
@@ -566,15 +551,20 @@ public class MainActivity extends AppCompatActivity {
         showFeetImage = currentFeetImage;
         showLegsImage = currentLegsImage;
 
-        headImageDisplayHidden.setImageResource(currentHeadResId);
-        torsoImageDisplayHidden.setImageResource(currentTorsoResId);
-        legsImageDisplayHidden.setImageResource(currentLegsResId);
-        feetImageDisplayHidden.setImageResource(currentFeetResId);
+        setImage(headImageDisplayHidden,headNames.get(currentHeadImage));
+        setImage(torsoImageDisplayHidden,torsoNames.get(currentTorsoImage));
+        setImage(legsImageDisplayHidden,legNames.get(currentLegsImage));
+        setImage(feetImageDisplayHidden,feetNames.get(currentFeetImage));
 
-        changeImageRight(headImageDisplay,currentHeadResId);
-        changeImageRight(torsoImageDisplay,currentTorsoResId);
-        changeImageRight(legsImageDisplay,currentLegsResId);
-        changeImageRight(feetImageDisplay,currentFeetResId);
+//        headImageDisplayHidden.setImageResource(currentHeadResId);
+//        torsoImageDisplayHidden.setImageResource(currentTorsoResId);
+//        legsImageDisplayHidden.setImageResource(currentLegsResId);
+//        feetImageDisplayHidden.setImageResource(currentFeetResId);
+
+        changeImageRight(headImageDisplay,headNames.get(currentHeadImage));
+        changeImageRight(torsoImageDisplay,torsoNames.get(currentTorsoImage));
+        changeImageRight(legsImageDisplay,legNames.get(currentLegsImage));
+        changeImageRight(feetImageDisplay,feetNames.get(currentFeetImage));
 
         recalculatePrice();
     }
@@ -589,13 +579,9 @@ public class MainActivity extends AppCompatActivity {
                         currentHeadImage = 0;
                 {
 
-                    String fileName = "a" + heads.get(currentHeadImage);
-                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                    headImageHidden.setImageResource(resID);
-                    currentHeadResId = resID;
+                    setImage(headImageHidden,headNames.get(currentHeadImage));
                     Toast.makeText(this, "Name: " + headNames.get(currentHeadImage) + "\nPrice:$" + headPrices.get(currentHeadImage), Toast.LENGTH_SHORT).show();
-
-                    changeImageRight(headImage,resID);
+                    changeImageRight(headImage,headNames.get(currentHeadImage));
 
                 }
                 break;
@@ -605,14 +591,9 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentTorsoImage = 0;
                 {
-                    String fileName = "a" + torsos.get(currentTorsoImage);
-                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                    torsoImageHidden.setImageResource(resID);
-                    currentTorsoResId = resID;
                     Toast.makeText(this, "Name: " + torsoNames.get(currentTorsoImage) + "\nPrice:$" + torsoPrices.get(currentTorsoImage), Toast.LENGTH_SHORT).show();
-                    //iv.setImageResource(resID);
-
-                    changeImageRight(torsoImage,resID);
+                    setImage(torsoImageHidden,torsoNames.get(currentTorsoImage));
+                    changeImageRight(torsoImage,torsoNames.get(currentTorsoImage));
                 }
                 break;
                 case "legs":
@@ -621,14 +602,10 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentLegsImage = 0;
                 {
-                    String fileName = "a" + legs.get(currentLegsImage);
-                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                    legsImageHidden.setImageResource(resID);
-                    currentLegsResId = resID;
                     Toast.makeText(this, "Name: " + legNames.get(currentLegsImage) + "\nPrice:$" + legPrices.get(currentLegsImage), Toast.LENGTH_SHORT).show();
                     //iv.setImageResource(resID);
-
-                    changeImageRight(legsImage,resID);
+                    setImage(legsImageHidden,legNames.get(currentLegsImage));
+                    changeImageRight(legsImage,legNames.get(currentLegsImage));
                 }
                 break;
                 case "feet":
@@ -637,14 +614,10 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentFeetImage = 0;
                 {
-                    String fileName = "a" + feet.get(currentFeetImage);
-                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                    feetImageHidden.setImageResource(resID);
-                    currentFeetResId = resID;
                     Toast.makeText(this, "Name: " + feetNames.get(currentFeetImage) + "\nPrice:$" + feetPrices.get(currentFeetImage), Toast.LENGTH_SHORT).show();
                     //iv.setImageResource(resID);
-
-                    changeImageRight(feetImage,resID);
+                    setImage(feetImageHidden,feetNames.get(currentFeetImage));
+                    changeImageRight(feetImage,feetNames.get(currentFeetImage));
                 }
                 break;
             }
@@ -657,15 +630,13 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentHeadImage = numberOfHeads;
                 {
-                    String fileName = "a" + heads.get(currentHeadImage);
-                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                    headImageHidden.setImageResource(resID);
-                    currentHeadResId = resID;
+//                    String fileName = "a" + heads.get(currentHeadImage);
+//                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+//                    headImageHidden.setImageResource(resID);
+//                    currentHeadResId = resID;
                     Toast.makeText(this, "Name: " + headNames.get(currentHeadImage) + "\nPrice:$" + headPrices.get(currentHeadImage), Toast.LENGTH_SHORT).show();
-
-                    //iv.setImageResource(resID);
-
-                    changeImageLeft(headImage,resID);
+                    setImage(headImageHidden,headNames.get(currentHeadImage));
+                    changeImageLeft(headImage,headNames.get(currentHeadImage));
                 }
                 break;
                 case "torso":
@@ -674,14 +645,9 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentTorsoImage = numberOfTorsos;
                 {
-                    String fileName = "a" + torsos.get(currentTorsoImage);
-                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                    torsoImageHidden.setImageResource(resID);
-                    currentTorsoResId = resID;
                     Toast.makeText(this, "Name: " + torsoNames.get(currentTorsoImage) + "\nPrice:$" + torsoPrices.get(currentTorsoImage), Toast.LENGTH_SHORT).show();
-                    //iv.setImageResource(resID);
-
-                    changeImageLeft(torsoImage,resID);
+                    setImage(torsoImageHidden,torsoNames.get(currentTorsoImage));
+                    changeImageLeft(torsoImage,torsoNames.get(currentTorsoImage));
                 }
                 break;
                 case "legs":
@@ -690,14 +656,9 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentLegsImage = numberOfLegs;
                 {
-                    String fileName = "a" + legs.get(currentLegsImage);
-                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                    legsImageHidden.setImageResource(resID);
-                    currentLegsResId = resID;
                     Toast.makeText(this, "Name: " + legNames.get(currentLegsImage) + "\nPrice:$" + legPrices.get(currentLegsImage), Toast.LENGTH_SHORT).show();
-                    //iv.setImageResource(resID);
-
-                    changeImageLeft(legsImage,resID);
+                    setImage(legsImageHidden,legNames.get(currentLegsImage));
+                    changeImageLeft(legsImage,legNames.get(currentLegsImage));
                 }
                 break;
                 case "feet":
@@ -706,14 +667,9 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentFeetImage = numberOfFeet;
                 {
-                    String fileName = "a" + feet.get(currentFeetImage);
-                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                    feetImageHidden.setImageResource(resID);
-                    currentFeetResId = resID;
                     Toast.makeText(this, "Name: " + feetNames.get(currentFeetImage) + "\nPrice:$" + feetPrices.get(currentFeetImage), Toast.LENGTH_SHORT).show();
-                    //iv.setImageResource(resID);
-
-                    changeImageLeft(feetImage,resID);
+                    setImage(feetImageHidden,feetNames.get(currentFeetImage));
+                    changeImageLeft(feetImage,feetNames.get(currentFeetImage));
                 }
                 break;
             }
