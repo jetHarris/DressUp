@@ -16,4 +16,14 @@
         android:orderInCategory="100"
         android:title="camera"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_write_nfc"
+        android:orderInCategory="100"
+        android:title="write nfc"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_read_nfc"
+        android:orderInCategory="100"
+        android:title="read nfc"
+        app:showAsAction="never" />
 </menu>

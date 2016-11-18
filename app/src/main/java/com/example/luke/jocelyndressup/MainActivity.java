@@ -389,6 +389,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i2);
                 break;
 
+            case R.id.action_read_nfc:
+                Intent i4 = new Intent(this, ReadNFCItemActivity.class);
+                startActivity(i4);
+                break;
+
+            case R.id.action_write_nfc:
+                Intent i5 = new Intent(this, WriteNFCItemActivity.class);
+                startActivity(i5);
+                break;
+
         }
         return true;
 
