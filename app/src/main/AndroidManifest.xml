@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.luke.jocelyndressup">
 
-    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.NFC" />
+
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -19,9 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden">
-
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity android:name=".AboutActivity" />
         <activity
             android:name=".OutfitsActivity"
@@ -33,19 +31,20 @@
             android:name=".ItemDetailActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".BufferActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".BufferActivity"/>
         <activity
             android:name=".ReadNFCItemActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".WriteNFCItemActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".TutorialActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

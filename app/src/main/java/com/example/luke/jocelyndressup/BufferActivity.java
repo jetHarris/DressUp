@@ -11,6 +11,7 @@ public class BufferActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buffer);
+        getSupportActionBar().hide(); // Get rid of actionbar manually
     }
 
     public void mainPageClicked(View view) {
