@@ -21,7 +21,7 @@ public class TutorialActivity extends AppCompatActivity {
     ProgressBar prgBar;
     Button btnDone;
     int prevPosition;
-
+    private boolean help;
     private static final int MAX_VIEWS = 5;//Total number of tutorial images
 
     @Override
@@ -33,9 +33,18 @@ public class TutorialActivity extends AppCompatActivity {
         SharedPreferences spAppHistory = getSharedPreferences("AppHistory", MODE_PRIVATE);
         boolean previously_run = spAppHistory.getBoolean("previously_run", false);
 
-        if(previously_run) {
+        help = false;
+        if(getIntent().getExtras() != null) {
+            help = getIntent().getExtras().getBoolean("help", false);
+        }
+
+        if(previously_run && help == false) {
             Intent i = new Intent(this, BufferActivity.class);
             startActivity(i);
+        }
+        else {
+            if(!help)
+                firstTimeInstall();
         }
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -49,6 +58,10 @@ public class TutorialActivity extends AppCompatActivity {
         btnDone = (Button) findViewById(R.id.btn_Done);
         //btnDone.setVisibility(View.INVISIBLE);
     } // onCreate
+
+    private void firstTimeInstall() {
+
+    }
 
     public void cDone(View view) {
         SharedPreferences spAppHistory = getSharedPreferences("AppHistory", MODE_PRIVATE);
