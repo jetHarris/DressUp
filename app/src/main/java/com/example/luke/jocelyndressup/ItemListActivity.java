@@ -1,8 +1,11 @@
 package com.example.luke.jocelyndressup;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class ItemListActivity extends AppCompatActivity {
@@ -29,12 +34,14 @@ public class ItemListActivity extends AppCompatActivity {
     int feetID;
     String type;
     ArrayList<Integer> itemIDs;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
         db = new DBAdapter(this);
+        context = this.getApplicationContext();
 
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -61,7 +68,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         setArrays();
 
-        CustomListAdapter adapter = new CustomListAdapter(this, itemname, imgid, prices);
+        CustomListAdapter adapter = new CustomListAdapter(this, itemname, imgid, prices,context);
         list = (ListView) findViewById(R.id.list);
         list.setAdapter(adapter);
 
@@ -86,6 +93,8 @@ public class ItemListActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     public void sendToDetails(int position){
         Intent i = new Intent(this, ItemDetailActivity.class);

@@ -3,6 +3,8 @@ package com.example.luke.jocelyndressup;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class ItemDetailActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -35,6 +39,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
     EditText vendorText;
     Spinner typeSpinner;
     ArrayList<String> types = new ArrayList<String>();
+    ImageView display;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,8 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
         layoutParams.rightMargin = 40;
         imageView.setLayoutParams(layoutParams);
         actionBar.setCustomView(imageView);
+
+        display = (ImageView)findViewById(R.id.detailImage);
 
         if (getIntent().getExtras() != null) {
             type = getIntent().getExtras().getString("type");
@@ -78,6 +85,18 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
         getItem();
     }
 
+    public void setImage(ImageView view, String fileName){
+        try {
+            FileInputStream fin = openFileInput(fileName+".bmp");
+            Bitmap b = BitmapFactory.decodeStream(fin);
+            view.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public void getItem(){
         db.open();
         Cursor c;
@@ -96,10 +115,11 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
         priceText.setText(""+price);
         vendorText.setText(vendorName);
 
-        ImageView iv = (ImageView) findViewById(R.id.detailImage);
-        String fileName = "a" + itemId;
-        int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-        iv.setImageResource(resID);
+        setImage(display, name);
+//        ImageView iv = (ImageView) findViewById(R.id.detailImage);
+//        String fileName = "a" + itemId;
+//        int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
+//        iv.setImageResource(resID);
 
         db.close();
     }

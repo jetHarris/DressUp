@@ -95,13 +95,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView legsImageDisplayHidden;
     ImageView feetImageDisplayHidden;
 
-    int currentHeadResId = 0;
-    int currentTorsoResId= 0;
-    int currentLegsResId= 0;
-    int currentFeetResId= 0;
-
-
-
     private static final int SWIPE_MIN_DISTANCE = 20;
     private static final int SWIPE_THRESHOLD_VELOCITY = 50;
 
