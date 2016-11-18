@@ -57,7 +57,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/a10"
+        app:srcCompat="@drawable/feet1"
         android:id="@+id/detailImage"
         android:background="@android:color/white"
         android:layout_alignParentBottom="true"

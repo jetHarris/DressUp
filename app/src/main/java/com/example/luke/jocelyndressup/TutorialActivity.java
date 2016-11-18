@@ -1,8 +1,11 @@
 package com.example.luke.jocelyndressup;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,6 +18,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class TutorialActivity extends AppCompatActivity {
     ViewPager viewPager;
@@ -60,7 +67,62 @@ public class TutorialActivity extends AppCompatActivity {
     } // onCreate
 
     private void firstTimeInstall() {
+        //take all the images from the drawable folder and put them in the internal storage
+        Bitmap feet1 = BitmapFactory.decodeResource(getResources(),R.drawable.feet1);
+        saveToInternalStorage(feet1,"feet1");
 
+        Bitmap feet2 = BitmapFactory.decodeResource(getResources(),R.drawable.feet2);
+        saveToInternalStorage(feet2,"feet2");
+
+        Bitmap feet3 = BitmapFactory.decodeResource(getResources(),R.drawable.feet3);
+        saveToInternalStorage(feet3,"feet3");
+
+        Bitmap head1 = BitmapFactory.decodeResource(getResources(),R.drawable.head1);
+        saveToInternalStorage(head1,"head1");
+
+        Bitmap head2 = BitmapFactory.decodeResource(getResources(),R.drawable.head2);
+        saveToInternalStorage(head2,"head2");
+
+        Bitmap head3 = BitmapFactory.decodeResource(getResources(),R.drawable.head3);
+        saveToInternalStorage(head3,"head3");
+
+        Bitmap torso1 = BitmapFactory.decodeResource(getResources(),R.drawable.torso1);
+        saveToInternalStorage(torso1,"torso1");
+
+        Bitmap torso2 = BitmapFactory.decodeResource(getResources(),R.drawable.torso2);
+        saveToInternalStorage(torso2,"torso2");
+
+        Bitmap torso3 = BitmapFactory.decodeResource(getResources(),R.drawable.torso3);
+        saveToInternalStorage(torso3,"torso3");
+
+        Bitmap legs1 = BitmapFactory.decodeResource(getResources(),R.drawable.legs1);
+        saveToInternalStorage(legs1,"legs1");
+
+        Bitmap legs2 = BitmapFactory.decodeResource(getResources(),R.drawable.legs2);
+        saveToInternalStorage(legs2,"legs2");
+
+        Bitmap legs3 = BitmapFactory.decodeResource(getResources(),R.drawable.legs3);
+        saveToInternalStorage(legs3,"legs3");
+
+
+    }
+
+    private void saveToInternalStorage(Bitmap bitmapImage, String filename){
+
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(filename+".bmp", Context.MODE_PRIVATE);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void cDone(View view) {

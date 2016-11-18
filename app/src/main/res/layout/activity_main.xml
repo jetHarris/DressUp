@@ -117,7 +117,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageHeadTemp"
-            android:src="@drawable/a6"
+            android:src="@drawable/head1"
             android:layout_marginBottom="10dp"
             android:background="#000000"
             android:padding="1dp"
@@ -130,7 +130,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageTorsoTemp"
-            android:src="@drawable/a12"
+            android:src="@drawable/torso1"
             android:background="#000000"
             android:padding="1dp"
             android:layout_marginBottom="10dp"
@@ -142,7 +142,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageLegsTemp"
-            android:src="@drawable/a9"
+            android:src="@drawable/legs1"
             android:background="#000000"
             android:padding="1dp"
             android:layout_marginBottom="10dp"
@@ -156,7 +156,7 @@
             android:id="@+id/imageFeetTemp"
             android:background="#000000"
             android:padding="1dp"
-            android:src="@drawable/a3"
+            android:src="@drawable/feet1"
             android:onClick="onClick" />
     </LinearLayout>
 
@@ -179,7 +179,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageHeadShowTemp"
-            android:src="@drawable/a6"
+            android:src="@drawable/head1"
             android:layout_marginTop="20dp"
             android:layout_weight="0.03"
             android:onClick="onClick" />
@@ -190,7 +190,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageTorsoShowTemp"
-            android:src="@drawable/a12"
+            android:src="@drawable/torso1"
             android:onClick="onClick" />
 
         <ImageView
@@ -199,7 +199,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageLegsShowTemp"
-            android:src="@drawable/a9"
+            android:src="@drawable/legs1"
             android:onClick="onClick" />
 
         <ImageView
@@ -208,7 +208,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageFeetShowTemp"
-            android:src="@drawable/a3"
+            android:src="@drawable/feet1"
             android:layout_marginBottom="20dp"
             android:onClick="onClick" />
     </LinearLayout>
@@ -229,7 +229,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageHeadShow"
-            android:src="@drawable/a6"
+            android:src="@drawable/head1"
             android:layout_marginTop="20dp"
             android:layout_weight="0.03"
             android:onClick="onClick" />
@@ -240,7 +240,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageTorsoShow"
-            android:src="@drawable/a12"
+            android:src="@drawable/torso1"
             android:onClick="onClick" />
 
         <ImageView
@@ -249,7 +249,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageLegsShow"
-            android:src="@drawable/a9"
+            android:src="@drawable/legs1"
             android:onClick="onClick" />
 
         <ImageView
@@ -258,7 +258,7 @@
             android:scaleType="fitEnd"
             android:adjustViewBounds="true"
             android:id="@+id/imageFeetShow"
-            android:src="@drawable/a3"
+            android:src="@drawable/feet1"
             android:layout_marginBottom="20dp"
             android:onClick="onClick" />
     </LinearLayout>
@@ -278,7 +278,7 @@
         android:scaleType="fitEnd"
         android:adjustViewBounds="true"
         android:id="@+id/imageHead"
-        android:src="@drawable/a6"
+        android:src="@drawable/head1"
         android:layout_marginBottom="10dp"
         android:background="#000000"
         android:padding="1dp"
@@ -291,7 +291,7 @@
         android:scaleType="fitEnd"
         android:adjustViewBounds="true"
         android:id="@+id/imageTorso"
-        android:src="@drawable/a12"
+        android:src="@drawable/torso1"
         android:background="#000000"
         android:padding="1dp"
         android:layout_marginBottom="10dp"
@@ -303,7 +303,7 @@
         android:scaleType="fitEnd"
         android:adjustViewBounds="true"
         android:id="@+id/imageLegs"
-        android:src="@drawable/a9"
+        android:src="@drawable/legs1"
         android:background="#000000"
         android:padding="1dp"
         android:layout_marginBottom="10dp"
@@ -317,7 +317,7 @@
         android:id="@+id/imageFeet"
         android:background="#000000"
         android:padding="1dp"
-        android:src="@drawable/a3"
+        android:src="@drawable/feet1"
         android:onClick="onClick" />
 </LinearLayout>
 
