@@ -205,6 +205,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        heads = new ArrayList<Integer>();
+//        feet = new ArrayList<Integer>();
+//        legs = new ArrayList<Integer>();
+//        torsos = new ArrayList<Integer>();
+//        headPrices = new ArrayList<Float>();
+//        feetPrices = new ArrayList<Float>();
+//        legPrices = new ArrayList<Float>();
+//        torsoPrices = new ArrayList<Float>();
+//        headNames = new ArrayList<String>();
+//        feetNames = new ArrayList<String>();
+//        legNames = new ArrayList<String>();
+//        torsoNames = new ArrayList<String>();
+
 
         setArrays();
 
@@ -246,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
             nameLabel.setText(oName);
         }
 
-
+        //both of the following methods break when launched from phone
         recalculatePrice();
         setImages();
 

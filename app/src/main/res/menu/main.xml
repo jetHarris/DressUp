@@ -11,4 +11,9 @@
         android:orderInCategory="100"
         android:title="outfits"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_camera"
+        android:orderInCategory="100"
+        android:title="camera"
+        app:showAsAction="never" />
 </menu>
