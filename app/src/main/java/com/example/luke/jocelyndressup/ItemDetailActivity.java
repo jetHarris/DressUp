@@ -1,6 +1,7 @@
 package com.example.luke.jocelyndressup;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -40,11 +41,13 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
     Spinner typeSpinner;
     ArrayList<String> types = new ArrayList<String>();
     ImageView display;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
         db = new DBAdapter(this);
+        context = this.getApplicationContext();
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayOptions( android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -87,11 +90,14 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
 
     public void setImage(ImageView view, String fileName){
         try {
-            FileInputStream fin = openFileInput(fileName+".bmp");
-            Bitmap b = BitmapFactory.decodeStream(fin);
-            view.setImageBitmap(b);
+            ImageLoaderPacket packet = new ImageLoaderPacket(fileName,view, context);
+            ImageLoader il = new ImageLoader();
+            il.execute(packet);
+//            FileInputStream fin = openFileInput(fileName+".bmp");
+//            Bitmap b = BitmapFactory.decodeStream(fin);
+//            view.setImageBitmap(b);
         }
-        catch (FileNotFoundException e)
+        catch (Exception e)
         {
             e.printStackTrace();
         }

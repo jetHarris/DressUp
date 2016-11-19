@@ -253,11 +253,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void setImage(ImageView view, String fileName){
         try {
-            FileInputStream fin = openFileInput(fileName+".bmp");
-            Bitmap b = BitmapFactory.decodeStream(fin);
-            view.setImageBitmap(b);
+            ImageLoaderPacket packet = new ImageLoaderPacket(fileName,view, context);
+            ImageLoader il = new ImageLoader();
+            il.execute(packet);
+//            FileInputStream fin = openFileInput(fileName+".bmp");
+//            Bitmap b = BitmapFactory.decodeStream(fin);
+//            view.setImageBitmap(b);
         }
-        catch (FileNotFoundException e)
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -514,27 +517,34 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i4);
     }
 
-    public void changeImageLeft(ImageView iv, String filename){
+    public void changeImageLeft(ImageView iv, String filename,ImageView iv2){
         //sliding animation
-        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.slide);
-        iv.startAnimation(animSlide);
+//        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
+//                R.anim.slide);
+//        iv.startAnimation(animSlide);
 
-        ChangeImageRunnable thread = new ChangeImageRunnable(iv,this.context, filename);
-        //thread.run();
-        iv.postDelayed(thread, 700);
+        ImageLoaderPacket packet = new ImageLoaderPacket(filename,iv, context, iv2);
+        ImageLoaderLeftAnim il = new ImageLoaderLeftAnim();
+        il.execute(packet);
+
+//        ChangeImageRunnable thread = new ChangeImageRunnable(iv,this.context, filename);
+//        //thread.run();
+//        iv.postDelayed(thread, 700);
 
     }
 
-    public void changeImageRight(ImageView iv, String filename){
+    public void changeImageRight(ImageView iv, String filename, ImageView iv2){
         //sliding animation
-        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.slideleft);
-        iv.startAnimation(animSlide);
+//        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
+//                R.anim.slideleft);
+//        iv.startAnimation(animSlide);
 
-        ChangeImageLeftRunnable thread = new ChangeImageLeftRunnable(iv,this.context, filename);
-        //thread.run();
-        iv.postDelayed(thread, 700);
+        ImageLoaderPacket packet = new ImageLoaderPacket(filename,iv, context,iv2);
+        ImageLoaderRightAnim il = new ImageLoaderRightAnim();
+        il.execute(packet);
+//        ChangeImageLeftRunnable thread = new ChangeImageLeftRunnable(iv,this.context, filename);
+//        //thread.run();
+//        iv.postDelayed(thread, 700);
 
     }
 
@@ -544,20 +554,20 @@ public class MainActivity extends AppCompatActivity {
         showFeetImage = currentFeetImage;
         showLegsImage = currentLegsImage;
 
-        setImage(headImageDisplayHidden,headNames.get(currentHeadImage));
-        setImage(torsoImageDisplayHidden,torsoNames.get(currentTorsoImage));
-        setImage(legsImageDisplayHidden,legNames.get(currentLegsImage));
-        setImage(feetImageDisplayHidden,feetNames.get(currentFeetImage));
+//        setImage(headImageDisplayHidden,headNames.get(currentHeadImage));
+//        setImage(torsoImageDisplayHidden,torsoNames.get(currentTorsoImage));
+//        setImage(legsImageDisplayHidden,legNames.get(currentLegsImage));
+//        setImage(feetImageDisplayHidden,feetNames.get(currentFeetImage));
 
 //        headImageDisplayHidden.setImageResource(currentHeadResId);
 //        torsoImageDisplayHidden.setImageResource(currentTorsoResId);
 //        legsImageDisplayHidden.setImageResource(currentLegsResId);
 //        feetImageDisplayHidden.setImageResource(currentFeetResId);
 
-        changeImageRight(headImageDisplay,headNames.get(currentHeadImage));
-        changeImageRight(torsoImageDisplay,torsoNames.get(currentTorsoImage));
-        changeImageRight(legsImageDisplay,legNames.get(currentLegsImage));
-        changeImageRight(feetImageDisplay,feetNames.get(currentFeetImage));
+        changeImageRight(headImageDisplay,headNames.get(currentHeadImage), headImageDisplayHidden);
+        changeImageRight(torsoImageDisplay,torsoNames.get(currentTorsoImage),torsoImageDisplayHidden );
+        changeImageRight(legsImageDisplay,legNames.get(currentLegsImage),legsImageDisplayHidden);
+        changeImageRight(feetImageDisplay,feetNames.get(currentFeetImage),feetImageDisplayHidden);
 
         recalculatePrice();
     }
@@ -572,9 +582,17 @@ public class MainActivity extends AppCompatActivity {
                         currentHeadImage = 0;
                 {
 
-                    setImage(headImageHidden,headNames.get(currentHeadImage));
-                    Toast.makeText(this, "Name: " + headNames.get(currentHeadImage) + "\nPrice:$" + headPrices.get(currentHeadImage), Toast.LENGTH_SHORT).show();
-                    changeImageRight(headImage,headNames.get(currentHeadImage));
+//                    try {
+//                        FileInputStream fin = openFileInput(headNames.get(currentHeadImage) + ".bmp");
+//                        Bitmap b = BitmapFactory.decodeStream(fin);
+//                        headImageHidden.setImageBitmap(b);
+//                    }
+//                    catch(FileNotFoundException ex){
+//
+//                    }
+                    //setImage(headImageHidden,headNames.get(currentHeadImage));
+                    //Toast.makeText(this, "Name: " + headNames.get(currentHeadImage) + "\nPrice:$" + headPrices.get(currentHeadImage), Toast.LENGTH_SHORT).show();
+                    changeImageRight(headImage,headNames.get(currentHeadImage),headImageHidden);
 
                 }
                 break;
@@ -584,9 +602,18 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentTorsoImage = 0;
                 {
-                    Toast.makeText(this, "Name: " + torsoNames.get(currentTorsoImage) + "\nPrice:$" + torsoPrices.get(currentTorsoImage), Toast.LENGTH_SHORT).show();
-                    setImage(torsoImageHidden,torsoNames.get(currentTorsoImage));
-                    changeImageRight(torsoImage,torsoNames.get(currentTorsoImage));
+
+//                    try {
+//                        FileInputStream fin = openFileInput(torsoNames.get(currentTorsoImage) + ".bmp");
+//                        Bitmap b = BitmapFactory.decodeStream(fin);
+//                        torsoImageHidden.setImageBitmap(b);
+//                    }
+//                    catch(FileNotFoundException ex){
+//
+//                    }
+                    //Toast.makeText(this, "Name: " + torsoNames.get(currentTorsoImage) + "\nPrice:$" + torsoPrices.get(currentTorsoImage), Toast.LENGTH_SHORT).show();
+                    //setImage(torsoImageHidden,torsoNames.get(currentTorsoImage));
+                    changeImageRight(torsoImage,torsoNames.get(currentTorsoImage),torsoImageHidden);
                 }
                 break;
                 case "legs":
@@ -595,10 +622,18 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentLegsImage = 0;
                 {
-                    Toast.makeText(this, "Name: " + legNames.get(currentLegsImage) + "\nPrice:$" + legPrices.get(currentLegsImage), Toast.LENGTH_SHORT).show();
+//                    try {
+//                        FileInputStream fin = openFileInput(legNames.get(currentLegsImage) + ".bmp");
+//                        Bitmap b = BitmapFactory.decodeStream(fin);
+//                        legsImageHidden.setImageBitmap(b);
+//                    }
+//                    catch(FileNotFoundException ex){
+//
+//                    }
+                    //Toast.makeText(this, "Name: " + legNames.get(currentLegsImage) + "\nPrice:$" + legPrices.get(currentLegsImage), Toast.LENGTH_SHORT).show();
                     //iv.setImageResource(resID);
-                    setImage(legsImageHidden,legNames.get(currentLegsImage));
-                    changeImageRight(legsImage,legNames.get(currentLegsImage));
+                    //setImage(legsImageHidden,legNames.get(currentLegsImage));
+                    changeImageRight(legsImage,legNames.get(currentLegsImage),legsImageHidden);
                 }
                 break;
                 case "feet":
@@ -607,10 +642,18 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentFeetImage = 0;
                 {
-                    Toast.makeText(this, "Name: " + feetNames.get(currentFeetImage) + "\nPrice:$" + feetPrices.get(currentFeetImage), Toast.LENGTH_SHORT).show();
+//                    try {
+//                        FileInputStream fin = openFileInput(feetNames.get(currentFeetImage) + ".bmp");
+//                        Bitmap b = BitmapFactory.decodeStream(fin);
+//                        feetImageHidden.setImageBitmap(b);
+//                    }
+//                    catch(FileNotFoundException ex){
+//
+//                    }
+                    //Toast.makeText(this, "Name: " + feetNames.get(currentFeetImage) + "\nPrice:$" + feetPrices.get(currentFeetImage), Toast.LENGTH_SHORT).show();
                     //iv.setImageResource(resID);
-                    setImage(feetImageHidden,feetNames.get(currentFeetImage));
-                    changeImageRight(feetImage,feetNames.get(currentFeetImage));
+                    //setImage(feetImageHidden,feetNames.get(currentFeetImage));
+                    changeImageRight(feetImage,feetNames.get(currentFeetImage),feetImageHidden);
                 }
                 break;
             }
@@ -627,9 +670,17 @@ public class MainActivity extends AppCompatActivity {
 //                    int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
 //                    headImageHidden.setImageResource(resID);
 //                    currentHeadResId = resID;
-                    Toast.makeText(this, "Name: " + headNames.get(currentHeadImage) + "\nPrice:$" + headPrices.get(currentHeadImage), Toast.LENGTH_SHORT).show();
-                    setImage(headImageHidden,headNames.get(currentHeadImage));
-                    changeImageLeft(headImage,headNames.get(currentHeadImage));
+//                    try {
+//                        FileInputStream fin = openFileInput(headNames.get(currentHeadImage) + ".bmp");
+//                        Bitmap b = BitmapFactory.decodeStream(fin);
+//                        headImageHidden.setImageBitmap(b);
+//                    }
+//                    catch(FileNotFoundException ex){
+//
+//                    }
+                    //Toast.makeText(this, "Name: " + headNames.get(currentHeadImage) + "\nPrice:$" + headPrices.get(currentHeadImage), Toast.LENGTH_SHORT).show();
+                    //setImage(headImageHidden,headNames.get(currentHeadImage));
+                    changeImageLeft(headImage,headNames.get(currentHeadImage),headImageHidden);
                 }
                 break;
                 case "torso":
@@ -638,9 +689,17 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentTorsoImage = numberOfTorsos;
                 {
-                    Toast.makeText(this, "Name: " + torsoNames.get(currentTorsoImage) + "\nPrice:$" + torsoPrices.get(currentTorsoImage), Toast.LENGTH_SHORT).show();
-                    setImage(torsoImageHidden,torsoNames.get(currentTorsoImage));
-                    changeImageLeft(torsoImage,torsoNames.get(currentTorsoImage));
+//                    try {
+//                        FileInputStream fin = openFileInput(torsoNames.get(currentTorsoImage) + ".bmp");
+//                        Bitmap b = BitmapFactory.decodeStream(fin);
+//                        torsoImageHidden.setImageBitmap(b);
+//                    }
+//                    catch(FileNotFoundException ex){
+//
+//                    }
+                    //Toast.makeText(this, "Name: " + torsoNames.get(currentTorsoImage) + "\nPrice:$" + torsoPrices.get(currentTorsoImage), Toast.LENGTH_SHORT).show();
+                    //setImage(torsoImageHidden,torsoNames.get(currentTorsoImage));
+                    changeImageLeft(torsoImage,torsoNames.get(currentTorsoImage),torsoImageHidden);
                 }
                 break;
                 case "legs":
@@ -649,9 +708,17 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentLegsImage = numberOfLegs;
                 {
-                    Toast.makeText(this, "Name: " + legNames.get(currentLegsImage) + "\nPrice:$" + legPrices.get(currentLegsImage), Toast.LENGTH_SHORT).show();
-                    setImage(legsImageHidden,legNames.get(currentLegsImage));
-                    changeImageLeft(legsImage,legNames.get(currentLegsImage));
+//                    try {
+//                        FileInputStream fin = openFileInput(legNames.get(currentLegsImage) + ".bmp");
+//                        Bitmap b = BitmapFactory.decodeStream(fin);
+//                        legsImageHidden.setImageBitmap(b);
+//                    }
+//                    catch(FileNotFoundException ex){
+//
+//                    }
+                    //Toast.makeText(this, "Name: " + legNames.get(currentLegsImage) + "\nPrice:$" + legPrices.get(currentLegsImage), Toast.LENGTH_SHORT).show();
+                    //setImage(legsImageHidden,legNames.get(currentLegsImage));
+                    changeImageLeft(legsImage,legNames.get(currentLegsImage),legsImageHidden);
                 }
                 break;
                 case "feet":
@@ -660,9 +727,17 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentFeetImage = numberOfFeet;
                 {
-                    Toast.makeText(this, "Name: " + feetNames.get(currentFeetImage) + "\nPrice:$" + feetPrices.get(currentFeetImage), Toast.LENGTH_SHORT).show();
-                    setImage(feetImageHidden,feetNames.get(currentFeetImage));
-                    changeImageLeft(feetImage,feetNames.get(currentFeetImage));
+//                    try {
+//                        FileInputStream fin = openFileInput(feetNames.get(currentFeetImage) + ".bmp");
+//                        Bitmap b = BitmapFactory.decodeStream(fin);
+//                        feetImageHidden.setImageBitmap(b);
+//                    }
+//                    catch(FileNotFoundException ex){
+//
+//                    }
+                    //Toast.makeText(this, "Name: " + feetNames.get(currentFeetImage) + "\nPrice:$" + feetPrices.get(currentFeetImage), Toast.LENGTH_SHORT).show();
+                    //setImage(feetImageHidden,feetNames.get(currentFeetImage));
+                    changeImageLeft(feetImage,feetNames.get(currentFeetImage),feetImageHidden);
                 }
                 break;
             }

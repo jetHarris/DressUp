@@ -35,11 +35,14 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
     public void setImage(ImageView view, String fileName){
         try {
-            FileInputStream fin = c.openFileInput(fileName+".bmp");
-            Bitmap b = BitmapFactory.decodeStream(fin);
-            view.setImageBitmap(b);
+            ImageLoaderPacket packet = new ImageLoaderPacket(fileName,view, c);
+            ImageLoader il = new ImageLoader();
+            il.execute(packet);
+//            FileInputStream fin = openFileInput(fileName+".bmp");
+//            Bitmap b = BitmapFactory.decodeStream(fin);
+//            view.setImageBitmap(b);
         }
-        catch (FileNotFoundException e)
+        catch (Exception e)
         {
             e.printStackTrace();
         }
