@@ -69,35 +69,35 @@
         android:text="Cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button3"
-        android:onClick="cancelClicked"
+        android:id="@+id/cancelBtn"
+        android:onClick="onClick (ItemDetailActivity)"
         android:background="@drawable/custom_button_highlight"
         android:textColor="@android:color/white"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/button2"
+        android:layout_alignStart="@+id/deleteBtn"
         android:layout_toStartOf="@+id/detailImage" />
 
     <Button
         android:text="Delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:onClick="deleteClicked"
+        android:id="@+id/deleteBtn"
+        android:onClick="onClick (ItemDetailActivity)"
         android:background="@drawable/custom_button_highlight"
         android:textColor="@android:color/white"
-        android:layout_above="@+id/button3"
-        android:layout_alignStart="@+id/button"
+        android:layout_above="@+id/cancelBtn"
+        android:layout_alignStart="@+id/updateBtn"
         android:layout_toStartOf="@+id/detailImage" />
 
     <Button
         android:text="Update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:onClick="updateClicked"
+        android:id="@+id/updateBtn"
+        android:onClick="onClick (ItemDetailActivity)"
         android:background="@drawable/custom_button_highlight"
         android:textColor="@android:color/white"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/deleteBtn"
         android:layout_alignStart="@+id/typeSpinner"
         android:layout_toStartOf="@+id/detailImage" />
 

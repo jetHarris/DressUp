@@ -378,6 +378,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i2);
                 break;
 
+            case R.id.action_camera:
+                Intent i6 = new Intent(this, CameraActivity.class);
+                startActivity(i6);
+                break;
+
             case R.id.action_read_nfc:
                 Intent i4 = new Intent(this, ReadNFCItemActivity.class);
                 startActivity(i4);

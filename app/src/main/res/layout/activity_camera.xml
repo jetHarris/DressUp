@@ -11,24 +11,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.luke.jocelyndressup.CameraActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@android:drawable/alert_light_frame"
+        android:layout_alignParentStart="true"
+        android:id="@+id/imageView"
+        android:adjustViewBounds="false"
+        android:layout_below="@+id/saveImageBtn" />
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_input_add"
         android:id="@+id/imageButton"
+        android:onClick="onClick"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:onClick="onClick" />
+        android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@android:drawable/alert_light_frame"
+    <Button
+        android:text="Save Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/imageButton"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="37dp"
-        android:id="@+id/imageView"
-        android:adjustViewBounds="false" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/saveImageBtn"
+        android:visibility="invisible"
+        android:background="@drawable/custom_button"
+        android:onClick="onClick" />
 </RelativeLayout>
 
