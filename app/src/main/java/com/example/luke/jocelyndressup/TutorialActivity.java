@@ -113,7 +113,7 @@ public class TutorialActivity extends AppCompatActivity {
         try {
             fos = openFileOutput(filename+".bmp", Context.MODE_PRIVATE);
             // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 50, fos);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -160,7 +161,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                     try {
                         fos = openFileOutput(nameText.getText().toString()+".bmp", Context.MODE_PRIVATE);
                         // Use the compress method on the BitMap object to write image to the OutputStream
-                        capture.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                        capture.compress(Bitmap.CompressFormat.PNG, 50, fos);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -237,5 +238,19 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BitmapDrawable drawable = (BitmapDrawable) display.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        display.setImageBitmap(null);
+
+        if (bitmap != null && !bitmap.isRecycled()) {
+            bitmap.recycle();
+            bitmap = null;
+        }
     }
 }

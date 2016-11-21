@@ -16,7 +16,9 @@
         android:icon="@drawable/icon"
         android:label="Dress Up"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden"></activity>

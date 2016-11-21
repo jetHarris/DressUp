@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -70,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> feetNames = new ArrayList<String>();
     ArrayList<String> legNames = new ArrayList<String>();
     ArrayList<String> torsoNames = new ArrayList<String>();
+    ArrayList<AsyncTask> tasks = new ArrayList<AsyncTask>();
+    ArrayList<ImageView> frontFacingViews = new ArrayList<ImageView>();
+    ArrayList<String> fileNames = new ArrayList<String>();
     TextView priceView;
     TextView taxView;
     TextView totalView;
@@ -154,6 +160,8 @@ public class MainActivity extends AppCompatActivity {
         legsImage = (ImageView) findViewById(R.id.imageLegs);
         feetImage = (ImageView) findViewById(R.id.imageFeet);
 
+
+
         headImageHidden = (ImageView) findViewById(R.id.imageHeadTemp);
         torsoImageHidden = (ImageView) findViewById(R.id.imageTorsoTemp);
         legsImageHidden = (ImageView) findViewById(R.id.imageLegsTemp);
@@ -163,6 +171,16 @@ public class MainActivity extends AppCompatActivity {
         torsoImageDisplay = (ImageView)findViewById(R.id.imageTorsoShow);
         legsImageDisplay = (ImageView)findViewById(R.id.imageLegsShow);
         feetImageDisplay = (ImageView)findViewById(R.id.imageFeetShow);
+
+        frontFacingViews.add(headImage);
+        frontFacingViews.add(headImageDisplay);
+        frontFacingViews.add(torsoImage);
+        frontFacingViews.add(torsoImageDisplay);
+        frontFacingViews.add(legsImage);
+        frontFacingViews.add(legsImageDisplay);
+        frontFacingViews.add(feetImage);
+        frontFacingViews.add(feetImageDisplay);
+
 
         headImageDisplayHidden= (ImageView)findViewById(R.id.imageHeadShowTemp);
         torsoImageDisplayHidden= (ImageView)findViewById(R.id.imageTorsoShowTemp);
@@ -255,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             ImageLoaderPacket packet = new ImageLoaderPacket(fileName,view, context);
             ImageLoader il = new ImageLoader();
+            tasks.add(il);
             il.execute(packet);
 //            FileInputStream fin = openFileInput(fileName+".bmp");
 //            Bitmap b = BitmapFactory.decodeStream(fin);
@@ -270,6 +289,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             ImageLoaderPacket packet = new ImageLoaderPacket(fileName,view, context, secondView);
             ImageLoader il = new ImageLoader();
+            tasks.add(il);
             il.execute(packet);
         }
         catch (Exception e)
@@ -296,17 +316,28 @@ public class MainActivity extends AppCompatActivity {
 
     public void setImages() {
 
-        setImage(headImageDisplay,headNames.get(currentHeadImage),headImage);
-        //setImage(headImage,headNames.get(currentHeadImage));
+        fileNames.clear();
+        fileNames.add(headNames.get(currentHeadImage));
+        fileNames.add(torsoNames.get(currentTorsoImage));
+        fileNames.add(legNames.get(currentLegsImage));
+        fileNames.add(feetNames.get(currentFeetImage));
 
-        setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage),torsoImage);
-        //setImage(torsoImage,torsoNames.get(currentTorsoImage));
 
-        setImage(legsImageDisplay,legNames.get(currentLegsImage), legsImage);
-        //setImage(legsImage,legNames.get(currentLegsImage));
+        ImageLoaderSuperPacket packet = new ImageLoaderSuperPacket(fileNames,frontFacingViews,context);
+        SuperImageLoader loader = new SuperImageLoader();
+        loader.execute(packet);
 
-        setImage(feetImageDisplay,feetNames.get(currentFeetImage), feetImage);
-        //setImage(feetImage,feetNames.get(currentFeetImage));
+//        setImage(headImageDisplay,headNames.get(currentHeadImage),headImage);
+//        //setImage(headImage,headNames.get(currentHeadImage));
+//
+//        setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage),torsoImage);
+//        //setImage(torsoImage,torsoNames.get(currentTorsoImage));
+//
+//        setImage(legsImageDisplay,legNames.get(currentLegsImage), legsImage);
+//        //setImage(legsImage,legNames.get(currentLegsImage));
+//
+//        setImage(feetImageDisplay,feetNames.get(currentFeetImage), feetImage);
+//        //setImage(feetImage,feetNames.get(currentFeetImage));
     }
 
     public void setArrays() {
@@ -542,6 +573,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageLoaderPacket packet = new ImageLoaderPacket(filename,iv, context, iv2);
         ImageLoaderLeftAnim il = new ImageLoaderLeftAnim();
+        tasks.add(il);
         il.execute(packet);
 
 //        ChangeImageRunnable thread = new ChangeImageRunnable(iv,this.context, filename);
@@ -558,6 +590,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageLoaderPacket packet = new ImageLoaderPacket(filename,iv, context,iv2);
         ImageLoaderRightAnim il = new ImageLoaderRightAnim();
+        tasks.add(il);
         il.execute(packet);
 //        ChangeImageLeftRunnable thread = new ChangeImageLeftRunnable(iv,this.context, filename);
 //        //thread.run();
@@ -762,6 +795,84 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        for(int i = 0; i < tasks.size();++i){
+            if(tasks.get(i) != null){
+                tasks.get(i).cancel(true);
+            }
+        }
+
+        ArrayList<Bitmap> bitMapsToClear = new ArrayList<Bitmap>();
+
+
+        BitmapDrawable drawable = (BitmapDrawable) headImage.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        bitMapsToClear.add(bitmap);
+
+        drawable = (BitmapDrawable) torsoImage.getDrawable();
+        bitmap = drawable.getBitmap();
+        bitMapsToClear.add(bitmap);
+
+        drawable = (BitmapDrawable) legsImage.getDrawable();
+        bitmap = drawable.getBitmap();
+        bitMapsToClear.add(bitmap);
+
+        drawable = (BitmapDrawable) feetImage.getDrawable();
+        bitmap = drawable.getBitmap();
+        bitMapsToClear.add(bitmap);
+
+        drawable = (BitmapDrawable) headImageDisplay.getDrawable();
+        bitmap = drawable.getBitmap();
+        bitMapsToClear.add(bitmap);
+
+        drawable = (BitmapDrawable) torsoImageDisplay.getDrawable();
+        bitmap = drawable.getBitmap();
+        bitMapsToClear.add(bitmap);
+
+        drawable = (BitmapDrawable) legsImageDisplay.getDrawable();
+        bitmap = drawable.getBitmap();
+        bitMapsToClear.add(bitmap);
+
+        drawable = (BitmapDrawable) feetImageDisplay.getDrawable();
+        bitmap = drawable.getBitmap();
+        bitMapsToClear.add(bitmap);
+
+
+
+
+        headImage.setImageBitmap(null);
+        headImageDisplay.setImageBitmap(null);
+        headImageDisplayHidden.setImageBitmap(null);
+        headImageHidden.setImageBitmap(null);
+
+
+        torsoImage.setImageBitmap(null);
+        torsoImageDisplay.setImageBitmap(null);
+        torsoImageDisplayHidden.setImageBitmap(null);
+        torsoImageHidden.setImageBitmap(null);
+
+        legsImage.setImageBitmap(null);
+        legsImageDisplay.setImageBitmap(null);
+        legsImageDisplayHidden.setImageBitmap(null);
+        legsImageHidden.setImageBitmap(null);
+
+        feetImage.setImageBitmap(null);
+        feetImageDisplay.setImageBitmap(null);
+        feetImageDisplayHidden.setImageBitmap(null);
+        feetImageHidden.setImageBitmap(null);
+
+        for(int i = 0; i <bitMapsToClear.size();++i ){
+            if (bitMapsToClear.get(i) != null && !bitMapsToClear.get(i).isRecycled()) {
+                bitMapsToClear.get(i).recycle();
+                bitMapsToClear.set(i,null);
+                //bitmap = null;
+            }
+        }
+
+    }
 
     private final class GestureListenerHead extends GestureDetector.SimpleOnGestureListener {
 

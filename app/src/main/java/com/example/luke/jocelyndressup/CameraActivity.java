@@ -38,7 +38,7 @@ public class CameraActivity extends AppCompatActivity {
             case R.id.saveImageBtn:
                 Intent i = new Intent(this, ItemDetailActivity.class);
                 ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                capture.compress(Bitmap.CompressFormat.PNG, 100, bs);
+                capture.compress(Bitmap.CompressFormat.PNG, 50, bs);
                 i.putExtra("image", bs.toByteArray());
                 startActivity(i);
                 break;
