@@ -21,7 +21,7 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_camera);
 
         // Disable Camera features with this boolean if user doesnt have camera and we say it is not required in the manifest
         //boolean hasCamera = hasSystemFeature(PackageManager.FEATURE_CAMERA);
