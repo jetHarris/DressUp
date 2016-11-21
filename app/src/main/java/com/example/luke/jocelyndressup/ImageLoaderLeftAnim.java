@@ -32,8 +32,8 @@ public class ImageLoaderLeftAnim
             publishProgress(packet1);
 
             FileInputStream fin = params[0].context.openFileInput(params[0].fileName+".bmp");
-            Bitmap b = BitmapFactory.decodeStream(fin);
-            ImageLoaderPacketPost packet = new ImageLoaderPacketPost(b,params[0].view, params[0].context);
+            //Bitmap b = BitmapFactory.decodeStream(fin);
+            ImageLoaderPacketPost packet = new ImageLoaderPacketPost(b1,params[0].view, params[0].context);
             Thread.sleep(700);
             return packet;
         }catch(Exception e){

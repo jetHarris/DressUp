@@ -26,7 +26,11 @@ public class ImageLoader
         try{
             FileInputStream fin = params[0].context.openFileInput(params[0].fileName+".bmp");
             Bitmap b = BitmapFactory.decodeStream(fin);
-            ImageLoaderPacketPost packet = new ImageLoaderPacketPost(b,params[0].view, params[0].context);
+            ImageLoaderPacketPost packet;
+            if (params[0].secondView == null)
+                packet = new ImageLoaderPacketPost(b,params[0].view, params[0].context);
+            else
+                packet = new ImageLoaderPacketPost(b,params[0].view, params[0].context, params[0].secondView);
             return packet;
         }catch(Exception e){
             Log.e("Image","Failed to load image",e);
@@ -39,7 +43,8 @@ public class ImageLoader
     protected void onPostExecute(ImageLoaderPacketPost ilpp){
         if(ilpp!=null){
             ilpp.view.setImageBitmap(ilpp.bit);
-
+            if(ilpp.secondView != null)
+                ilpp.secondView.setImageBitmap(ilpp.bit);
         }
     }
     protected void onCancelled(){

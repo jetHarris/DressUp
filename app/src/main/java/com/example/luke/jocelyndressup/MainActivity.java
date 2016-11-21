@@ -266,6 +266,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setImage(ImageView view, String fileName, ImageView secondView){
+        try {
+            ImageLoaderPacket packet = new ImageLoaderPacket(fileName,view, context, secondView);
+            ImageLoader il = new ImageLoader();
+            il.execute(packet);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public void recalculatePrice() {
         runningPrice = 0;
         runningPrice += headPrices.get(showHeadImage);
@@ -284,17 +296,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void setImages() {
 
-        setImage(headImageDisplay,headNames.get(currentHeadImage));
-        setImage(headImage,headNames.get(currentHeadImage));
+        setImage(headImageDisplay,headNames.get(currentHeadImage),headImage);
+        //setImage(headImage,headNames.get(currentHeadImage));
 
-        setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage));
-        setImage(torsoImage,torsoNames.get(currentTorsoImage));
+        setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage),torsoImage);
+        //setImage(torsoImage,torsoNames.get(currentTorsoImage));
 
-        setImage(legsImageDisplay,legNames.get(currentLegsImage));
-        setImage(legsImage,legNames.get(currentLegsImage));
+        setImage(legsImageDisplay,legNames.get(currentLegsImage), legsImage);
+        //setImage(legsImage,legNames.get(currentLegsImage));
 
-        setImage(feetImageDisplay,feetNames.get(currentFeetImage));
-        setImage(feetImage,feetNames.get(currentFeetImage));
+        setImage(feetImageDisplay,feetNames.get(currentFeetImage), feetImage);
+        //setImage(feetImage,feetNames.get(currentFeetImage));
     }
 
     public void setArrays() {
@@ -409,23 +421,23 @@ public class MainActivity extends AppCompatActivity {
 
             //get the id's from the database then set the appropriate images
             currentHeadImage = heads.indexOf(c.getInt(2));
-            setImage(headImageDisplay,headNames.get(currentHeadImage));
-            setImage(headImage,headNames.get(currentHeadImage));
+            setImage(headImageDisplay,headNames.get(currentHeadImage),headImage);
+            //setImage(headImage,headNames.get(currentHeadImage));
             showHeadImage = currentHeadImage;
 
             currentTorsoImage = torsos.indexOf(c.getInt(3));
-            setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage));
-            setImage(torsoImage,torsoNames.get(currentTorsoImage));
+            setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage),torsoImage);
+            //setImage(torsoImage,torsoNames.get(currentTorsoImage));
             showTorsoImage = currentTorsoImage;
 
             currentLegsImage = legs.indexOf(c.getInt(4));
-            setImage(legsImageDisplay,legNames.get(currentLegsImage));
-            setImage(legsImage,legNames.get(currentLegsImage));
+            setImage(legsImageDisplay,legNames.get(currentLegsImage),legsImage);
+            //setImage(legsImage,legNames.get(currentLegsImage));
             showLegsImage = currentLegsImage;
 
             currentFeetImage = feet.indexOf(c.getInt(5));
-            setImage(feetImageDisplay,feetNames.get(currentFeetImage));
-            setImage(feetImage,feetNames.get(currentFeetImage));
+            setImage(feetImageDisplay,feetNames.get(currentFeetImage),feetImage);
+            //setImage(feetImage,feetNames.get(currentFeetImage));
             showFeetImage = currentFeetImage;
         } else {
             Toast.makeText(this, "Get failed on " + name, Toast.LENGTH_SHORT).show();
