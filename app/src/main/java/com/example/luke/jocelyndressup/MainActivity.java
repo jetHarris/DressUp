@@ -874,6 +874,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        setImages();
+    }
+
     private final class GestureListenerHead extends GestureDetector.SimpleOnGestureListener {
 
         @Override

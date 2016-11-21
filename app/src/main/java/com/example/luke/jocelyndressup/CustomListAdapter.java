@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class CustomListAdapter extends ArrayAdapter<String> {
 
@@ -20,6 +22,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     private final String[] itemname;
     private final Integer[] imgid;
     private final Float[] price;
+    ArrayList<ImageView> views = new ArrayList<ImageView>();
     Context c;
 
     public CustomListAdapter(Activity context, String[] itemname, Integer[] imgid, Float[] price, Context con) {
@@ -55,6 +58,8 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         setImage(imageView,itemname[position]);
+
+        views.add(imageView);
         TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
         txtTitle.setText(itemname[position]);
@@ -63,4 +68,25 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         return rowView;
 
     };
+
+    public void pause(){
+        for(int i = 0; i < views.size();++i) {
+            BitmapDrawable drawable = (BitmapDrawable) views.get(i).getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+
+            views.get(i).setImageBitmap(null);
+
+            if (bitmap != null && !bitmap.isRecycled()) {
+                bitmap.recycle();
+                bitmap = null;
+            }
+        }
+    }
+
+    public void resume(){
+        for(int i = 0; i < views.size();++i) {
+            setImage(views.get(i), itemname[i]);
+        }
+    }
+
 }

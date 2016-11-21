@@ -35,6 +35,7 @@ public class ItemListActivity extends AppCompatActivity {
     String type;
     ArrayList<Integer> itemIDs;
     Context context;
+    CustomListAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         setArrays();
 
-        CustomListAdapter adapter = new CustomListAdapter(this, itemname, imgid, prices,context);
+        adapter = new CustomListAdapter(this, itemname, imgid, prices,context);
         list = (ListView) findViewById(R.id.list);
         list.setAdapter(adapter);
 
@@ -219,5 +220,18 @@ public class ItemListActivity extends AppCompatActivity {
                 break;
 
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.pause();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        adapter.resume();
     }
 }
