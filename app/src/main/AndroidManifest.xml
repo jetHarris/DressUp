@@ -3,6 +3,7 @@
     package="com.example.luke.jocelyndressup">
 
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <uses-feature
         android:name="android.hardware.nfc"
