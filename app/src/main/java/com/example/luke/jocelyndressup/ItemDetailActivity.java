@@ -253,4 +253,10 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
             bitmap = null;
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        setImage(display, name);
+    }
 }
