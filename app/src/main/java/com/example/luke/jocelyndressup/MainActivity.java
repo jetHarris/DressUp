@@ -421,22 +421,22 @@ public class MainActivity extends AppCompatActivity {
 
             //get the id's from the database then set the appropriate images
             currentHeadImage = heads.indexOf(c.getInt(2));
-            setImage(headImageDisplay,headNames.get(currentHeadImage),headImage);
+            //setImage(headImageDisplay,headNames.get(currentHeadImage),headImage);
             //setImage(headImage,headNames.get(currentHeadImage));
             showHeadImage = currentHeadImage;
 
             currentTorsoImage = torsos.indexOf(c.getInt(3));
-            setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage),torsoImage);
+            //setImage(torsoImageDisplay,torsoNames.get(currentTorsoImage),torsoImage);
             //setImage(torsoImage,torsoNames.get(currentTorsoImage));
             showTorsoImage = currentTorsoImage;
 
             currentLegsImage = legs.indexOf(c.getInt(4));
-            setImage(legsImageDisplay,legNames.get(currentLegsImage),legsImage);
+            //setImage(legsImageDisplay,legNames.get(currentLegsImage),legsImage);
             //setImage(legsImage,legNames.get(currentLegsImage));
             showLegsImage = currentLegsImage;
 
             currentFeetImage = feet.indexOf(c.getInt(5));
-            setImage(feetImageDisplay,feetNames.get(currentFeetImage),feetImage);
+            //setImage(feetImageDisplay,feetNames.get(currentFeetImage),feetImage);
             //setImage(feetImage,feetNames.get(currentFeetImage));
             showFeetImage = currentFeetImage;
         } else {
