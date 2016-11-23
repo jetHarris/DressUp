@@ -813,85 +813,85 @@ public class MainActivity extends AppCompatActivity {
         }
         System.gc();
 
-        ArrayList<Bitmap> bitMapsToClear = new ArrayList<Bitmap>();
-
-
-        BitmapDrawable drawable = (BitmapDrawable) headImage.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) torsoImage.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) legsImage.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) feetImage.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) headImageDisplay.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) torsoImageDisplay.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) legsImageDisplay.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) feetImageDisplay.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-
-
-
-        headImage.setImageBitmap(null);
-        headImageDisplay.setImageBitmap(null);
-        headImageDisplayHidden.setImageBitmap(null);
-        headImageHidden.setImageBitmap(null);
-
-
-        torsoImage.setImageBitmap(null);
-        torsoImageDisplay.setImageBitmap(null);
-        torsoImageDisplayHidden.setImageBitmap(null);
-        torsoImageHidden.setImageBitmap(null);
-
-        legsImage.setImageBitmap(null);
-        legsImageDisplay.setImageBitmap(null);
-        legsImageDisplayHidden.setImageBitmap(null);
-        legsImageHidden.setImageBitmap(null);
-
-        feetImage.setImageBitmap(null);
-        feetImageDisplay.setImageBitmap(null);
-        feetImageDisplayHidden.setImageBitmap(null);
-        feetImageHidden.setImageBitmap(null);
-
-        for(int i = 0; i <bitMapsToClear.size();++i ){
-            if (bitMapsToClear.get(i) != null && !bitMapsToClear.get(i).isRecycled()) {
-                bitMapsToClear.get(i).recycle();
-                bitMapsToClear.set(i,null);
-                //bitmap = null;
-            }
-        }
+//        ArrayList<Bitmap> bitMapsToClear = new ArrayList<Bitmap>();
+//
+//
+//        BitmapDrawable drawable = (BitmapDrawable) headImage.getDrawable();
+//        Bitmap bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) torsoImage.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) legsImage.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) feetImage.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) headImageDisplay.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) torsoImageDisplay.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) legsImageDisplay.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) feetImageDisplay.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//
+//
+//
+//        headImage.setImageBitmap(null);
+//        headImageDisplay.setImageBitmap(null);
+//        headImageDisplayHidden.setImageBitmap(null);
+//        headImageHidden.setImageBitmap(null);
+//
+//
+//        torsoImage.setImageBitmap(null);
+//        torsoImageDisplay.setImageBitmap(null);
+//        torsoImageDisplayHidden.setImageBitmap(null);
+//        torsoImageHidden.setImageBitmap(null);
+//
+//        legsImage.setImageBitmap(null);
+//        legsImageDisplay.setImageBitmap(null);
+//        legsImageDisplayHidden.setImageBitmap(null);
+//        legsImageHidden.setImageBitmap(null);
+//
+//        feetImage.setImageBitmap(null);
+//        feetImageDisplay.setImageBitmap(null);
+//        feetImageDisplayHidden.setImageBitmap(null);
+//        feetImageHidden.setImageBitmap(null);
+//
+//        for(int i = 0; i <bitMapsToClear.size();++i ){
+//            if (bitMapsToClear.get(i) != null && !bitMapsToClear.get(i).isRecycled()) {
+//                bitMapsToClear.get(i).recycle();
+//                bitMapsToClear.set(i,null);
+//                //bitmap = null;
+//            }
+//        }
 
     }
 
-    public void onResume() {
-        super.onResume();  // Always call the superclass method first
-        setImages();
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        setImages();
-    }
+//    public void onResume() {
+//        super.onResume();  // Always call the superclass method first
+//        setImages();
+//    }
+//
+//    @Override
+//    protected void onPostResume() {
+//        super.onPostResume();
+//        setImages();
+//    }
 
     private final class GestureListenerHead extends GestureDetector.SimpleOnGestureListener {
 
