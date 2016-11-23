@@ -874,9 +874,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
+        setImages();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
         setImages();
     }
 
