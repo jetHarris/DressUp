@@ -161,7 +161,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                     try {
                         fos = openFileOutput(nameText.getText().toString()+".bmp", Context.MODE_PRIVATE);
                         // Use the compress method on the BitMap object to write image to the OutputStream
-                        capture.compress(Bitmap.CompressFormat.PNG, 50, fos);
+                        capture.compress(Bitmap.CompressFormat.PNG, 10, fos);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -252,6 +252,8 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
             bitmap.recycle();
             bitmap = null;
         }
+
+        System.gc();
     }
 
     @Override

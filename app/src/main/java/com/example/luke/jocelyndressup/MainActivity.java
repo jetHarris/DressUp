@@ -118,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        System.gc();
         db = new DBAdapter(this);
         context = this.getApplicationContext();
         //get the existing database file or from assets folder if doesn't exist
@@ -576,6 +578,8 @@ public class MainActivity extends AppCompatActivity {
         tasks.add(il);
         il.execute(packet);
 
+        System.gc();
+
 //        ChangeImageRunnable thread = new ChangeImageRunnable(iv,this.context, filename);
 //        //thread.run();
 //        iv.postDelayed(thread, 700);
@@ -592,6 +596,8 @@ public class MainActivity extends AppCompatActivity {
         ImageLoaderRightAnim il = new ImageLoaderRightAnim();
         tasks.add(il);
         il.execute(packet);
+
+        System.gc();
 //        ChangeImageLeftRunnable thread = new ChangeImageLeftRunnable(iv,this.context, filename);
 //        //thread.run();
 //        iv.postDelayed(thread, 700);
@@ -619,6 +625,7 @@ public class MainActivity extends AppCompatActivity {
         changeImageRight(legsImageDisplay,legNames.get(currentLegsImage),legsImageDisplayHidden);
         changeImageRight(feetImageDisplay,feetNames.get(currentFeetImage),feetImageDisplayHidden);
 
+        System.gc();
         recalculatePrice();
     }
 
@@ -804,6 +811,7 @@ public class MainActivity extends AppCompatActivity {
                 tasks.get(i).cancel(true);
             }
         }
+        System.gc();
 
         ArrayList<Bitmap> bitMapsToClear = new ArrayList<Bitmap>();
 
