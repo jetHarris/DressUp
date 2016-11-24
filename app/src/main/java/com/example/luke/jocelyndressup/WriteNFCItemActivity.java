@@ -1,9 +1,13 @@
 package com.example.luke.jocelyndressup;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +67,17 @@ public class WriteNFCItemActivity extends AppCompatActivity {
                 Toast.makeText(WriteNFCItemActivity.this, exception.getType().toString(), Toast.LENGTH_LONG).show();
             }
         });
+
+        sharingAnimation(R.anim.rotatesharing);
+    }
+
+    private void sharingAnimation(int animationResourceID)
+    {
+        ImageView reuseImageView = (ImageView)findViewById(R.id.ivIcon);
+        reuseImageView.setImageResource(R.drawable.icon);
+        reuseImageView.setVisibility(View.VISIBLE);
+        Animation an = AnimationUtils.loadAnimation(this, animationResourceID);
+        reuseImageView.startAnimation(an);
     }
 
     // fires on NFC card detected
