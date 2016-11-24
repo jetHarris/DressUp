@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class ItemListActivity extends AppCompatActivity {
     ArrayList<Integer> itemIDs;
     Context context;
     CustomListAdapter adapter = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,13 +227,17 @@ public class ItemListActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        adapter.pause();
+        for(int i = 0; i < adapter.tasks.size();++i){
+            if(adapter.tasks.get(i) != null){
+                adapter.tasks.get(i).cancel(true);
+            }
+        }
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();  // Always call the superclass method first
-        adapter.resume();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();  // Always call the superclass method first
+//        adapter.resume();
+//    }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     private final Float[] price;
     ArrayList<ImageView> views = new ArrayList<ImageView>();
     Context c;
+    public  ArrayList<AsyncTask> tasks = new ArrayList<AsyncTask>();
 
     public CustomListAdapter(Activity context, String[] itemname, Integer[] imgid, Float[] price, Context con) {
         super(context, R.layout.mylist, itemname);
@@ -40,8 +42,9 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         try {
             ImageLoaderPacket packet = new ImageLoaderPacket(fileName,view, c);
             ImageLoader il = new ImageLoader();
+            tasks.add(il);
             il.execute(packet);
-//            FileInputStream fin = openFileInput(fileName+".bmp");
+//            FileInputStream fin = c.openFileInput(fileName+".bmp");
 //            Bitmap b = BitmapFactory.decodeStream(fin);
 //            view.setImageBitmap(b);
         }
@@ -69,19 +72,19 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
     };
 
-    public void pause(){
-        for(int i = 0; i < views.size();++i) {
-            BitmapDrawable drawable = (BitmapDrawable) views.get(i).getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-
-            views.get(i).setImageBitmap(null);
-
-            if (bitmap != null && !bitmap.isRecycled()) {
-                bitmap.recycle();
-                bitmap = null;
-            }
-        }
-    }
+//    public void pause(){
+//        for(int i = 0; i < views.size();++i) {
+//            BitmapDrawable drawable = (BitmapDrawable) views.get(i).getDrawable();
+//            Bitmap bitmap = drawable.getBitmap();
+//
+//            views.get(i).setImageBitmap(null);
+//
+//            if (bitmap != null && !bitmap.isRecycled()) {
+//                bitmap.recycle();
+//                bitmap = null;
+//            }
+//        }
+//    }
 
     public void resume(){
         for(int i = 0; i < views.size();++i) {

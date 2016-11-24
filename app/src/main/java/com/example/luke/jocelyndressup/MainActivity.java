@@ -118,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        System.gc();
         db = new DBAdapter(this);
         context = this.getApplicationContext();
         //get the existing database file or from assets folder if doesn't exist
@@ -576,6 +578,8 @@ public class MainActivity extends AppCompatActivity {
         tasks.add(il);
         il.execute(packet);
 
+        System.gc();
+
 //        ChangeImageRunnable thread = new ChangeImageRunnable(iv,this.context, filename);
 //        //thread.run();
 //        iv.postDelayed(thread, 700);
@@ -592,6 +596,8 @@ public class MainActivity extends AppCompatActivity {
         ImageLoaderRightAnim il = new ImageLoaderRightAnim();
         tasks.add(il);
         il.execute(packet);
+
+        System.gc();
 //        ChangeImageLeftRunnable thread = new ChangeImageLeftRunnable(iv,this.context, filename);
 //        //thread.run();
 //        iv.postDelayed(thread, 700);
@@ -619,6 +625,7 @@ public class MainActivity extends AppCompatActivity {
         changeImageRight(legsImageDisplay,legNames.get(currentLegsImage),legsImageDisplayHidden);
         changeImageRight(feetImageDisplay,feetNames.get(currentFeetImage),feetImageDisplayHidden);
 
+        System.gc();
         recalculatePrice();
     }
 
@@ -804,81 +811,87 @@ public class MainActivity extends AppCompatActivity {
                 tasks.get(i).cancel(true);
             }
         }
+        System.gc();
 
-        ArrayList<Bitmap> bitMapsToClear = new ArrayList<Bitmap>();
-
-
-        BitmapDrawable drawable = (BitmapDrawable) headImage.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) torsoImage.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) legsImage.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) feetImage.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) headImageDisplay.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) torsoImageDisplay.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) legsImageDisplay.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-        drawable = (BitmapDrawable) feetImageDisplay.getDrawable();
-        bitmap = drawable.getBitmap();
-        bitMapsToClear.add(bitmap);
-
-
-
-
-        headImage.setImageBitmap(null);
-        headImageDisplay.setImageBitmap(null);
-        headImageDisplayHidden.setImageBitmap(null);
-        headImageHidden.setImageBitmap(null);
-
-
-        torsoImage.setImageBitmap(null);
-        torsoImageDisplay.setImageBitmap(null);
-        torsoImageDisplayHidden.setImageBitmap(null);
-        torsoImageHidden.setImageBitmap(null);
-
-        legsImage.setImageBitmap(null);
-        legsImageDisplay.setImageBitmap(null);
-        legsImageDisplayHidden.setImageBitmap(null);
-        legsImageHidden.setImageBitmap(null);
-
-        feetImage.setImageBitmap(null);
-        feetImageDisplay.setImageBitmap(null);
-        feetImageDisplayHidden.setImageBitmap(null);
-        feetImageHidden.setImageBitmap(null);
-
-        for(int i = 0; i <bitMapsToClear.size();++i ){
-            if (bitMapsToClear.get(i) != null && !bitMapsToClear.get(i).isRecycled()) {
-                bitMapsToClear.get(i).recycle();
-                bitMapsToClear.set(i,null);
-                //bitmap = null;
-            }
-        }
+//        ArrayList<Bitmap> bitMapsToClear = new ArrayList<Bitmap>();
+//
+//
+//        BitmapDrawable drawable = (BitmapDrawable) headImage.getDrawable();
+//        Bitmap bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) torsoImage.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) legsImage.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) feetImage.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) headImageDisplay.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) torsoImageDisplay.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) legsImageDisplay.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//        drawable = (BitmapDrawable) feetImageDisplay.getDrawable();
+//        bitmap = drawable.getBitmap();
+//        bitMapsToClear.add(bitmap);
+//
+//
+//
+//
+//        headImage.setImageBitmap(null);
+//        headImageDisplay.setImageBitmap(null);
+//        headImageDisplayHidden.setImageBitmap(null);
+//        headImageHidden.setImageBitmap(null);
+//
+//
+//        torsoImage.setImageBitmap(null);
+//        torsoImageDisplay.setImageBitmap(null);
+//        torsoImageDisplayHidden.setImageBitmap(null);
+//        torsoImageHidden.setImageBitmap(null);
+//
+//        legsImage.setImageBitmap(null);
+//        legsImageDisplay.setImageBitmap(null);
+//        legsImageDisplayHidden.setImageBitmap(null);
+//        legsImageHidden.setImageBitmap(null);
+//
+//        feetImage.setImageBitmap(null);
+//        feetImageDisplay.setImageBitmap(null);
+//        feetImageDisplayHidden.setImageBitmap(null);
+//        feetImageHidden.setImageBitmap(null);
+//
+//        for(int i = 0; i <bitMapsToClear.size();++i ){
+//            if (bitMapsToClear.get(i) != null && !bitMapsToClear.get(i).isRecycled()) {
+//                bitMapsToClear.get(i).recycle();
+//                bitMapsToClear.set(i,null);
+//                //bitmap = null;
+//            }
+//        }
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();  // Always call the superclass method first
-        setImages();
-    }
+//    public void onResume() {
+//        super.onResume();  // Always call the superclass method first
+//        setImages();
+//    }
+//
+//    @Override
+//    protected void onPostResume() {
+//        super.onPostResume();
+//        setImages();
+//    }
 
     private final class GestureListenerHead extends GestureDetector.SimpleOnGestureListener {
 
