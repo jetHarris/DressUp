@@ -7,10 +7,6 @@ import android.content.DialogInterface;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,8 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,15 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
-import static android.R.attr.path;
 
 public class MainActivity extends AppCompatActivity {
     //variables to keep track of the total number of items for each category
@@ -149,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setCustomView(imageView);
 
 
-        priceView = (TextView) findViewById(R.id.priceText);
+        priceView = (TextView) findViewById(R.id.totalText);
         taxView = (TextView) findViewById(R.id.taxText);
-        totalView = (TextView) findViewById(R.id.totalText);
+        totalView = (TextView) findViewById(R.id.overallTotalText);
 
         headPriceLabel = (TextView)findViewById(R.id.headPrice);
         torsoPriceLabel = (TextView)findViewById(R.id.torsoPrice);
@@ -245,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         if (outfitOnDisplay) {
             TextView label = (TextView) findViewById(R.id.outfitLabel);
             TextView nameLabel = (TextView) findViewById(R.id.outfitNameText);
-            Button removeOutfit = (Button) findViewById(R.id.removeOutfitBtn);
+            Button removeOutfit = (Button) findViewById(R.id.saveBtn);
             removeOutfit.setVisibility(View.VISIBLE);
             label.setVisibility(View.VISIBLE);
             nameLabel.setVisibility(View.VISIBLE);
@@ -491,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
 
             //if the save button is clicked
-            case R.id.buttonSave:
+            case R.id.saveBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Please input name of outfit");
 
@@ -542,7 +533,7 @@ public class MainActivity extends AppCompatActivity {
                 db.close();
                 TextView label = (TextView) findViewById(R.id.outfitLabel);
                 TextView nameLabel = (TextView) findViewById(R.id.outfitNameText);
-                Button removeOutfit = (Button) findViewById(R.id.removeOutfitBtn);
+                Button removeOutfit = (Button) findViewById(R.id.saveBtn);
                 removeOutfit.setVisibility(View.INVISIBLE);
                 label.setVisibility(View.INVISIBLE);
                 nameLabel.setVisibility(View.INVISIBLE);

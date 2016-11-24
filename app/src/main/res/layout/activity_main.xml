@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="0dp"
     tools:context="com.example.luke.jocelyndressup.MainActivity"
-    android:background="@drawable/custom_button"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@android:color/white"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
@@ -23,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:id="@+id/linearLayout4"
+        android:id="@+id/navlayout"
         android:background="#003300"
         android:layout_marginBottom="10dp"
         android:paddingTop="5dp"
@@ -58,454 +52,274 @@
             android:textColor="@android:color/white"
             android:onClick="onClick" />
     </LinearLayout>
+
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout2"
-        android:weightSum="1"
-        android:layout_marginRight="20dp"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_alignParentStart="true">
+        android:id="@+id/imageLayoutBack"
+        android:layout_below="@+id/navlayout"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:background="@android:color/transparent"
+        android:layout_alignBottom="@+id/imageLayout"
+        android:layout_marginRight="10dp">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitEnd"
-            android:adjustViewBounds="true"
+            android:layout_height="70dp"
+            app:srcCompat="@drawable/head1"
             android:id="@+id/imageHeadTemp"
-            android:src="@drawable/head1"
-            android:layout_marginBottom="10dp"
-            android:background="#000000"
             android:padding="1dp"
-            android:layout_weight="0.03" />
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/black"
+            android:scaleType="fitXY" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitEnd"
-            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/torso1"
             android:id="@+id/imageTorsoTemp"
-            android:src="@drawable/torso1"
-            android:background="#000000"
             android:padding="1dp"
-            android:layout_marginBottom="10dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitEnd"
-            android:adjustViewBounds="true"
-            android:id="@+id/imageLegsTemp"
-            android:src="@drawable/legs1"
-            android:background="#000000"
-            android:padding="1dp"
-            android:layout_marginBottom="10dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitEnd"
-            android:adjustViewBounds="true"
-            android:id="@+id/imageFeetTemp"
-            android:background="#000000"
-            android:padding="1dp"
-            android:src="@drawable/feet1" />
-    </LinearLayout>
-
-
-    <LinearLayout
-    android:layout_width="120dp"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/linearLayout1"
-    android:weightSum="1"
-        android:layout_marginRight="20dp"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_alignParentStart="true">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitEnd"
-            android:adjustViewBounds="true"
-            android:id="@+id/imageHead"
-            android:src="@drawable/head1"
             android:layout_marginBottom="10dp"
-            android:background="#000000"
-            android:padding="1dp"
-            android:layout_weight="0.03" />
+            android:background="@android:color/black"
+            android:layout_height="105dp"
+            android:scaleType="fitXY" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitEnd"
-            android:adjustViewBounds="true"
-            android:id="@+id/imageTorso"
-            android:src="@drawable/torso1"
-            android:background="#000000"
+            app:srcCompat="@drawable/legs2"
+            android:id="@+id/imageLegsTemp"
             android:padding="1dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/black"
+            android:layout_height="155dp"
+            android:scaleType="fitXY" />
 
         <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitEnd"
-        android:adjustViewBounds="true"
-        android:id="@+id/imageLegs"
-        android:src="@drawable/legs1"
-        android:background="#000000"
-        android:padding="1dp"
-        android:layout_marginBottom="10dp" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitEnd"
-        android:adjustViewBounds="true"
-        android:id="@+id/imageFeet"
-        android:background="#000000"
-        android:padding="1dp"
-        android:src="@drawable/feet1" />
-</LinearLayout>
-
+            android:layout_width="match_parent"
+            app:srcCompat="@drawable/feet2"
+            android:id="@+id/imageFeetTemp"
+            android:background="@android:color/black"
+            android:layout_height="34dp"
+            android:padding="1dp"
+            android:scaleType="fitXY" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="120dp"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout4"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/buttonSave"
-        android:id="@+id/TotalsLayout"
+        android:id="@+id/imageLayout"
+        android:layout_below="@+id/navlayout"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:srcCompat="@drawable/head1"
+            android:id="@+id/imageHead"
+            android:padding="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/black"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            app:srcCompat="@drawable/torso1"
+            android:id="@+id/imageTorso"
+            android:padding="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/black"
+            android:layout_height="105dp"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            app:srcCompat="@drawable/legs2"
+            android:id="@+id/imageLegs"
+            android:padding="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/black"
+            android:layout_height="155dp"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            app:srcCompat="@drawable/feet2"
+            android:id="@+id/imageFeet"
+            android:background="@android:color/black"
+            android:layout_height="34dp"
+            android:padding="1dp"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/imageLayoutBack"
+        android:layout_below="@+id/navlayout"
         android:background="@drawable/custom_button">
-
-        <TextView
-            android:text="@string/price_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/textView4"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:fontFamily="serif"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:typeface="serif"
-            android:background="@android:color/transparent"
-            android:paddingLeft="0dp"
-            android:textColorLink="@android:color/white"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:id="@+id/totalsLayout"
+        android:layout_above="@+id/saveBtn"
+        android:layout_toEndOf="@+id/pricesLayout">
 
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView4"
-            android:gravity="center"
-            android:id="@+id/priceText"
-            android:layout_alignEnd="@+id/textView4"
-            android:typeface="serif"
-            android:layout_alignStart="@+id/textView4"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:fontFamily="serif"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:text="@string/tax_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/priceText"
-            android:gravity="center"
-            android:id="@+id/textView7"
-            android:layout_alignStart="@+id/priceText"
-            android:layout_alignEnd="@+id/priceText"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textStyle="normal|bold"
-            android:textSize="20sp"
-            android:typeface="serif"
-            android:fontFamily="serif"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/white" />
+            android:id="@+id/textView18"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/taxText"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="20sp"
-            android:typeface="serif"
-            android:textStyle="normal|bold"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/textView7"
-            android:layout_alignStart="@+id/textView7"
-            android:layout_alignEnd="@+id/textView7" />
-
-        <TextView
-            android:text="@string/total_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/textView9"
-            android:layout_below="@+id/taxText"
-            android:layout_alignStart="@+id/taxText"
-            android:layout_alignEnd="@+id/taxText"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="20sp"
-            android:typeface="serif"
-            android:textStyle="normal|bold"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
             android:id="@+id/totalText"
-            android:layout_below="@+id/textView9"
-            android:layout_alignStart="@+id/textView9"
-            android:layout_alignEnd="@+id/textView9"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="20sp"
-            android:typeface="serif"
-            android:textStyle="normal|bold"
-            android:fontFamily="serif"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"/>
 
         <TextView
-            android:text="@string/outfit_name_prompt"
+            android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/outfitLabel"
-            android:visibility="invisible"
-            android:layout_below="@+id/totalText"
-            android:layout_alignEnd="@+id/totalText"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textStyle="normal|bold"
-            android:textSize="20sp"
-            android:typeface="serif"
-            android:fontFamily="sans-serif-medium"
-            android:background="@android:color/transparent"
-            android:layout_alignStart="@+id/totalText"
-            android:textColor="@android:color/white" />
+            android:id="@+id/textView20"
+            android:textColor="@android:color/white"/>
 
         <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/taxText"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView22"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/overallTotalText"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/outfitLabel"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/outfitNameText"
-            android:gravity="center"
-            android:visibility="invisible"
-            android:text="blah blah"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="20sp"
-            android:typeface="serif"
-            android:textStyle="normal|bold"
-            android:layout_below="@+id/outfitLabel"
-            android:background="@android:color/transparent"
-            android:layout_alignStart="@+id/outfitLabel"
-            android:layout_alignEnd="@+id/outfitLabel"
-            android:textColor="@android:color/white" />
-
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 
-    <Button
-        android:text="Remove Outfit"
-        android:layout_width="300dp"
-        android:textColor="@android:color/white"
-        android:layout_height="wrap_content"
-        android:id="@+id/removeOutfitBtn"
-        android:layout_weight="0.00"
-        android:visibility="invisible"
-        android:onClick="onClick"
-        android:background="@drawable/custom_button"
-        android:layout_marginLeft="-20dp"
-        android:layout_below="@+id/buttonSave"
-        android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/pricesLayout"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="12dp"
+            android:layout_above="@+id/saveBtn">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="120dp"
-        android:layout_height="match_parent"
-        android:id="@+id/PricesLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/buttonSave"
-        android:layout_below="@+id/linearLayout4"
-        android:background="@drawable/custom_button">
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/headName"
+                android:textColor="@android:color/white" />
 
-        <TextView
-            android:text="@string/price_prompt"
-            android:layout_width="match_parent"
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/headPrice"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/torsoName"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/torsoPrice"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/legsName"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/legsPrice"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/feetName"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/feetPrice"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+        <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/headName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:fontFamily="serif"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:typeface="serif"
-            android:background="@android:color/transparent"
-            android:paddingLeft="0dp"
-            android:textColorLink="@android:color/white"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp" />
+            android:id="@+id/saveBtn"
+            android:background="@drawable/custom_button"
+            android:layout_above="@+id/removeOutfitBtn"
+            android:layout_alignEnd="@+id/totalsLayout"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="13dp"
+            android:layout_alignStart="@+id/pricesLayout" />
 
-        <TextView
-            android:text="@string/price_prompt"
-            android:layout_width="match_parent"
+        <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/headPrice"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:fontFamily="serif"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:typeface="serif"
-            android:background="@android:color/transparent"
-            android:paddingLeft="0dp"
-            android:textColorLink="@android:color/white"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp" />
+            android:id="@+id/removeOutfitBtn"
+            android:background="@drawable/custom_button"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="7dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@+id/saveBtn"
+            android:layout_alignStart="@+id/saveBtn" />
+    </RelativeLayout>
 
-        <TextView
-            android:text="@string/price_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/torsoName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:fontFamily="serif"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:typeface="serif"
-            android:background="@android:color/transparent"
-            android:paddingLeft="0dp"
-            android:textColorLink="@android:color/white"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp" />
-
-        <TextView
-            android:text="@string/price_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/torsoPrice"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:fontFamily="serif"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:typeface="serif"
-            android:background="@android:color/transparent"
-            android:paddingLeft="0dp"
-            android:textColorLink="@android:color/white"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp" />
-
-        <TextView
-            android:text="@string/price_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/legsName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:fontFamily="serif"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:typeface="serif"
-            android:background="@android:color/transparent"
-            android:paddingLeft="0dp"
-            android:textColorLink="@android:color/white"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp" />
-
-        <TextView
-            android:text="@string/price_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/legsPrice"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:fontFamily="serif"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:typeface="serif"
-            android:background="@android:color/transparent"
-            android:paddingLeft="0dp"
-            android:textColorLink="@android:color/white"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp" />
-
-
-        <TextView
-            android:text="@string/price_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/feetName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:fontFamily="serif"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:typeface="serif"
-            android:background="@android:color/transparent"
-            android:paddingLeft="0dp"
-            android:textColorLink="@android:color/white"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp" />
-        <TextView
-            android:text="@string/price_prompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/feetPrice"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:fontFamily="serif"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"
-            android:typeface="serif"
-            android:background="@android:color/transparent"
-            android:paddingLeft="0dp"
-            android:textColorLink="@android:color/white"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp" />
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/buttonSave"
-        android:onClick="onClick"
-        android:background="@drawable/custom_button"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp"
-        android:layout_alignParentEnd="true" />
-
-</RelativeLayout>
 </RelativeLayout>

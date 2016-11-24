@@ -13,15 +13,13 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,6 +77,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                 updateBtn.setText("Save Item");
                 Button deleteBtn = (Button) findViewById(R.id.deleteBtn);
                 deleteBtn.setVisibility(View.INVISIBLE);
+                display.setImageBitmap(capture);
                 addingItem = true;
             } else {
                 type = getIntent().getExtras().getString("type");
@@ -91,7 +90,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
         }
 
         nameText = (EditText) findViewById(R.id.nameText);
-        priceText = (EditText) findViewById(R.id.priceText);
+        priceText = (EditText) findViewById(R.id.totalText);
         vendorText = (EditText) findViewById(R.id.vendText);
         typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         typeSpinner.setOnItemSelectedListener(this);
@@ -171,11 +170,20 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                             e.printStackTrace();
                         }
                     }
+                    Toast.makeText(this, "Item Saved", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(this, ItemListActivity.class);
+                    i.putExtra("type", type);
+                    i.putExtra("head", headId);
+                    i.putExtra("torso", torsoId);
+                    i.putExtra("legs", legsId);
+                    i.putExtra("feet", feetId);
+                    startActivity(i);
 
                 } else {
                     db.open();
                     db.updateItem(itemId, nameText.getText().toString(), Float.parseFloat(priceText.getText().toString()), vendorText.getText().toString(), senderId, type);
                     db.close();
+                    Toast.makeText(this, "Item Updated", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(this, ItemListActivity.class);
                     i.putExtra("type", type);
                     i.putExtra("head", headId);

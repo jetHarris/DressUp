@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:id="@+id/linearLayout4"
+        android:id="@+id/navlayout"
         android:background="#003300"
         android:layout_marginBottom="10dp"
         android:paddingTop="5dp"
@@ -81,7 +81,7 @@
         android:text="About"
         android:id="@+id/textView"
         android:textSize="40dp"
-        android:layout_below="@+id/linearLayout4"
+        android:layout_below="@+id/navlayout"
         android:layout_alignParentStart="true"
         android:paddingLeft="15dp"
         android:textColor="@android:color/white" />

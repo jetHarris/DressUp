@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:id="@+id/linearLayout4"
+        android:id="@+id/navlayout"
         android:background="#003300"
         android:layout_marginBottom="10dp"
         android:paddingTop="5dp"
@@ -62,8 +62,8 @@
         android:background="@android:color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/priceText"
-        android:layout_below="@+id/linearLayout4" />
+        android:layout_toEndOf="@+id/totalText"
+        android:layout_below="@+id/navlayout" />
 
     <Button
         android:text="Cancel"
@@ -109,7 +109,7 @@
         android:textColor="@android:color/white"
         android:textStyle="normal|bold"
         android:textSize="20sp"
-        android:layout_below="@+id/linearLayout4"
+        android:layout_below="@+id/navlayout"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="15dp" />
 
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/priceText"
+        android:id="@+id/totalText"
         android:layout_below="@+id/textView11"
         android:textStyle="normal|bold"
         android:textSize="20sp"
@@ -156,8 +156,8 @@
         android:textStyle="normal|bold"
         android:textSize="20sp"
         android:textColor="@color/colorwhite"
-        android:layout_below="@+id/priceText"
-        android:layout_alignStart="@+id/priceText" />
+        android:layout_below="@+id/totalText"
+        android:layout_alignStart="@+id/totalText" />
 
     <EditText
         android:layout_width="wrap_content"
