@@ -25,7 +25,7 @@ public class SuperImageLoader
 //TODO Auto-generated method stub
         try{
 
-            FileInputStream fin = params[0].context.openFileInput(params[0].fileNames.get(0)+".bmp");
+            FileInputStream fin = params[0].context.openFileInput(namify(params[0].fileNames.get(0))+".bmp");
             Bitmap b = BitmapFactory.decodeStream(fin);
 
 
@@ -34,7 +34,7 @@ public class SuperImageLoader
 
 
             //b.recycle();
-            fin = params[0].context.openFileInput(params[0].fileNames.get(1)+".bmp");
+            fin = params[0].context.openFileInput(namify(params[0].fileNames.get(1))+".bmp");
             b = BitmapFactory.decodeStream(fin);
 
 
@@ -42,7 +42,7 @@ public class SuperImageLoader
             publishProgress(packet);
 
             //b.recycle();
-            fin = params[0].context.openFileInput(params[0].fileNames.get(2)+".bmp");
+            fin = params[0].context.openFileInput(namify(params[0].fileNames.get(2))+".bmp");
             b = BitmapFactory.decodeStream(fin);
 
 
@@ -50,7 +50,7 @@ public class SuperImageLoader
             publishProgress(packet);
 
             //b.recycle();
-            fin = params[0].context.openFileInput(params[0].fileNames.get(3)+".bmp");
+            fin = params[0].context.openFileInput(namify(params[0].fileNames.get(3))+".bmp");
             b = BitmapFactory.decodeStream(fin);
 
 
@@ -65,6 +65,12 @@ public class SuperImageLoader
             Log.e("Image","Failed to load image",e);
         }
         return null;
+    }
+
+    protected String namify(String name){
+        String temp = name.replace(' ','_');
+        String results = temp.toLowerCase();
+        return results;
     }
     protected void onProgressUpdate(ImageLoaderPacketPost... params){
         try {

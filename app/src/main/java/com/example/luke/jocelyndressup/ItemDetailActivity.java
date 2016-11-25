@@ -153,12 +153,13 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
 
             case R.id.updateBtn:
                 if (addingItem) {
+                    if(!nameText.getText().equals("") && !priceText.getText().equals("")){
                     db.open();
                     db.insertItem(nameText.getText().toString(), Float.parseFloat(priceText.getText().toString()), vendorText.getText().toString(), senderId, type);
                     db.close();
                     FileOutputStream fos = null;
                     try {
-                        fos = openFileOutput(nameText.getText().toString()+".bmp", Context.MODE_PRIVATE);
+                        fos = openFileOutput(namify(nameText.getText().toString())+".bmp", Context.MODE_PRIVATE);
                         // Use the compress method on the BitMap object to write image to the OutputStream
                         capture.compress(Bitmap.CompressFormat.PNG, 10, fos);
                     } catch (Exception e) {
@@ -178,19 +179,28 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                     i.putExtra("legs", legsId);
                     i.putExtra("feet", feetId);
                     startActivity(i);
+                    }
+                    else{
+                        Toast.makeText(this, "Please fill out at least name and price", Toast.LENGTH_SHORT).show();
+                    }
 
                 } else {
-                    db.open();
-                    db.updateItem(itemId, nameText.getText().toString(), Float.parseFloat(priceText.getText().toString()), vendorText.getText().toString(), senderId, type);
-                    db.close();
-                    Toast.makeText(this, "Item Updated", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(this, ItemListActivity.class);
-                    i.putExtra("type", type);
-                    i.putExtra("head", headId);
-                    i.putExtra("torso", torsoId);
-                    i.putExtra("legs", legsId);
-                    i.putExtra("feet", feetId);
-                    startActivity(i);
+                    if(!nameText.getText().equals("") && !priceText.getText().equals("")) {
+                        db.open();
+                        db.updateItem(itemId, nameText.getText().toString(), Float.parseFloat(priceText.getText().toString()), vendorText.getText().toString(), senderId, type);
+                        db.close();
+                        Toast.makeText(this, "Item Updated", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(this, ItemListActivity.class);
+                        i.putExtra("type", type);
+                        i.putExtra("head", headId);
+                        i.putExtra("torso", torsoId);
+                        i.putExtra("legs", legsId);
+                        i.putExtra("feet", feetId);
+                        startActivity(i);
+                    }
+                    else{
+                        Toast.makeText(this, "Please fill out at least name and price", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
 
@@ -262,6 +272,11 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
         }
 
         System.gc();
+    }
+    protected String namify(String name){
+        String temp = name.replace(' ','_');
+        String results = temp.toLowerCase();
+        return results;
     }
 
     @Override

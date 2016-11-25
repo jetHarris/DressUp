@@ -24,7 +24,7 @@ public class ImageLoader
     protected ImageLoaderPacketPost doInBackground(ImageLoaderPacket... params) {
         //TODO Auto-generated method stub
         try{
-            FileInputStream fin = params[0].context.openFileInput(params[0].fileName+".bmp");
+            FileInputStream fin = params[0].context.openFileInput(namify(params[0].fileName)+".bmp");
             Bitmap b = BitmapFactory.decodeStream(fin);
             ImageLoaderPacketPost packet;
             if (params[0].secondView == null)
@@ -38,7 +38,12 @@ public class ImageLoader
         return null;
     }
     protected void onProgressUpdate(Integer... params){
-        //Update a progress bar here, or ignore it, it's up to you
+    }
+    //takes the item name and gets the valid file name from it
+    protected String namify(String name){
+        String temp = name.replace(' ','_');
+        String results = temp.toLowerCase();
+        return results;
     }
     protected void onPostExecute(ImageLoaderPacketPost ilpp){
         if(ilpp!=null){

@@ -57,7 +57,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/feet1"
+        app:srcCompat="@drawable/tan_flats"
         android:id="@+id/detailImage"
         android:background="@android:color/white"
         android:layout_alignParentBottom="true"
@@ -139,7 +139,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/totalText"
         android:layout_below="@+id/textView11"

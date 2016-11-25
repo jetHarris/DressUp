@@ -38,7 +38,7 @@ public class DBAdapter {
     static final String DATABASE_NAME = "MyDB";
     static final String DATABASE_TABLE_OUTFITS = "outfits";
     static final String DATABASE_TABLE_ITEMS = "items";
-    static final int DATABASE_VERSION = 6;
+    static final int DATABASE_VERSION = 7;
 
     static final String DATABASE_CREATE =
             "create table outfits (_id integer primary key autoincrement, "
@@ -76,15 +76,15 @@ public class DBAdapter {
 
             //default feet
             ContentValues values1 = new ContentValues();
-            values1.put(KEY_ITEM_NAME, "feet1");
+            values1.put(KEY_ITEM_NAME, "tan flats");
             values1.put(KEY_PRICE, 15.99);
-            values1.put(KEY_VENDOR_NAME, "winners");
+            values1.put(KEY_VENDOR_NAME, "george");
             values1.put(KEY_SENDER_ID, 0);
             values1.put(KEY_TYPE, "feet");
             db.insert(DATABASE_TABLE_ITEMS, null, values1);
 
             ContentValues values2 = new ContentValues();
-            values2.put(KEY_ITEM_NAME, "feet2");
+            values2.put(KEY_ITEM_NAME, "brown flats");
             values2.put(KEY_PRICE, 20.99);
             values2.put(KEY_VENDOR_NAME, "winners");
             values2.put(KEY_SENDER_ID, 0);
@@ -92,9 +92,9 @@ public class DBAdapter {
             db.insert(DATABASE_TABLE_ITEMS, null, values2);
 
             ContentValues values = new ContentValues();
-            values.put(KEY_ITEM_NAME, "feet3");
+            values.put(KEY_ITEM_NAME, "sneakers");
             values.put(KEY_PRICE, 10.99);
-            values.put(KEY_VENDOR_NAME, "winners");
+            values.put(KEY_VENDOR_NAME, "H&M");
             values.put(KEY_SENDER_ID, 0);
             values.put(KEY_TYPE, "feet");
             db.insert(DATABASE_TABLE_ITEMS, null, values);
@@ -103,24 +103,24 @@ public class DBAdapter {
 
             //default heads
             ContentValues values5 = new ContentValues();
-            values5.put(KEY_ITEM_NAME, "head1");
-            values5.put(KEY_PRICE, 10.0);
+            values5.put(KEY_ITEM_NAME, "nothing");
+            values5.put(KEY_PRICE, 0.0);
             values5.put(KEY_VENDOR_NAME, "winners");
             values5.put(KEY_SENDER_ID, 0);
             values5.put(KEY_TYPE, "head");
             db.insert(DATABASE_TABLE_ITEMS, null, values5);
 
             ContentValues values6 = new ContentValues();
-            values6.put(KEY_ITEM_NAME, "head2");
-            values6.put(KEY_PRICE, 5.0);
-            values6.put(KEY_VENDOR_NAME, "winners");
+            values6.put(KEY_ITEM_NAME, "brown hat");
+            values6.put(KEY_PRICE, 15.99);
+            values6.put(KEY_VENDOR_NAME, "The Bay");
             values6.put(KEY_SENDER_ID, 0);
             values6.put(KEY_TYPE, "head");
             db.insert(DATABASE_TABLE_ITEMS, null, values6);
 
             ContentValues values4 = new ContentValues();
-            values4.put(KEY_ITEM_NAME, "head3");
-            values4.put(KEY_PRICE, 0.0);
+            values4.put(KEY_ITEM_NAME, "black hat");
+            values4.put(KEY_PRICE, 20.99);
             values4.put(KEY_VENDOR_NAME, "winners");
             values4.put(KEY_SENDER_ID, 0);
             values4.put(KEY_TYPE, "head");
@@ -129,25 +129,25 @@ public class DBAdapter {
 
             //default legs
             ContentValues values8 = new ContentValues();
-            values8.put(KEY_ITEM_NAME, "legs1");
-            values8.put(KEY_PRICE, 26.0);
-            values8.put(KEY_VENDOR_NAME, "winners");
+            values8.put(KEY_ITEM_NAME, "black leggings");
+            values8.put(KEY_PRICE, 26.99);
+            values8.put(KEY_VENDOR_NAME, "Old Navy");
             values8.put(KEY_SENDER_ID, 0);
             values8.put(KEY_TYPE, "legs");
             db.insert(DATABASE_TABLE_ITEMS, null, values8);
 
             ContentValues values9 = new ContentValues();
-            values9.put(KEY_ITEM_NAME, "legs2");
-            values9.put(KEY_PRICE, 6.67);
-            values9.put(KEY_VENDOR_NAME, "winners");
+            values9.put(KEY_ITEM_NAME, "peasant skirt");
+            values9.put(KEY_PRICE, 16.99);
+            values9.put(KEY_VENDOR_NAME, "Old Navy");
             values9.put(KEY_SENDER_ID, 0);
             values9.put(KEY_TYPE, "legs");
             db.insert(DATABASE_TABLE_ITEMS, null, values9);
 
             ContentValues values7 = new ContentValues();
-            values7.put(KEY_ITEM_NAME, "legs3");
-            values7.put(KEY_PRICE, 16.0);
-            values7.put(KEY_VENDOR_NAME, "winners");
+            values7.put(KEY_ITEM_NAME, "black skirt");
+            values7.put(KEY_PRICE, 20.99);
+            values7.put(KEY_VENDOR_NAME, "Old Navy");
             values7.put(KEY_SENDER_ID, 0);
             values7.put(KEY_TYPE, "legs");
             db.insert(DATABASE_TABLE_ITEMS, null, values7);
@@ -155,25 +155,25 @@ public class DBAdapter {
 
             //default torsos
             ContentValues values11 = new ContentValues();
-            values11.put(KEY_ITEM_NAME, "torso1");
-            values11.put(KEY_PRICE, 69.97);
-            values11.put(KEY_VENDOR_NAME, "winners");
+            values11.put(KEY_ITEM_NAME, "brown gold sweater");
+            values11.put(KEY_PRICE, 40.99);
+            values11.put(KEY_VENDOR_NAME, "Winners");
             values11.put(KEY_SENDER_ID, 0);
             values11.put(KEY_TYPE, "torso");
             db.insert(DATABASE_TABLE_ITEMS, null, values11);
 
             ContentValues values12 = new ContentValues();
-            values12.put(KEY_ITEM_NAME, "torso2");
-            values12.put(KEY_PRICE, 16.67);
-            values12.put(KEY_VENDOR_NAME, "winners");
+            values12.put(KEY_ITEM_NAME, "grey crop top");
+            values12.put(KEY_PRICE, 16.99);
+            values12.put(KEY_VENDOR_NAME, "Old Navy");
             values12.put(KEY_SENDER_ID, 0);
             values12.put(KEY_TYPE, "torso");
             db.insert(DATABASE_TABLE_ITEMS, null, values12);
 
             ContentValues values10 = new ContentValues();
-            values10.put(KEY_ITEM_NAME, "torso3");
-            values10.put(KEY_PRICE, 6.67);
-            values10.put(KEY_VENDOR_NAME, "winners");
+            values10.put(KEY_ITEM_NAME, "white dress shirt");
+            values10.put(KEY_PRICE, 26.67);
+            values10.put(KEY_VENDOR_NAME, "Winners");
             values10.put(KEY_SENDER_ID, 0);
             values10.put(KEY_TYPE, "torso");
             db.insert(DATABASE_TABLE_ITEMS, null, values10);
