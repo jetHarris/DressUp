@@ -63,7 +63,8 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/totalText"
         android:layout_below="@+id/navlayout"
-        android:maxWidth="120dp" />
+        android:maxWidth="120dp"
+        android:layout_width="120dp" />
 
     <TextView
         android:text="@string/name_promt"
