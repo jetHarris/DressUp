@@ -22,7 +22,7 @@
         android:paddingBottom="5dp">
 
         <Button
-            android:text="Home"
+            android:text="@string/home_promt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/homeBtn"
@@ -32,7 +32,7 @@
             android:onClick="onClick" />
 
         <Button
-            android:text="Outfits"
+            android:text="@string/outfits_promt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/OutfitsBtn"
@@ -42,7 +42,7 @@
             android:onClick="onClick" />
 
         <Button
-            android:text="About"
+            android:text="@string/about_nav_promt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/AboutBtn"
@@ -52,29 +52,6 @@
             android:onClick="onClick" />
     </LinearLayout>
 
-    <Button
-        android:text="Add Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/addItemBtn"
-        android:background="@drawable/custom_button_highlight"
-        android:textColor="@android:color/white"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="15dp" />
-
-    <TextView
-        android:text="Click an item to pick. Hold to Edit."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/addItemBtn"
-        android:layout_marginStart="12dp"
-        android:id="@+id/textView4"
-        android:layout_alignTop="@+id/addItemBtn"
-        android:layout_alignParentBottom="true"
-        android:textColor="@android:color/white"
-        android:paddingTop="16dp" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -83,5 +60,29 @@
         android:layout_above="@+id/textView4"
         android:id="@+id/list"
         android:layout_marginRight="10dp" />
+
+    <Button
+        android:text="@string/add_new_item_promt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addItemBtn"
+        android:background="@drawable/custom_button_highlight"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_alignParentEnd="true"
+        android:onClick="onClick" />
+
+    <TextView
+        android:text="@string/list_promt"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/textView4"
+        android:textColor="@android:color/white"
+        android:paddingTop="16dp"
+        android:layout_marginStart="14dp"
+        android:layout_above="@+id/addItemBtn"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="20dp" />
 
 </RelativeLayout>

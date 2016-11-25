@@ -76,7 +76,6 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                 Button updateBtn = (Button) findViewById(R.id.updateBtn);
                 updateBtn.setText("Save Item");
                 Button deleteBtn = (Button) findViewById(R.id.deleteBtn);
-                deleteBtn.setVisibility(View.INVISIBLE);
                 display.setImageBitmap(capture);
                 addingItem = true;
             } else {
@@ -153,36 +152,39 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
 
             case R.id.updateBtn:
                 if (addingItem) {
-                    if(!nameText.getText().equals("") && !priceText.getText().equals("")){
-                    db.open();
-                    db.insertItem(nameText.getText().toString(), Float.parseFloat(priceText.getText().toString()), vendorText.getText().toString(), senderId, type);
-                    db.close();
-                    FileOutputStream fos = null;
-                    try {
-                        fos = openFileOutput(namify(nameText.getText().toString())+".bmp", Context.MODE_PRIVATE);
-                        // Use the compress method on the BitMap object to write image to the OutputStream
-                        capture.compress(Bitmap.CompressFormat.JPEG, 50, fos);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
+                    if (!nameText.getText().equals("") && !priceText.getText().equals("")) {
+                        db.open();
+                        Float price = Float.parseFloat(priceText.getText().toString());
+                        Float hundred = 100.0F;
+                        db.insertItem(nameText.getText().toString(), Math.round(price * hundred) / hundred, vendorText.getText().toString(), senderId, type);
+                        db.close();
+                        FileOutputStream fos = null;
                         try {
-                            fos.close();
-                        } catch (IOException e) {
+                            fos = openFileOutput(namify(nameText.getText().toString()) + ".bmp", Context.MODE_PRIVATE);
+                            // Use the compress method on the BitMap object to write image to the OutputStream
+                            capture.compress(Bitmap.CompressFormat.JPEG, 50, fos);
+                        } catch (Exception e) {
                             e.printStackTrace();
+                        } finally {
+                            try {
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                    Toast.makeText(this, "Item Saved", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(this, MainActivity.class);
-                    startActivity(i);
-                    }
-                    else{
+                        Toast.makeText(this, "Item Saved", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(this, MainActivity.class);
+                        startActivity(i);
+                    } else {
                         Toast.makeText(this, "Please fill out at least name and price", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    if(!nameText.getText().equals("") && !priceText.getText().equals("")) {
+                    if (!nameText.getText().equals("") && !priceText.getText().equals("")) {
                         db.open();
-                        db.updateItem(itemId, nameText.getText().toString(), Float.parseFloat(priceText.getText().toString()), vendorText.getText().toString(), senderId, type);
+                        Float price = Float.parseFloat(priceText.getText().toString());
+                        Float hundred = 100.0F;
+                        db.updateItem(itemId, nameText.getText().toString(), Math.round(price * hundred) / hundred, vendorText.getText().toString(), senderId, type);
                         db.close();
                         Toast.makeText(this, "Item Updated", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(this, ItemListActivity.class);
@@ -192,25 +194,29 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                         i.putExtra("legs", legsId);
                         i.putExtra("feet", feetId);
                         startActivity(i);
-                    }
-                    else{
+                    } else {
                         Toast.makeText(this, "Please fill out at least name and price", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
 
             case R.id.deleteBtn:
-                db.open();
-                db.deleteItem(itemId);
-                db.close();
-                Intent i2 = new Intent(this, ItemListActivity.class);
-                i2.putExtra("type", type);
-                i2.putExtra("head", headId);
-                i2.putExtra("torso", torsoId);
-                i2.putExtra("legs", legsId);
-                i2.putExtra("feet", feetId);
-                startActivity(i2);
+                if (addingItem) {
+                    Toast.makeText(this, "Cannot delete an item that does not exist yet", Toast.LENGTH_SHORT).show();
+                } else {
+                    db.open();
+                    db.deleteItem(itemId);
+                    db.close();
+                    Intent i2 = new Intent(this, ItemListActivity.class);
+                    i2.putExtra("type", type);
+                    i2.putExtra("head", headId);
+                    i2.putExtra("torso", torsoId);
+                    i2.putExtra("legs", legsId);
+                    i2.putExtra("feet", feetId);
+                    startActivity(i2);
+                }
                 break;
+
 
             //if the outfits menu item was clicked then go to the outfits page
             case R.id.OutfitsBtn:
@@ -224,11 +230,10 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                 break;
 
             case R.id.cancelBtn:
-                if(addingItem){
+                if (addingItem) {
                     Intent i6 = new Intent(this, CameraActivity.class);
                     startActivity(i6);
-                }
-                else {
+                } else {
                     Intent i5 = new Intent(this, ItemListActivity.class);
                     i5.putExtra("type", type);
                     i5.putExtra("head", headId);
@@ -268,8 +273,9 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
 
         System.gc();
     }
-    protected String namify(String name){
-        String temp = name.replace(' ','_');
+
+    protected String namify(String name) {
+        String temp = name.replace(' ', '_');
         String results = temp.toLowerCase();
         return results;
     }

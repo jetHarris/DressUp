@@ -10,21 +10,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.luke.jocelyndressup.ReadNFCItemActivity">
 
-    <TextView
-        android:text="Listening For Item..."
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/tvReadItemMsg"
-        android:textAppearance="@android:style/TextAppearance.Material.Large" />
-
     <Button
-        android:text="Stop Listening"
+        android:text="@string/stop_listening_promt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvReadItemMsg"
         android:layout_alignParentStart="true"
         android:id="@+id/btn_ReturnFromReadItem"
         android:onClick="onClick" />
+
+    <TextView
+        android:text="@string/listening_promt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvReadItemMsg"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

@@ -30,7 +30,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Save Item"
+        android:text="@string/save_item_promt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageButton"
@@ -38,6 +38,7 @@
         android:id="@+id/saveImageBtn"
         android:visibility="invisible"
         android:background="@drawable/custom_button"
-        android:onClick="onClick" />
+        android:onClick="onClick"
+        android:textColor="@android:color/white" />
 </RelativeLayout>
 

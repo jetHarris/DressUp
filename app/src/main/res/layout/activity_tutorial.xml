@@ -28,7 +28,7 @@
         android:id="@+id/btn_Done"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Got it, Let's go!"
+        android:text="@string/tutorial_end_promt"
         android:onClick="cDone"
         android:background="@drawable/custom_button"
         android:layout_alignParentBottom="true"

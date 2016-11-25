@@ -67,7 +67,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
         txtTitle.setText(itemname[position]);
         //imageView.setImageResource(imgid[position]);
-        extratxt.setText("Price: "+price[position]);
+        extratxt.setText("Price: $"+String.format("%.2f", price[position]));
         return rowView;
 
     };

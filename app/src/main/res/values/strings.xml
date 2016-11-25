@@ -1,12 +1,39 @@
 <resources>
     <string name="app_name">JocelynDressUp</string>
 
-    <string name="type_promt">Type</string>
+    <string name="type_promt">Type:</string>
 
-    <string name="price_prompt"><u>  Price  </u></string>
-    <string name="tax_prompt"><u>   Tax   </u></string>
-    <string name="total_prompt"><u>  Total  </u></string>
-    <string name="outfit_name_prompt"><u> Outfit: </u></string>
+    <string name="sub_total_prompt"><u>Sub Total</u></string>
+    <string name="tax_prompt"><u>Tax</u></string>
+    <string name="total_prompt"><u>Total</u></string>
+    <string name="outfit_name_prompt"><u>Outfit</u></string>
+
+    <string name="name_promt">Name:</string>
+    <string name="price_promt">Price:</string>
+    <string name="vendor_promt">Vendor:</string>
+
+    <string name="app_by">App By Luke Harris and Daniel Malnati</string>
+
+    <string name="about_text">This app is intended to help someone pick individual items to create an outfit. The focus helping the user budget for an outfit or simply be conscience of how much they are spending.</string>
+    <string name="about_promt">About</string>
+    <string name="list_promt">Click to pick. Hold to Edit</string>
+    <string name="listening_promt">Listening For Item...</string>
+    <string name="sharing_promt">Sharing Item</string>
+    <string name="main_promt">Main Page</string>
+    <string name="save_item_promt">Save Item</string>
+    <string name="home_promt">Home</string>
+    <string name="outfits_promt">Outfits</string>
+    <string name="update_promt">Update</string>
+    <string name="about_nav_promt">About</string>
+    <string name="delete_promt">Delete</string>
+    <string name="cancel_promt">Cancel</string>
+
+    <string name="add_new_item_promt">Add New Item</string>
+    <string name="save_outfit_promt">Save Outfit</string>
+    <string name="remove_outfit_promt">Remove Outfit</string>
+    <string name="stop_listening_promt">Stop Listening</string>
+    <string name="tutorial_end_promt">Got it, Let\'s go!</string>
+    <string name="stop_sharing_promt">Stop Sharing </string>
 
     <string-array name="type_arrays">
         <item>Head</item>

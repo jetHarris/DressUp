@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayOptions( android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         ImageView imageView = new ImageView(actionBar.getThemedContext());
         imageView.setScaleType(ImageView.ScaleType.FIT_START);
         imageView.setImageResource(R.drawable.tdicon);
@@ -144,15 +144,15 @@ public class MainActivity extends AppCompatActivity {
         taxView = (TextView) findViewById(R.id.taxText);
         totalView = (TextView) findViewById(R.id.overallTotalText);
 
-        headPriceLabel = (TextView)findViewById(R.id.headPrice);
-        torsoPriceLabel = (TextView)findViewById(R.id.torsoPrice);
-        legsPriceLabel = (TextView)findViewById(R.id.legsPrice);
-        feetPriceLabel = (TextView)findViewById(R.id.feetPrice);
+        headPriceLabel = (TextView) findViewById(R.id.headPrice);
+        torsoPriceLabel = (TextView) findViewById(R.id.torsoPrice);
+        legsPriceLabel = (TextView) findViewById(R.id.legsPrice);
+        feetPriceLabel = (TextView) findViewById(R.id.feetPrice);
 
-        headNameLabel = (TextView)findViewById(R.id.headName);
-        torsoNameLabel = (TextView)findViewById(R.id.torsoName);
-        legsNameLabel = (TextView)findViewById(R.id.legsName);
-        feetNameLabel = (TextView)findViewById(R.id.feetName);
+        headNameLabel = (TextView) findViewById(R.id.headName);
+        torsoNameLabel = (TextView) findViewById(R.id.torsoName);
+        legsNameLabel = (TextView) findViewById(R.id.legsName);
+        feetNameLabel = (TextView) findViewById(R.id.feetName);
 
 
         headImage = (ImageView) findViewById(R.id.imageHead);
@@ -228,8 +228,7 @@ public class MainActivity extends AppCompatActivity {
                     currentFeetImage = feet.indexOf(getIntent().getExtras().getInt("feet"));
                 }
             }
-        }
-        else{
+        } else {
 
         }
 
@@ -250,31 +249,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setImage(ImageView view, String fileName){
+    public void setImage(ImageView view, String fileName) {
         try {
-            ImageLoaderPacket packet = new ImageLoaderPacket(fileName,view, context);
+            ImageLoaderPacket packet = new ImageLoaderPacket(fileName, view, context);
             ImageLoader il = new ImageLoader();
             tasks.add(il);
             il.execute(packet);
 //            FileInputStream fin = openFileInput(fileName+".bmp");
 //            Bitmap b = BitmapFactory.decodeStream(fin);
 //            view.setImageBitmap(b);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void setImage(ImageView view, String fileName, ImageView secondView){
+    public void setImage(ImageView view, String fileName, ImageView secondView) {
         try {
-            ImageLoaderPacket packet = new ImageLoaderPacket(fileName,view, context, secondView);
+            ImageLoaderPacket packet = new ImageLoaderPacket(fileName, view, context, secondView);
             ImageLoader il = new ImageLoader();
             tasks.add(il);
             il.execute(packet);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -286,23 +281,24 @@ public class MainActivity extends AppCompatActivity {
         runningPrice += legPrices.get(currentLegsImage);
         runningPrice += feetPrices.get(currentFeetImage);
 
-        headPriceLabel.setText(""+headPrices.get(currentHeadImage));
-        torsoPriceLabel.setText(""+torsoPrices.get(currentTorsoImage));
-        legsPriceLabel.setText(""+legPrices.get(currentLegsImage));
-        feetPriceLabel.setText(""+feetPrices.get(currentFeetImage));
+        headPriceLabel.setText("$" + String.format("%.2f", headPrices.get(currentHeadImage)));
+        torsoPriceLabel.setText("$" + String.format("%.2f", torsoPrices.get(currentTorsoImage)));
+        legsPriceLabel.setText("$" + String.format("%.2f", legPrices.get(currentLegsImage)));
+        feetPriceLabel.setText("$" + String.format("%.2f", feetPrices.get(currentFeetImage)));
 
 
-        headNameLabel.setText(""+headNames.get(currentHeadImage));
-        torsoNameLabel.setText(""+torsoNames.get(currentTorsoImage));
-        legsNameLabel.setText(""+legNames.get(currentLegsImage));
-        feetNameLabel.setText(""+feetNames.get(currentFeetImage));
+        headNameLabel.setText("" + headNames.get(currentHeadImage));
+        torsoNameLabel.setText("" + torsoNames.get(currentTorsoImage));
+        legsNameLabel.setText("" + legNames.get(currentLegsImage));
+        feetNameLabel.setText("" + feetNames.get(currentFeetImage));
 
         double roundedPrice = Math.round(runningPrice * 100.0) / 100.0;
         double tax = Math.round((runningPrice * 0.13) * 100.0) / 100.0;
         double total = Math.round((runningPrice * 1.13) * 100.0) / 100.0;
-        priceView.setText("$" + roundedPrice);
-        taxView.setText("$" + tax);
-        totalView.setText("$" + total);
+
+        priceView.setText("$" + String.format("%.2f", roundedPrice));
+        taxView.setText("$" + String.format("%.2f", tax));
+        totalView.setText("$" + String.format("%.2f", total));
 
     }
 
@@ -315,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
         fileNames.add(feetNames.get(currentFeetImage));
 
 
-        ImageLoaderSuperPacket packet = new ImageLoaderSuperPacket(fileNames,frontFacingViews,context);
+        ImageLoaderSuperPacket packet = new ImageLoaderSuperPacket(fileNames, frontFacingViews, context);
         SuperImageLoader loader = new SuperImageLoader();
         loader.execute(packet);
 
@@ -478,6 +474,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     //onClick method to handle all the click events from the buttons on the page.
+    public void saveTextDisplay(boolean saveTracker){
+        if (saveTracker) {
+            Toast.makeText(this, "Outfit Saved", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Save Cancelled", Toast.LENGTH_SHORT).show();
+        }
+    }
     public void onClick(View view) {
         switch (view.getId()) {
 
@@ -492,7 +495,6 @@ public class MainActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 builder.setView(input);
 
-                saveTracker = false;
                 // Set up the buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -500,11 +502,13 @@ public class MainActivity extends AppCompatActivity {
                         m_Text = input.getText().toString();
                         //add a contact into the database
                         if (m_Text != "") {
-                            saveTracker = true;
+                            oName = m_Text;
+                            outfitOnDisplay = true;
                             db.open();
                             long id = db.insertOutfit(m_Text, heads.get(currentHeadImage), torsos.get(currentTorsoImage),
                                     legs.get(currentLegsImage), feet.get(currentFeetImage));
                             db.close();
+                            saveTextDisplay(true);
                         }
                     }
                 });
@@ -512,31 +516,31 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
+                        saveTextDisplay(false);
                     }
                 });
 
                 builder.show();
 
-                if(saveTracker){
-                    Toast.makeText(this, "Outfit Saved", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(this, "Save Cancelled", Toast.LENGTH_SHORT).show();
-                }
+
 
 
                 break;
             //if the assemble button is pressed then the record the current state of the images and send that to the assembled page
             case R.id.removeOutfitBtn:
-                db.open();
-                db.deleteOutfitByName(oName);
-                db.close();
-                TextView label = (TextView) findViewById(R.id.outfitLabel);
-                TextView nameLabel = (TextView) findViewById(R.id.outfitNameText);
-                Button removeOutfit = (Button) findViewById(R.id.saveBtn);
-                removeOutfit.setVisibility(View.INVISIBLE);
-                label.setVisibility(View.INVISIBLE);
-                nameLabel.setVisibility(View.INVISIBLE);
+                if (outfitOnDisplay) {
+                    db.open();
+                    db.deleteOutfitByName(oName);
+                    db.close();
+                    TextView label = (TextView) findViewById(R.id.outfitLabel);
+                    TextView nameLabel = (TextView) findViewById(R.id.outfitNameText);
+                    Button removeOutfit = (Button) findViewById(R.id.saveBtn);
+                    removeOutfit.setVisibility(View.INVISIBLE);
+                    label.setVisibility(View.INVISIBLE);
+                    nameLabel.setVisibility(View.INVISIBLE);
+                } else {
+                    Toast.makeText(this, "An outfit must be saved before it can be deleted", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.AboutBtn:
                 Intent i = new Intent(this, AboutActivity.class);
@@ -562,13 +566,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i4);
     }
 
-    public void changeImageLeft(ImageView iv, String filename,ImageView iv2){
+    public void changeImageLeft(ImageView iv, String filename, ImageView iv2) {
         //sliding animation
 //        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
 //                R.anim.slide);
 //        iv.startAnimation(animSlide);
 
-        ImageLoaderPacket packet = new ImageLoaderPacket(filename,iv, context, iv2);
+        ImageLoaderPacket packet = new ImageLoaderPacket(filename, iv, context, iv2);
         ImageLoaderLeftAnim il = new ImageLoaderLeftAnim();
         tasks.add(il);
         il.execute(packet);
@@ -582,13 +586,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void changeImageRight(ImageView iv, String filename, ImageView iv2){
+    public void changeImageRight(ImageView iv, String filename, ImageView iv2) {
         //sliding animation
 //        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(),
 //                R.anim.slideleft);
 //        iv.startAnimation(animSlide);
 
-        ImageLoaderPacket packet = new ImageLoaderPacket(filename,iv, context,iv2);
+        ImageLoaderPacket packet = new ImageLoaderPacket(filename, iv, context, iv2);
         ImageLoaderRightAnim il = new ImageLoaderRightAnim();
         tasks.add(il);
         il.execute(packet);
@@ -647,8 +651,8 @@ public class MainActivity extends AppCompatActivity {
 //                    }
                     //setImage(headImageHidden,headNames.get(currentHeadImage));
                     //Toast.makeText(this, "Name: " + headNames.get(currentHeadImage) + "\nPrice:$" + headPrices.get(currentHeadImage), Toast.LENGTH_SHORT).show();
-                    changeImageRight(headImage,headNames.get(currentHeadImage),headImageHidden);
-                    headNameLabel.setText(""+headNames.get(currentHeadImage));
+                    changeImageRight(headImage, headNames.get(currentHeadImage), headImageHidden);
+                    headNameLabel.setText("" + headNames.get(currentHeadImage));
 
                 }
                 break;
@@ -669,7 +673,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
                     //Toast.makeText(this, "Name: " + torsoNames.get(currentTorsoImage) + "\nPrice:$" + torsoPrices.get(currentTorsoImage), Toast.LENGTH_SHORT).show();
                     //setImage(torsoImageHidden,torsoNames.get(currentTorsoImage));
-                    changeImageRight(torsoImage,torsoNames.get(currentTorsoImage),torsoImageHidden);
+                    changeImageRight(torsoImage, torsoNames.get(currentTorsoImage), torsoImageHidden);
                 }
                 break;
                 case "legs":
@@ -689,7 +693,7 @@ public class MainActivity extends AppCompatActivity {
                     //Toast.makeText(this, "Name: " + legNames.get(currentLegsImage) + "\nPrice:$" + legPrices.get(currentLegsImage), Toast.LENGTH_SHORT).show();
                     //iv.setImageResource(resID);
                     //setImage(legsImageHidden,legNames.get(currentLegsImage));
-                    changeImageRight(legsImage,legNames.get(currentLegsImage),legsImageHidden);
+                    changeImageRight(legsImage, legNames.get(currentLegsImage), legsImageHidden);
                 }
                 break;
                 case "feet":
@@ -709,7 +713,7 @@ public class MainActivity extends AppCompatActivity {
                     //Toast.makeText(this, "Name: " + feetNames.get(currentFeetImage) + "\nPrice:$" + feetPrices.get(currentFeetImage), Toast.LENGTH_SHORT).show();
                     //iv.setImageResource(resID);
                     //setImage(feetImageHidden,feetNames.get(currentFeetImage));
-                    changeImageRight(feetImage,feetNames.get(currentFeetImage),feetImageHidden);
+                    changeImageRight(feetImage, feetNames.get(currentFeetImage), feetImageHidden);
                 }
                 break;
             }
@@ -736,7 +740,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
                     //Toast.makeText(this, "Name: " + headNames.get(currentHeadImage) + "\nPrice:$" + headPrices.get(currentHeadImage), Toast.LENGTH_SHORT).show();
                     //setImage(headImageHidden,headNames.get(currentHeadImage));
-                    changeImageLeft(headImage,headNames.get(currentHeadImage),headImageHidden);
+                    changeImageLeft(headImage, headNames.get(currentHeadImage), headImageHidden);
                 }
                 break;
                 case "torso":
@@ -755,7 +759,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
                     //Toast.makeText(this, "Name: " + torsoNames.get(currentTorsoImage) + "\nPrice:$" + torsoPrices.get(currentTorsoImage), Toast.LENGTH_SHORT).show();
                     //setImage(torsoImageHidden,torsoNames.get(currentTorsoImage));
-                    changeImageLeft(torsoImage,torsoNames.get(currentTorsoImage),torsoImageHidden);
+                    changeImageLeft(torsoImage, torsoNames.get(currentTorsoImage), torsoImageHidden);
                 }
                 break;
                 case "legs":
@@ -774,7 +778,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
                     //Toast.makeText(this, "Name: " + legNames.get(currentLegsImage) + "\nPrice:$" + legPrices.get(currentLegsImage), Toast.LENGTH_SHORT).show();
                     //setImage(legsImageHidden,legNames.get(currentLegsImage));
-                    changeImageLeft(legsImage,legNames.get(currentLegsImage),legsImageHidden);
+                    changeImageLeft(legsImage, legNames.get(currentLegsImage), legsImageHidden);
                 }
                 break;
                 case "feet":
@@ -793,7 +797,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
                     //Toast.makeText(this, "Name: " + feetNames.get(currentFeetImage) + "\nPrice:$" + feetPrices.get(currentFeetImage), Toast.LENGTH_SHORT).show();
                     //setImage(feetImageHidden,feetNames.get(currentFeetImage));
-                    changeImageLeft(feetImage,feetNames.get(currentFeetImage),feetImageHidden);
+                    changeImageLeft(feetImage, feetNames.get(currentFeetImage), feetImageHidden);
                 }
                 break;
             }
@@ -805,8 +809,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        for(int i = 0; i < tasks.size();++i){
-            if(tasks.get(i) != null){
+        for (int i = 0; i < tasks.size(); ++i) {
+            if (tasks.get(i) != null) {
                 tasks.get(i).cancel(true);
             }
         }
@@ -903,10 +907,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                flingClothing(true,"head");
+                flingClothing(true, "head");
                 return true;
             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                flingClothing(false,"head");
+                flingClothing(false, "head");
                 return true;
             }
             return true;
@@ -925,10 +929,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                flingClothing(true,"torso");
+                flingClothing(true, "torso");
                 return true;
             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                flingClothing(false,"torso");
+                flingClothing(false, "torso");
                 return true;
             }
             return true;
@@ -947,10 +951,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                flingClothing(true,"legs");
+                flingClothing(true, "legs");
                 return true;
             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                flingClothing(false,"legs");
+                flingClothing(false, "legs");
                 return true;
             }
             return true;
@@ -968,10 +972,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                flingClothing(true,"feet");
+                flingClothing(true, "feet");
                 return true;
             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                flingClothing(false,"feet");
+                flingClothing(false, "feet");
                 return true;
             }
             return true;
