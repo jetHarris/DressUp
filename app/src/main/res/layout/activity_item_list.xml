@@ -51,12 +51,37 @@
             android:textColor="@android:color/white"
             android:onClick="onClick" />
     </LinearLayout>
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
+
+    <Button
+        android:text="Add Item"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/navlayout">
-    </ListView>
+        android:id="@+id/addItemBtn"
+        android:background="@drawable/custom_button_highlight"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:text="Click an item to pick. Hold to Edit."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/addItemBtn"
+        android:layout_marginStart="12dp"
+        android:id="@+id/textView4"
+        android:layout_alignTop="@+id/addItemBtn"
+        android:layout_alignParentBottom="true"
+        android:textColor="@android:color/white"
+        android:paddingTop="16dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navlayout"
+        android:layout_alignStart="@+id/addItemBtn"
+        android:layout_above="@+id/textView4"
+        android:id="@+id/list"
+        android:layout_marginRight="10dp" />
 
 </RelativeLayout>

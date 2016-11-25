@@ -57,8 +57,8 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         ImageView imageView = new ImageView(actionBar.getThemedContext());
-        imageView.setScaleType(ImageView.ScaleType.CENTER);
-        imageView.setImageResource(R.drawable.tdlongicon2);
+        imageView.setScaleType(ImageView.ScaleType.FIT_START);
+        imageView.setImageResource(R.drawable.tdicon);
         ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(
                 ActionBar.LayoutParams.WRAP_CONTENT,
                 ActionBar.LayoutParams.WRAP_CONTENT, Gravity.RIGHT
@@ -161,7 +161,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                     try {
                         fos = openFileOutput(namify(nameText.getText().toString())+".bmp", Context.MODE_PRIVATE);
                         // Use the compress method on the BitMap object to write image to the OutputStream
-                        capture.compress(Bitmap.CompressFormat.PNG, 10, fos);
+                        capture.compress(Bitmap.CompressFormat.JPEG, 50, fos);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -172,12 +172,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                         }
                     }
                     Toast.makeText(this, "Item Saved", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(this, ItemListActivity.class);
-                    i.putExtra("type", type);
-                    i.putExtra("head", headId);
-                    i.putExtra("torso", torsoId);
-                    i.putExtra("legs", legsId);
-                    i.putExtra("feet", feetId);
+                    Intent i = new Intent(this, MainActivity.class);
                     startActivity(i);
                     }
                     else{

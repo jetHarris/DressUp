@@ -172,7 +172,7 @@
         android:layout_toEndOf="@+id/pricesLayout">
 
         <TextView
-            android:text="TextView"
+            android:text="Sub Total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView18"
@@ -186,7 +186,7 @@
             android:textColor="@android:color/white"/>
 
         <TextView
-            android:text="TextView"
+            android:text="Tax"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView20"
@@ -200,7 +200,7 @@
             android:textColor="@android:color/white"/>
 
         <TextView
-            android:text="TextView"
+            android:text="Total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView22"
@@ -218,14 +218,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/outfitLabel"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:visibility="invisible" />
 
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/outfitNameText"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:visibility="invisible" />
     </LinearLayout>
 
         <LinearLayout

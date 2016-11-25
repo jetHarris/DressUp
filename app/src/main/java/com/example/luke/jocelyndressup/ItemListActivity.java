@@ -50,8 +50,8 @@ public class ItemListActivity extends AppCompatActivity {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayOptions( android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         ImageView imageView = new ImageView(actionBar.getThemedContext());
-        imageView.setScaleType(ImageView.ScaleType.CENTER);
-        imageView.setImageResource(R.drawable.tdlongicon2);
+        imageView.setScaleType(ImageView.ScaleType.FIT_START);
+        imageView.setImageResource(R.drawable.tdicon);
         ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(
                 ActionBar.LayoutParams.WRAP_CONTENT,
                 ActionBar.LayoutParams.WRAP_CONTENT, Gravity.RIGHT
@@ -219,6 +219,11 @@ public class ItemListActivity extends AppCompatActivity {
             case R.id.homeBtn:
                 Intent i3 = new Intent(this, MainActivity.class);
                 startActivity(i3);
+                break;
+
+            case R.id.addItemBtn:
+                Intent i6 = new Intent(this, CameraActivity.class);
+                startActivity(i6);
                 break;
 
         }
