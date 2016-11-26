@@ -159,17 +159,16 @@
         android:layout_marginTop="10dp" />
 
     <Button
-        android:text="@string/update_promt"
+        android:text="@string/cancel_promt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/updateBtn"
+        android:id="@+id/cancelBtn"
         android:onClick="onClick"
         android:background="@drawable/custom_button_highlight"
         android:textColor="@android:color/white"
-        android:layout_below="@+id/typeSpinner"
-        android:layout_alignStart="@+id/vendText"
-        android:layout_toStartOf="@+id/detailImage"
-        android:layout_marginTop="20dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/typeSpinner"
+        android:layout_toStartOf="@+id/detailImage" />
 
     <Button
         android:text="@string/delete_promt"
@@ -180,19 +179,19 @@
         android:background="@drawable/custom_button_highlight"
         android:textColor="@android:color/white"
         android:visibility="visible"
-        android:layout_below="@+id/updateBtn"
-        android:layout_alignStart="@+id/updateBtn"
+        android:layout_above="@+id/cancelBtn"
+        android:layout_alignStart="@+id/cancelBtn"
         android:layout_toStartOf="@+id/detailImage" />
 
     <Button
-        android:text="@string/cancel_promt"
+        android:text="@string/update_promt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cancelBtn"
+        android:id="@+id/updateBtn"
         android:onClick="onClick"
         android:background="@drawable/custom_button_highlight"
         android:textColor="@android:color/white"
-        android:layout_below="@+id/deleteBtn"
+        android:layout_above="@+id/deleteBtn"
         android:layout_alignStart="@+id/deleteBtn"
         android:layout_toStartOf="@+id/detailImage" />
 

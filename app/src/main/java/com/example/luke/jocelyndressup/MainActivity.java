@@ -905,6 +905,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            clickClothing("head");
+            return true;
+        }
+
+        @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                 flingClothing(true, "head");
@@ -921,6 +927,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
+            clickClothing("torso");
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
             clickClothing("torso");
             return true;
         }
@@ -946,6 +958,11 @@ public class MainActivity extends AppCompatActivity {
             clickClothing("legs");
             return true;
         }
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            clickClothing("legs");
+            return true;
+        }
 
 
         @Override
@@ -968,6 +985,13 @@ public class MainActivity extends AppCompatActivity {
             clickClothing("feet");
             return true;
         }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            clickClothing("feet");
+            return true;
+        }
+
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {

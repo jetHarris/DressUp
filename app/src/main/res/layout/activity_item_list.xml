@@ -83,6 +83,6 @@
         android:layout_marginStart="14dp"
         android:layout_above="@+id/addItemBtn"
         android:layout_alignParentStart="true"
-        android:paddingLeft="20dp" />
+        android:paddingLeft="10dp" />
 
 </RelativeLayout>

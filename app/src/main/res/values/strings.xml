@@ -28,6 +28,8 @@
     <string name="delete_promt">Delete</string>
     <string name="cancel_promt">Cancel</string>
 
+    <string name="main_instructions">swipe to change, tap to list items of type</string>
+
     <string name="add_new_item_promt">Add New Item</string>
     <string name="save_outfit_promt">Save Outfit</string>
     <string name="remove_outfit_promt">Remove Outfit</string>
