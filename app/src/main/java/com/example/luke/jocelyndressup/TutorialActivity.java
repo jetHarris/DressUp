@@ -206,23 +206,27 @@ public class TutorialActivity extends AppCompatActivity {
             switch(position) {
                 case 0:
                     //imageView.setImageResource(R.drawable.image1);
-                    imageView.setBackgroundColor(Color.RED);
+                    imageView.setImageResource(R.drawable.home_tutorial_1);
+                    imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 1:
-                    imageView.setBackgroundColor(Color.BLUE);
+                    imageView.setImageResource(R.drawable.home_tutorial_2);
+                    imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 2:
-                    imageView.setBackgroundColor(Color.GREEN);
+
+                    imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 3:
-                    imageView.setBackgroundColor(Color.YELLOW);
+                    imageView.setImageResource(R.drawable.home_tutorial_3);
+                    imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 4:
-                    imageView.setBackgroundColor(Color.CYAN);
+                    imageView.setBackgroundColor(Color.WHITE);
                     break;
             }
 

@@ -14,7 +14,8 @@ import android.widget.Toast;
 public class WriteNFCItemActivity extends AppCompatActivity {
     NFCManager nfcManager;
     String itemData = "";
-    String iId = "";
+    int iSender = 44;
+    int iId;
     String iPrice = "";
     String iName = "";
     String iVendor = "";
@@ -30,10 +31,11 @@ public class WriteNFCItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write_nfcitem);
 
         if (getIntent().getExtras() != null) {
-            iId = getIntent().getExtras().getString("itemId");
+            iId = getIntent().getExtras().getInt("itemId");
             iPrice = getIntent().getExtras().getString("price");
             iName = getIntent().getExtras().getString("name");
             iVendor = getIntent().getExtras().getString("vendor");
+            //iSender = getIntent().getExtras().getInt("sender");
             iType = getIntent().getExtras().getString("type");
 
             headId = getIntent().getExtras().getInt("head");
@@ -44,10 +46,11 @@ public class WriteNFCItemActivity extends AppCompatActivity {
 
         itemData += "{";
         itemData += "\"item\": {";
-        itemData += "\"id\":\"" + iId + "\",";
+        itemData += "\"id\":" + iId + ",";
         itemData += "\"name\":\"" + iName + "\",";
         itemData += "\"price\":\"" + iPrice + "\",";
         itemData += "\"vendor\":\"" + iVendor + "\",";
+        itemData += "\"sender\":" + iSender + ",";
         itemData += "\"type\":\"" + iType + "\"";
         itemData += "}";
         itemData += "}";
@@ -100,14 +103,14 @@ public class WriteNFCItemActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        Intent i = new Intent(this, ItemDetailActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         // Details to persist
-        i.putExtra("id", iId);
-        i.putExtra("type", iType);
-        i.putExtra("head", headId);
-        i.putExtra("torso", torsoId);
-        i.putExtra("legs", legsId);
-        i.putExtra("feet", feetId);
+//        i.putExtra("id", iId);
+//        i.putExtra("type", iType);
+//        i.putExtra("head", headId);
+//        i.putExtra("torso", torsoId);
+//        i.putExtra("legs", legsId);
+//        i.putExtra("feet", feetId);
         startActivity(i);
     }
 } // WriteNFCItemActivity

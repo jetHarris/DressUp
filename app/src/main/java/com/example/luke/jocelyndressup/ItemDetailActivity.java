@@ -243,6 +243,20 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                 startActivity(i4);
                 break;
 
+            case R.id.shareBtn:
+                Intent i7 = new Intent(this, WriteNFCItemActivity.class);
+                i7.putExtra("itemId", itemId);
+                i7.putExtra("name", nameText.getText().toString());
+                i7.putExtra("price", priceText.getText().toString());
+                i7.putExtra("vendor", vendorText.getText().toString());
+                i7.putExtra("type", type);
+                i7.putExtra("head", headId);
+                i7.putExtra("torso", torsoId);
+                i7.putExtra("legs", legsId);
+                i7.putExtra("feet", feetId);
+                startActivity(i7);
+                break;
+
             case R.id.cancelBtn:
                 if (addingItem) {
                     Intent i6 = new Intent(this, CameraActivity.class);
