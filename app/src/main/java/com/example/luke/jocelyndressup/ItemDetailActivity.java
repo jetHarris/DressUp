@@ -46,6 +46,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
     private Context context;
     boolean addingItem = false;
     Bitmap capture = null;
+    String startingName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +128,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
         }
 
         nameText.setText(name);
+        startingName = name;
         priceText.setText("" + price);
         vendorText.setText(vendorName);
 
@@ -179,6 +181,25 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                         Float hundred = 100.0F;
                         db.updateItem(itemId, nameText.getText().toString(), Math.round(price * hundred) / hundred, vendorText.getText().toString(), senderId, type);
                         db.close();
+
+                        //the name has changed so the file name must change as well
+                        if(!startingName.equals(nameText.getText())){
+                            FileOutputStream fos = null;
+                            try {
+                                fos = openFileOutput(namify(nameText.getText().toString()) + ".bmp", Context.MODE_PRIVATE);
+                                Bitmap bitmap = ((BitmapDrawable)display.getDrawable()).getBitmap();
+                                // Use the compress method on the BitMap object to write image to the OutputStream
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, fos);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            } finally {
+                                try {
+                                    fos.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
                         Toast.makeText(this, "Item Updated", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(this, ItemListActivity.class);
                         i.putExtra("type", type);
