@@ -25,6 +25,7 @@ public class SuperImageLoader
 //TODO Auto-generated method stub
         try{
 
+            String named = namify(params[0].fileNames.get(0));
             FileInputStream fin = params[0].context.openFileInput(namify(params[0].fileNames.get(0))+".bmp");
             Bitmap b = BitmapFactory.decodeStream(fin);
 
@@ -33,7 +34,6 @@ public class SuperImageLoader
             publishProgress(packet);
 
 
-            //b.recycle();
             fin = params[0].context.openFileInput(namify(params[0].fileNames.get(1))+".bmp");
             b = BitmapFactory.decodeStream(fin);
 
@@ -41,7 +41,6 @@ public class SuperImageLoader
             packet = new ImageLoaderPacketPost(b,params[0].viewList.get(2), params[0].context, params[0].viewList.get(3));
             publishProgress(packet);
 
-            //b.recycle();
             fin = params[0].context.openFileInput(namify(params[0].fileNames.get(2))+".bmp");
             b = BitmapFactory.decodeStream(fin);
 
@@ -49,7 +48,6 @@ public class SuperImageLoader
             packet = new ImageLoaderPacketPost(b,params[0].viewList.get(4), params[0].context, params[0].viewList.get(5));
             publishProgress(packet);
 
-            //b.recycle();
             fin = params[0].context.openFileInput(namify(params[0].fileNames.get(3))+".bmp");
             b = BitmapFactory.decodeStream(fin);
 
@@ -85,7 +83,6 @@ public class SuperImageLoader
         }
     }
     protected void onPostExecute(ImageLoaderPacketPost ilpp){
-        //ilpp.bit.recycle();
     }
     protected void onCancelled(){
     }

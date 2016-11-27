@@ -45,6 +45,7 @@ public class ItemListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_list);
         db = new DBAdapter(this);
         context = this.getApplicationContext();
+        System.gc();
 
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -59,8 +60,6 @@ public class ItemListActivity extends AppCompatActivity {
         layoutParams.rightMargin = 40;
         imageView.setLayoutParams(layoutParams);
         actionBar.setCustomView(imageView);
-        //get intent which would be from the outfits page
-        //then use the outfit name to set the images appropriately
         if (getIntent().getExtras() != null) {
             type = getIntent().getExtras().getString("type");
             headID = getIntent().getExtras().getInt("head");
@@ -137,7 +136,6 @@ public class ItemListActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         i.putExtra("type", type);
         switch(type) {
-            //if the next head button is clicked then switch the image of the head to the next one
             case "head":
                 i.putExtra("head", itemIDs.get(position));
                 i.putExtra("torso", torsoID);
@@ -172,21 +170,18 @@ public class ItemListActivity extends AppCompatActivity {
         itemIDs = new ArrayList<Integer>();
         db.open();
         Cursor c;
-        //get all the head id's
         c = db.getItemsByType(type);
         if (c.moveToFirst()) {
             do {
                 itemIDs.add(c.getInt(0));
                 names.add(c.getString(1));
                 pricesTemp.add(c.getFloat(2));
-                //DisplayContact(c);
             } while (c.moveToNext());
         }
 
         db.close();
 
         itemname = names.toArray(new String[names.size()]);
-        //imgid = (Integer[])imgIDs.toArray();
 
         ArrayList<Integer> resIds = new ArrayList<Integer>();
 
@@ -239,10 +234,4 @@ public class ItemListActivity extends AppCompatActivity {
         }
     }
 
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();  // Always call the superclass method first
-//        adapter.resume();
-//    }
 }

@@ -33,7 +33,6 @@ public class AboutActivity extends AppCompatActivity {
         layoutParams.rightMargin = 40;
         imageView.setLayoutParams(layoutParams);
         actionBar.setCustomView(imageView);
-        // Lucas Pukas is the Cutas
     }
     public void onClick(View view) {
         switch (view.getId()) {

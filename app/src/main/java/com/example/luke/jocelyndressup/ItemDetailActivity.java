@@ -108,9 +108,6 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
             ImageLoaderPacket packet = new ImageLoaderPacket(fileName, view, context);
             ImageLoader il = new ImageLoader();
             il.execute(packet);
-//            FileInputStream fin = openFileInput(fileName+".bmp");
-//            Bitmap b = BitmapFactory.decodeStream(fin);
-//            view.setImageBitmap(b);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,10 +131,6 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
         vendorText.setText(vendorName);
 
         setImage(display, name);
-//        ImageView iv = (ImageView) findViewById(R.id.detailImage);
-//        String fileName = "a" + itemId;
-//        int resID = getResources().getIdentifier(fileName, "drawable", getPackageName());
-//        iv.setImageResource(resID);
 
         db.close();
     }

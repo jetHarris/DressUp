@@ -80,16 +80,13 @@ public class OutfitsActivity extends AppCompatActivity implements AdapterView.On
 
         Cursor c;
         ArrayList<String> outfitNames = new ArrayList<String>();
-        int totalOutfits = 0;
         //get all the outfits and put then into the arrayList
         db.open();
         c = db.getAllOutfits();
         if(c.moveToFirst())
         {
             do {
-                totalOutfits++;
                 outfitNames.add(c.getString(1));
-                //DisplayContact(c);
             }while(c.moveToNext());
         }
         db.close();

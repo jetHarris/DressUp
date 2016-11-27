@@ -44,9 +44,6 @@ public class CustomListAdapter extends ArrayAdapter<String> {
             ImageLoader il = new ImageLoader();
             tasks.add(il);
             il.execute(packet);
-//            FileInputStream fin = c.openFileInput(fileName+".bmp");
-//            Bitmap b = BitmapFactory.decodeStream(fin);
-//            view.setImageBitmap(b);
         }
         catch (Exception e)
         {
@@ -66,30 +63,10 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
         txtTitle.setText(itemname[position]);
-        //imageView.setImageResource(imgid[position]);
         extratxt.setText("Price: $"+String.format("%.2f", price[position]));
         return rowView;
 
     };
 
-//    public void pause(){
-//        for(int i = 0; i < views.size();++i) {
-//            BitmapDrawable drawable = (BitmapDrawable) views.get(i).getDrawable();
-//            Bitmap bitmap = drawable.getBitmap();
-//
-//            views.get(i).setImageBitmap(null);
-//
-//            if (bitmap != null && !bitmap.isRecycled()) {
-//                bitmap.recycle();
-//                bitmap = null;
-//            }
-//        }
-//    }
-
-    public void resume(){
-        for(int i = 0; i < views.size();++i) {
-            setImage(views.get(i), itemname[i]);
-        }
-    }
 
 }
