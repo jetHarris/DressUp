@@ -221,6 +221,10 @@ public class ItemListActivity extends AppCompatActivity {
                 startActivity(i6);
                 break;
 
+            case R.id.addScanItemBtn:
+                Intent i7 = new Intent(this, ReadNFCItemActivity.class);
+                startActivity(i7);
+                break;
         }
     }
 
