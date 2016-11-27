@@ -2,30 +2,40 @@ package com.example.luke.jocelyndressup;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class ReadNFCItemActivity extends AppCompatActivity {
     NFCManager nfcManager;
     Context thisContext;
+    private DBAdapter db;
     String itemData;
-    String iId;
+    int iId;
     String iName;
     String iPrice;
     String iVendor;
+    int iSender;
     String iType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_nfcitem);
+        db = new DBAdapter(this);
         nfcManager = new NFCManager(this);
         nfcManager.onActivityCreate();
 
@@ -37,10 +47,11 @@ public class ReadNFCItemActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(itemRead);
                     JSONObject itemObject = jsonObj.getJSONObject("item");
-                    iId = itemObject.getString("id");
+                    iId = itemObject.getInt("id");
                     iName = itemObject.getString("name");
                     iPrice = itemObject.getString("price");
                     iVendor = itemObject.getString("vendor");
+                    iSender = itemObject.getInt("sender");
                     iType = itemObject.getString("type");
                 } catch (JSONException je) {
                     System.out.println("JSON Error - " + je.getMessage());
@@ -48,9 +59,21 @@ public class ReadNFCItemActivity extends AppCompatActivity {
                     System.out.println("Error - " + e.getMessage());
                 }
                 // Display Read Item?
-                readItemDetails();
+                updateItem();
+                toMain();
             }
         });
+
+        sharingAnimation(R.anim.rotatesharing);
+    }
+
+    private void sharingAnimation(int animationResourceID)
+    {
+        ImageView reuseImageView = (ImageView)findViewById(R.id.ivReadIcon);
+        reuseImageView.setImageResource(R.drawable.icon);
+        reuseImageView.setVisibility(View.VISIBLE);
+        Animation an = AnimationUtils.loadAnimation(this, animationResourceID);
+        reuseImageView.startAnimation(an);
     }
 
     // fires on NFC card detected
@@ -81,7 +104,26 @@ public class ReadNFCItemActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    private void updateItem() {
+        if (!iName.equals("") && !iPrice.equals("")) {
+            db.open();
+            Float price = Float.parseFloat(iPrice);
+            Float hundred = 100.0F;
+            db.updateItem(iId, iName, Math.round(price * hundred) / hundred, iVendor, iSender, iType);
+            db.close();
+            Toast.makeText(this, "Item Scanned to DB", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Invalid Item Tag", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void toMain() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
     public void onClick(View view) {
-        readItemDetails();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 } // ReadNFCItemActivity
