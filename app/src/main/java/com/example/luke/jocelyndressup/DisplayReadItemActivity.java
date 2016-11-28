@@ -5,11 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.FileInputStream;
 
 public class DisplayReadItemActivity extends AppCompatActivity {
     TextView tvName;
@@ -29,19 +32,35 @@ public class DisplayReadItemActivity extends AppCompatActivity {
 
         // Get Bundled data
         if (getIntent().getExtras() != null) {
-            if (getIntent().hasExtra("image"))
-                imgItem = BitmapFactory.decodeByteArray(
-                        getIntent().getByteArrayExtra("image"), 0, getIntent().getByteArrayExtra("image").length);
+//            if (getIntent().hasExtra("image"))
+//                imgItem = BitmapFactory.decodeByteArray(
+//                        getIntent().getByteArrayExtra("image"), 0, getIntent().getByteArrayExtra("image").length);
             name = getIntent().getExtras().getString("name", "");
             price = getIntent().getExtras().getString("price", "");
         }
 
         //Set Textviews
-        tvName.setText(name);
+        tvName.setText(namify(name));
         tvPrice.setText(price);
+
+        try {
+            FileInputStream fin = openFileInput(namify(name) + ".bmp");
+            imgItem = BitmapFactory.decodeStream(fin);
+            ImageView iv = (ImageView)findViewById(R.id.ivNewItem);
+            iv.setImageResource(R.drawable.icon);
+            iv.setImageBitmap(imgItem);
+        }catch(Exception e){
+            Log.e("Image","Failed to load image",e);
+        }
 
         //Trigger animation
         fadeinAnimation(R.anim.fadein);
+    }
+
+    protected String namify(String name) {
+        String temp = name.replace(' ', '_');
+        String results = temp.toLowerCase();
+        return results;
     }
 
     private void fadeinAnimation(int animationResourceID)

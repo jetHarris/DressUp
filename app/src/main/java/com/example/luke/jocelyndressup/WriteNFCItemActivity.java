@@ -30,19 +30,27 @@ public class WriteNFCItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_nfcitem);
 
-        if (getIntent().getExtras() != null) {
-            iId = getIntent().getExtras().getInt("itemId");
-            iPrice = getIntent().getExtras().getString("price");
-            iName = getIntent().getExtras().getString("name");
-            iVendor = getIntent().getExtras().getString("vendor");
-            //iSender = getIntent().getExtras().getInt("sender");
-            iType = getIntent().getExtras().getString("type");
+//        if (getIntent().getExtras() != null) {
+//            iId = getIntent().getExtras().getInt("itemId");
+//            iPrice = getIntent().getExtras().getString("price");
+//            iName = getIntent().getExtras().getString("name");
+//            iVendor = getIntent().getExtras().getString("vendor");
+//            //iSender = getIntent().getExtras().getInt("sender");
+//            iType = getIntent().getExtras().getString("type");
+//
+//            headId = getIntent().getExtras().getInt("head");
+//            torsoId = getIntent().getExtras().getInt("torso");
+//            legsId = getIntent().getExtras().getInt("legs");
+//            feetId = getIntent().getExtras().getInt("feet");
+//        }
 
-            headId = getIntent().getExtras().getInt("head");
-            torsoId = getIntent().getExtras().getInt("torso");
-            legsId = getIntent().getExtras().getInt("legs");
-            feetId = getIntent().getExtras().getInt("feet");
-        }
+        //Hard coded for testing
+        iId = 0;
+        iName = "grey_crop_top";
+        iPrice = "20.50";
+        iVendor = "Gap";
+        iSender = 44;
+        iType = "torso";
 
         itemData += "{";
         itemData += "\"item\": {";

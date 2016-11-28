@@ -45,7 +45,7 @@
         android:layout_marginTop="10dp" />
 
     <Button
-        android:text="Button"
+        android:text="@string/display_new_item_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -53,7 +53,6 @@
         android:id="@+id/button"
         android:background="@drawable/custom_button"
         android:onClick="onClick"
-        android:textColor="@color/colorwhite"
-        tools:text="@string/display_new_item_prompt" />
+        android:textColor="@color/colorwhite" />
 
 </RelativeLayout>
