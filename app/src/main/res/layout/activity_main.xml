@@ -107,7 +107,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="120dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/imageLayout"
         android:layout_below="@+id/navlayout"
         android:layout_alignParentStart="true"
@@ -153,15 +153,6 @@
             android:padding="1dp"
             android:scaleType="fitXY" />
 
-        <TextView
-            android:text="@string/main_instructions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:layout_marginTop="40dp"
-            android:textColor="@android:color/white"
-            android:background="@color/colorPrimaryDark"
-            android:padding="5dp" />
     </LinearLayout>
 
 
@@ -171,7 +162,8 @@
         android:layout_toEndOf="@+id/imageLayoutBack"
         android:layout_below="@+id/navlayout"
         android:background="@drawable/custom_button"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:id="@+id/priceBox">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -367,6 +359,21 @@
             android:layout_alignStart="@+id/saveBtn"
             android:textColor="@android:color/white"
             android:onClick="onClick" />
+
     </RelativeLayout>
+
+    <TextView
+        android:text="@string/main_instructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimaryDark"
+        android:padding="5dp"
+        android:layout_alignEnd="@+id/imageLayoutBack"
+        android:layout_alignStart="@+id/imageLayoutBack"
+        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@id/priceBox"
+        android:layout_marginBottom="11dp" />
 
 </RelativeLayout>
