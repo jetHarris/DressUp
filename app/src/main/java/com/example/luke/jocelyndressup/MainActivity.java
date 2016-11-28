@@ -356,33 +356,6 @@ public class MainActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
-//            //if about was clicked then go to the about page
-//            case R.id.action_about:
-//                Intent i = new Intent(this, AboutActivity.class);
-//                startActivity(i);
-//                break;
-//
-//            //if the outfits menu item was clicked then go to the outfits page
-//            case R.id.action_outfits:
-//                Intent i2 = new Intent(this, OutfitsActivity.class);
-//                startActivity(i2);
-//                break;
-//
-//            case R.id.action_camera:
-//                Intent i6 = new Intent(this, CameraActivity.class);
-//                startActivity(i6);
-//                break;
-//
-//            case R.id.action_read_nfc:
-//                Intent i4 = new Intent(this, ReadNFCItemActivity.class);
-//                startActivity(i4);
-//                break;
-//
-//            case R.id.action_write_nfc:
-//                Intent i5 = new Intent(this, WriteNFCItemActivity.class);
-//                startActivity(i5);
-//                break;
-
             case R.id.action_tutorial:
                 SharedPreferences spAppHistory = getSharedPreferences("AppHistory", MODE_PRIVATE);
                 SharedPreferences.Editor editor = spAppHistory.edit();
@@ -414,10 +387,13 @@ public class MainActivity extends AppCompatActivity {
             currentLegsImage = legs.indexOf(c.getInt(4));
 
             currentFeetImage = feet.indexOf(c.getInt(5));
+            Toast.makeText(this, "Outfit:" + name + " loaded!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Get failed on " + name, Toast.LENGTH_SHORT).show();
         }
         db.close();
+
+
     }
 
     //copyDB method given to us in class
@@ -493,12 +469,12 @@ public class MainActivity extends AppCompatActivity {
                     db.close();
                     TextView label = (TextView) findViewById(R.id.outfitLabel);
                     TextView nameLabel = (TextView) findViewById(R.id.outfitNameText);
-                    Button removeOutfit = (Button) findViewById(R.id.saveBtn);
-                    removeOutfit.setVisibility(View.INVISIBLE);
                     label.setVisibility(View.INVISIBLE);
                     nameLabel.setVisibility(View.INVISIBLE);
+                    Toast.makeText(this, "Outfit removed!", Toast.LENGTH_SHORT).show();
+                    outfitOnDisplay = false;
                 } else {
-                    Toast.makeText(this, "An outfit must be saved before it can be deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "An outfit must be saved/loaded before it can be deleted", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.AboutBtn:

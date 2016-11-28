@@ -162,14 +162,6 @@ public class DBAdapter {
             values11.put(KEY_TYPE, "torso");
             db.insert(DATABASE_TABLE_ITEMS, null, values11);
 
-            ContentValues values12 = new ContentValues();
-            values12.put(KEY_ITEM_NAME, "grey crop top");
-            values12.put(KEY_PRICE, 16.99);
-            values12.put(KEY_VENDOR_NAME, "Old Navy");
-            values12.put(KEY_SENDER_ID, 0);
-            values12.put(KEY_TYPE, "torso");
-            db.insert(DATABASE_TABLE_ITEMS, null, values12);
-
             ContentValues values10 = new ContentValues();
             values10.put(KEY_ITEM_NAME, "white dress shirt");
             values10.put(KEY_PRICE, 26.67);
