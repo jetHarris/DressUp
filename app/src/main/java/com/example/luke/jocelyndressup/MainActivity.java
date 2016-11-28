@@ -250,21 +250,31 @@ public class MainActivity extends AppCompatActivity {
 
     public void recalculatePrice() {
         runningPrice = 0;
-        runningPrice += headPrices.get(currentHeadImage);
-        runningPrice += torsoPrices.get(currentTorsoImage);
-        runningPrice += legPrices.get(currentLegsImage);
-        runningPrice += feetPrices.get(currentFeetImage);
+        if(headPrices.size() > 0) {
+            runningPrice += headPrices.get(currentHeadImage);
+            headPriceLabel.setText("$" + String.format("%.2f", headPrices.get(currentHeadImage)));
+        }
+        if(torsoPrices.size() > 0) {
+            runningPrice += torsoPrices.get(currentTorsoImage);
+            torsoPriceLabel.setText("$" + String.format("%.2f", torsoPrices.get(currentTorsoImage)));
+        }
+        if(legPrices.size() > 0) {
+            runningPrice += legPrices.get(currentLegsImage);
+            legsPriceLabel.setText("$" + String.format("%.2f", legPrices.get(currentLegsImage)));
+        }
+        if(feetPrices.size() > 0) {
+            runningPrice += feetPrices.get(currentFeetImage);
+            feetPriceLabel.setText("$" + String.format("%.2f", feetPrices.get(currentFeetImage)));
+        }
 
-        headPriceLabel.setText("$" + String.format("%.2f", headPrices.get(currentHeadImage)));
-        torsoPriceLabel.setText("$" + String.format("%.2f", torsoPrices.get(currentTorsoImage)));
-        legsPriceLabel.setText("$" + String.format("%.2f", legPrices.get(currentLegsImage)));
-        feetPriceLabel.setText("$" + String.format("%.2f", feetPrices.get(currentFeetImage)));
-
-
-        headNameLabel.setText("" + headNames.get(currentHeadImage));
-        torsoNameLabel.setText("" + torsoNames.get(currentTorsoImage));
-        legsNameLabel.setText("" + legNames.get(currentLegsImage));
-        feetNameLabel.setText("" + feetNames.get(currentFeetImage));
+        if(headNames.size() > 0)
+            headNameLabel.setText("" + headNames.get(currentHeadImage));
+        if(torsoNames.size() > 0)
+            torsoNameLabel.setText("" + torsoNames.get(currentTorsoImage));
+        if(legNames.size() > 0)
+            legsNameLabel.setText("" + legNames.get(currentLegsImage));
+        if(feetNames.size() > 0)
+            feetNameLabel.setText("" + feetNames.get(currentFeetImage));
 
         double roundedPrice = Math.round(runningPrice * 100.0) / 100.0;
         double tax = Math.round((runningPrice * 0.13) * 100.0) / 100.0;
@@ -279,10 +289,22 @@ public class MainActivity extends AppCompatActivity {
     public void setImages() {
 
         fileNames.clear();
-        fileNames.add(headNames.get(currentHeadImage));
-        fileNames.add(torsoNames.get(currentTorsoImage));
-        fileNames.add(legNames.get(currentLegsImage));
-        fileNames.add(feetNames.get(currentFeetImage));
+        if(headNames.size() > 0)
+            fileNames.add(headNames.get(currentHeadImage));
+        else
+            fileNames.add("question_mark");
+        if(torsoNames.size() > 0)
+            fileNames.add(torsoNames.get(currentTorsoImage));
+        else
+            fileNames.add("question_mark");
+        if(legNames.size() > 0)
+            fileNames.add(legNames.get(currentLegsImage));
+        else
+            fileNames.add("question_mark");
+        if(feetNames.size() > 0)
+            fileNames.add(feetNames.get(currentFeetImage));
+        else
+            fileNames.add("question_mark");
 
 
         ImageLoaderSuperPacket packet = new ImageLoaderSuperPacket(fileNames, frontFacingViews, context);
@@ -494,10 +516,27 @@ public class MainActivity extends AppCompatActivity {
     public void clickClothing(String type) {
         Intent i4 = new Intent(this, ItemListActivity.class);
         i4.putExtra("type", type);
-        i4.putExtra("head", heads.get(currentHeadImage));
-        i4.putExtra("torso", torsos.get(currentTorsoImage));
-        i4.putExtra("legs", legs.get(currentLegsImage));
-        i4.putExtra("feet", feet.get(currentFeetImage));
+        if(heads.size() >0)
+            i4.putExtra("head", heads.get(currentHeadImage));
+        else
+            i4.putExtra("head", -1);
+
+        if(torsos.size() >0)
+            i4.putExtra("torso", torsos.get(currentTorsoImage));
+        else
+            i4.putExtra("torso", -1);
+
+
+        if(legs.size() >0)
+            i4.putExtra("legs", legs.get(currentLegsImage));
+        else
+            i4.putExtra("legs", -1);
+
+
+        if(feet.size() >0)
+            i4.putExtra("feet", feet.get(currentFeetImage));
+        else
+            i4.putExtra("feet", -1);
         startActivity(i4);
     }
 
@@ -533,7 +572,8 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentHeadImage = 0;
                 {
-                    changeImageRight(headImage, headNames.get(currentHeadImage), headImageHidden);
+                    if(headNames.size() > 0)
+                        changeImageRight(headImage, headNames.get(currentHeadImage), headImageHidden);
                 }
                 break;
                 case "torso":
@@ -542,7 +582,8 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentTorsoImage = 0;
                 {
-                    changeImageRight(torsoImage, torsoNames.get(currentTorsoImage), torsoImageHidden);
+                    if(torsoNames.size() > 0)
+                        changeImageRight(torsoImage, torsoNames.get(currentTorsoImage), torsoImageHidden);
                 }
                 break;
                 case "legs":
@@ -551,7 +592,8 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentLegsImage = 0;
                 {
-                    changeImageRight(legsImage, legNames.get(currentLegsImage), legsImageHidden);
+                    if(legNames.size() > 0)
+                        changeImageRight(legsImage, legNames.get(currentLegsImage), legsImageHidden);
                 }
                 break;
                 case "feet":
@@ -560,7 +602,8 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentFeetImage = 0;
                 {
-                    changeImageRight(feetImage, feetNames.get(currentFeetImage), feetImageHidden);
+                    if(feetNames.size() > 0)
+                        changeImageRight(feetImage, feetNames.get(currentFeetImage), feetImageHidden);
                 }
                 break;
             }
@@ -573,7 +616,8 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentHeadImage = numberOfHeads;
                 {
-                    changeImageLeft(headImage, headNames.get(currentHeadImage), headImageHidden);
+                    if(headNames.size() > 0)
+                        changeImageLeft(headImage, headNames.get(currentHeadImage), headImageHidden);
                 }
                 break;
                 case "torso":
@@ -582,7 +626,8 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentTorsoImage = numberOfTorsos;
                 {
-                    changeImageLeft(torsoImage, torsoNames.get(currentTorsoImage), torsoImageHidden);
+                    if(torsoNames.size() > 0)
+                        changeImageLeft(torsoImage, torsoNames.get(currentTorsoImage), torsoImageHidden);
                 }
                 break;
                 case "legs":
@@ -591,7 +636,8 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentLegsImage = numberOfLegs;
                 {
-                    changeImageLeft(legsImage, legNames.get(currentLegsImage), legsImageHidden);
+                    if(legNames.size() > 0)
+                        changeImageLeft(legsImage, legNames.get(currentLegsImage), legsImageHidden);
                 }
                 break;
                 case "feet":
@@ -600,7 +646,8 @@ public class MainActivity extends AppCompatActivity {
                     else
                         currentFeetImage = numberOfFeet;
                 {
-                    changeImageLeft(feetImage, feetNames.get(currentFeetImage), feetImageHidden);
+                    if(feetNames.size() > 0)
+                        changeImageLeft(feetImage, feetNames.get(currentFeetImage), feetImageHidden);
                 }
                 break;
             }

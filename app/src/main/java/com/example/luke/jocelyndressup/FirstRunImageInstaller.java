@@ -54,6 +54,9 @@ public class FirstRunImageInstaller extends AsyncTask<InstallPacket, Integer, Bu
         Bitmap legs3 = BitmapFactory.decodeResource(params[0].c.getResources(),R.drawable.black_skirt);
         saveToInternalStorage(legs3,"black_skirt",params[0].c);
 
+        Bitmap question_mark = BitmapFactory.decodeResource(params[0].c.getResources(),R.drawable.question_mark);
+        saveToInternalStorage(question_mark,"question_mark",params[0].c);
+
         return params[0].but;
     }
 
