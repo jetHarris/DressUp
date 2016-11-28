@@ -42,7 +42,8 @@ public class ReadNFCItemActivity extends AppCompatActivity {
         nfcManager.setOnTagReadListener(new NFCManager.TagReadListener() {
             @Override
             public void onTagRead(String itemRead) {
-                Toast.makeText(ReadNFCItemActivity.this, "Item Received:" + itemRead, Toast.LENGTH_LONG).show();
+                Toast.makeText(ReadNFCItemActivity.this, "Item Received!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(ReadNFCItemActivity.this, "Item Received:" + itemRead, Toast.LENGTH_LONG).show();
                 itemData = itemRead;
                 try {
                     JSONObject jsonObj = new JSONObject(itemRead);
@@ -109,12 +110,18 @@ public class ReadNFCItemActivity extends AppCompatActivity {
             db.open();
             Float price = Float.parseFloat(iPrice);
             Float hundred = 100.0F;
-            db.updateItem(iId, iName, Math.round(price * hundred) / hundred, iVendor, iSender, iType);
+            db.updateItem(iId, namify(iName), Math.round(price * hundred) / hundred, iVendor, iSender, iType);
             db.close();
             Toast.makeText(this, "Item Scanned to DB", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Invalid Item Tag", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    protected String namify(String name) {
+        String temp = name.replace(' ', '_');
+        String results = temp.toLowerCase();
+        return results;
     }
 
     private void toMain() {

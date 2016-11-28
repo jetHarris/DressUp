@@ -44,9 +44,9 @@ public class TutorialActivity extends AppCompatActivity {
         context = this.getApplicationContext();
         SharedPreferences spAppHistory = getSharedPreferences("AppHistory", MODE_PRIVATE);
         boolean previously_run = spAppHistory.getBoolean("previously_run", false);
-
+        help = spAppHistory.getBoolean("help", false);
         btnDone = (Button) findViewById(R.id.btn_Done);
-        help = false;
+
         if(getIntent().getExtras() != null) {
             help = getIntent().getExtras().getBoolean("help", false);
         }
@@ -60,6 +60,9 @@ public class TutorialActivity extends AppCompatActivity {
                 firstTimeInstall();
                 btnDone.setEnabled(false);
                 Toast.makeText(this, "Doing first time install of images in background", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                btnDone.setVisibility(View.VISIBLE);
             }
         }
 
@@ -207,26 +210,26 @@ public class TutorialActivity extends AppCompatActivity {
                 case 0:
                     //imageView.setImageResource(R.drawable.image1);
                     imageView.setImageResource(R.drawable.home_tutorial_1);
-                    imageView.setBackgroundColor(Color.WHITE);
+                    //imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 1:
                     imageView.setImageResource(R.drawable.home_tutorial_2);
-                    imageView.setBackgroundColor(Color.WHITE);
+                    //imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 2:
 
-                    imageView.setBackgroundColor(Color.WHITE);
+                    //imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 3:
                     imageView.setImageResource(R.drawable.home_tutorial_3);
-                    imageView.setBackgroundColor(Color.WHITE);
+                    //imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 4:
-                    imageView.setBackgroundColor(Color.WHITE);
+                    //imageView.setBackgroundColor(Color.WHITE);
                     break;
             }
 

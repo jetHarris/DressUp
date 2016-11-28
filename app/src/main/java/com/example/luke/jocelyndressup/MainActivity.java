@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -355,31 +356,40 @@ public class MainActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
 
         switch (item.getItemId()) {
-            //if about was clicked then go to the about page
-            case R.id.action_about:
-                Intent i = new Intent(this, AboutActivity.class);
-                startActivity(i);
-                break;
+//            //if about was clicked then go to the about page
+//            case R.id.action_about:
+//                Intent i = new Intent(this, AboutActivity.class);
+//                startActivity(i);
+//                break;
+//
+//            //if the outfits menu item was clicked then go to the outfits page
+//            case R.id.action_outfits:
+//                Intent i2 = new Intent(this, OutfitsActivity.class);
+//                startActivity(i2);
+//                break;
+//
+//            case R.id.action_camera:
+//                Intent i6 = new Intent(this, CameraActivity.class);
+//                startActivity(i6);
+//                break;
+//
+//            case R.id.action_read_nfc:
+//                Intent i4 = new Intent(this, ReadNFCItemActivity.class);
+//                startActivity(i4);
+//                break;
+//
+//            case R.id.action_write_nfc:
+//                Intent i5 = new Intent(this, WriteNFCItemActivity.class);
+//                startActivity(i5);
+//                break;
 
-            //if the outfits menu item was clicked then go to the outfits page
-            case R.id.action_outfits:
-                Intent i2 = new Intent(this, OutfitsActivity.class);
-                startActivity(i2);
-                break;
-
-            case R.id.action_camera:
-                Intent i6 = new Intent(this, CameraActivity.class);
+            case R.id.action_tutorial:
+                SharedPreferences spAppHistory = getSharedPreferences("AppHistory", MODE_PRIVATE);
+                SharedPreferences.Editor editor = spAppHistory.edit();
+                editor.putBoolean("help", true);
+                editor.commit();
+                Intent i6 = new Intent(this, TutorialActivity.class);
                 startActivity(i6);
-                break;
-
-            case R.id.action_read_nfc:
-                Intent i4 = new Intent(this, ReadNFCItemActivity.class);
-                startActivity(i4);
-                break;
-
-            case R.id.action_write_nfc:
-                Intent i5 = new Intent(this, WriteNFCItemActivity.class);
-                startActivity(i5);
                 break;
 
         }
