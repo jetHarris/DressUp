@@ -32,7 +32,7 @@ public class TutorialActivity extends AppCompatActivity {
     Button btnDone;
     int prevPosition;
     private boolean help;
-    private static final int MAX_VIEWS = 5;//Total number of tutorial images
+    private static final int MAX_VIEWS = 7; //Total number of tutorial images
     Context context;
 
     @Override
@@ -182,8 +182,14 @@ public class TutorialActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = spAppHistory.edit();
         editor.putBoolean("previously_run", true);
         editor.commit();
-        Intent i = new Intent(this, BufferActivity.class);
-        startActivity(i);
+        if(!help) {
+            Intent i = new Intent(this, BufferActivity.class);
+            startActivity(i);
+        }
+        else {
+            Intent m = new Intent(this, MainActivity.class);
+            startActivity(m);
+        }
     } // cDone
 
     // ViewPager Initialization
@@ -199,6 +205,7 @@ public class TutorialActivity extends AppCompatActivity {
             return view == (View) object;
         }
 
+        // Load Images here
         @Override
         public Object instantiateItem(View container, int position) {
             Log.e("walkthrough", "instantiateItem(" + position + ");");
@@ -208,27 +215,38 @@ public class TutorialActivity extends AppCompatActivity {
 
             switch(position) {
                 case 0:
-                    //imageView.setImageResource(R.drawable.image1);
-                    imageView.setImageResource(R.drawable.home_tutorial_1);
+                    imageView.setImageResource(R.drawable.tutorial_welcome);
                     //imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 1:
-                    imageView.setImageResource(R.drawable.home_tutorial_2);
+                    //imageView.setImageResource(R.drawable.image1);
+                    imageView.setImageResource(R.drawable.tutorial_home_1);
                     //imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 2:
-
+                    imageView.setImageResource(R.drawable.tutorial_home_2);
                     //imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 3:
-                    imageView.setImageResource(R.drawable.home_tutorial_3);
+                    imageView.setImageResource(R.drawable.tutorial_item_list_2);
                     //imageView.setBackgroundColor(Color.WHITE);
                     break;
 
                 case 4:
+                    imageView.setImageResource(R.drawable.tutorial_home_3);
+                    //imageView.setBackgroundColor(Color.WHITE);
+                    break;
+
+                case 5:
+                    imageView.setImageResource(R.drawable.tutorial_outfit_1);
+                    //imageView.setBackgroundColor(Color.WHITE);
+                    break;
+
+                case 6:
+                    imageView.setImageResource(R.drawable.tutorial_final);
                     //imageView.setBackgroundColor(Color.WHITE);
                     break;
             }
