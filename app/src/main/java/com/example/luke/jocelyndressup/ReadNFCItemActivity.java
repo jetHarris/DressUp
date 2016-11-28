@@ -51,7 +51,7 @@ public class ReadNFCItemActivity extends AppCompatActivity {
         nfcManager.setOnTagReadListener(new NFCManager.TagReadListener() {
             @Override
             public void onTagRead(String itemRead) {
-                Toast.makeText(ReadNFCItemActivity.this, "Item Received!" + itemRead, Toast.LENGTH_LONG).show();
+                Toast.makeText(ReadNFCItemActivity.this, "Item Received!", Toast.LENGTH_LONG).show();
                 //Toast.makeText(ReadNFCItemActivity.this, "Item Received:" + itemRead, Toast.LENGTH_LONG).show();
                 itemData = itemRead;
                 try {
