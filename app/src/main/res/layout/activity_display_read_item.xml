@@ -11,14 +11,6 @@
     tools:context="com.example.luke.jocelyndressup.DisplayReadItemActivity"
     android:background="@drawable/custom_button">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:id="@+id/ivNewItem"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_height="100dp"
-        android:layout_marginTop="10dp" />
-
     <TextView
         android:text="Item"
         android:layout_width="match_parent"
@@ -31,19 +23,6 @@
         android:textColor="@color/colorwhite"
         android:layout_marginTop="10dp" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dis_name"
-        android:layout_toEndOf="@+id/ivNewItem"
-        android:id="@+id/dis_price"
-        android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:textColor="@color/colorwhite"
-        android:gravity="center"
-        tools:text="Price"
-        android:layout_marginTop="10dp" />
-
     <Button
         android:text="@string/display_new_item_prompt"
         android:layout_width="match_parent"
@@ -53,6 +32,31 @@
         android:id="@+id/button"
         android:background="@drawable/custom_button"
         android:onClick="onClick"
-        android:textColor="@color/colorwhite" />
+        android:textColor="@color/colorwhite"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:id="@+id/ivNewItem"
+        android:layout_height="100dp"
+        android:layout_centerInParent="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="125dp"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dis_price"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="@color/colorwhite"
+        android:gravity="center"
+        tools:text="Price"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/dis_name"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -41,7 +41,7 @@ public class DisplayReadItemActivity extends AppCompatActivity {
 
         //Set Textviews
         tvName.setText(namify(name));
-        tvPrice.setText(price);
+        tvPrice.setText("$" + price);
 
         try {
             FileInputStream fin = openFileInput(namify(name) + ".bmp");
