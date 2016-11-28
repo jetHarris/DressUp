@@ -61,6 +61,20 @@ public class CameraActivity extends AppCompatActivity {
                 i.putExtra("image", bs.toByteArray());
                 startActivity(i);
                 break;
+            case R.id.AboutBtn:
+                Intent i1 = new Intent(this, AboutActivity.class);
+                startActivity(i1);
+                break;
+            //if the outfits menu item was clicked then go to the outfits page
+            case R.id.OutfitsBtn:
+                Intent i3 = new Intent(this, OutfitsActivity.class);
+                startActivity(i3);
+                break;
+
+            case R.id.homeBtn:
+                Intent i4 = new Intent(this, MainActivity.class);
+                startActivity(i4);
+                break;
         }
     }
 
