@@ -14,7 +14,7 @@
 
     <string name="app_by">App By Luke Harris and Daniel Malnati</string>
 
-    <string name="about_text">This app is intended to help someone pick individual items to create an outfit. The focus helping the user budget for an outfit or simply be conscience of how much they are spending.</string>
+    <string name="about_text">Our project is an application that helps a user with budgeting, organizing and deciding upon clothing items. We had this idea when we heard people complaining about how long it took to decide on outfits to wear. The app features photo capturing, nfc tag reading, and a fully fleshed out database for outfits and clothing items. We hope this app helps you budget your shopping and always remember your favourite outfits.</string>
     <string name="about_promt">About</string>
     <string name="list_promt">Click to pick. Hold to Edit</string>
     <string name="listening_promt">Listening For Item...</string>
