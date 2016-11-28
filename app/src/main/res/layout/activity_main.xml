@@ -262,7 +262,7 @@
             android:layout_width="120dp">
 
             <TextView
-                android:text="TextView"
+                android:text="No Items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/headName"
@@ -271,7 +271,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:text="TextView"
+                android:text="No Items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/headPrice"
@@ -279,7 +279,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:text="TextView"
+                android:text="No Items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/torsoName"
@@ -289,7 +289,7 @@
                 android:layout_marginTop="50dp" />
 
             <TextView
-                android:text="TextView"
+                android:text="No Items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/torsoPrice"
@@ -297,7 +297,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:text="TextView"
+                android:text="No Items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/legsName"
@@ -307,7 +307,7 @@
                 android:layout_marginTop="50dp" />
 
             <TextView
-                android:text="TextView"
+                android:text="No Items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/legsPrice"
@@ -315,7 +315,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:text="TextView"
+                android:text="No Items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/feetName"
@@ -325,7 +325,7 @@
                 android:layout_marginTop="50dp" />
 
             <TextView
-                android:text="TextView"
+                android:text="No Items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/feetPrice"
