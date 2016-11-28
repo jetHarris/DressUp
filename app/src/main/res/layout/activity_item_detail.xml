@@ -172,6 +172,21 @@
         android:layout_toStartOf="@+id/detailImage" />
 
     <Button
+        android:text="@string/delete_promt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteBtn"
+        android:onClick="onClick"
+        android:background="@drawable/custom_button_highlight"
+        android:textColor="@android:color/white"
+        android:visibility="visible"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_above="@+id/cancelBtn"
+        android:layout_alignStart="@+id/cancelBtn"
+        android:layout_toStartOf="@+id/detailImage" />
+
+    <Button
         android:text="@string/update_promt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -179,38 +194,10 @@
         android:onClick="onClick"
         android:background="@drawable/custom_button_highlight"
         android:textColor="@android:color/white"
-        android:layout_below="@+id/typeSpinner"
-        android:layout_alignStart="@+id/typeSpinner"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_marginRight="10dp" />
-
-    <Button
-        android:text="@string/delete_promt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/deleteBtn"
-        android:onClick="onClick (ItemDetailActivity)"
-        android:background="@drawable/custom_button_highlight"
-        android:textColor="@android:color/white"
-        android:visibility="visible"
-        android:layout_below="@+id/typeSpinner"
-        android:layout_toEndOf="@+id/updateBtn"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" />
-
-    <Button
-        android:text="@string/share_item_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/shareBtn"
-        android:onClick="onClick"
-        android:background="@drawable/custom_button_highlight"
-        android:textColor="@android:color/white"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_below="@+id/updateBtn"
-        android:layout_toEndOf="@+id/textView13"
-        android:layout_marginTop="11dp" />
+        android:layout_above="@+id/deleteBtn"
+        android:layout_alignStart="@+id/deleteBtn"
+        android:layout_toStartOf="@+id/detailImage" />
 
 </RelativeLayout>
