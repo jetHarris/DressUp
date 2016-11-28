@@ -221,6 +221,7 @@ public class ItemDetailActivity extends AppCompatActivity implements AdapterView
                     db.open();
                     db.deleteItem(itemId);
                     db.close();
+                    Toast.makeText(this, "Item Removed", Toast.LENGTH_SHORT).show();
                     Intent i2 = new Intent(this, ItemListActivity.class);
                     i2.putExtra("type", type);
                     i2.putExtra("head", headId);
