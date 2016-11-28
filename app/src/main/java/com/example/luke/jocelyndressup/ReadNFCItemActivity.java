@@ -16,6 +16,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -30,6 +31,8 @@ public class ReadNFCItemActivity extends AppCompatActivity {
     String iVendor;
     int iSender;
     String iType;
+
+    Bitmap capture = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,12 +113,45 @@ public class ReadNFCItemActivity extends AppCompatActivity {
             db.open();
             Float price = Float.parseFloat(iPrice);
             Float hundred = 100.0F;
-            db.updateItem(iId, namify(iName), Math.round(price * hundred) / hundred, iVendor, iSender, iType);
+            db.insertItem(iName, Math.round(price * hundred) / hundred, iVendor, iSender, iType);
             db.close();
-            Toast.makeText(this, "Item Scanned to DB", Toast.LENGTH_SHORT).show();
+            FileOutputStream fos = null;
+            try {
+                fos = openFileOutput(namify(iName) + ".bmp", Context.MODE_PRIVATE);
+                // Use the compress method on the BitMap object to write image to the OutputStream
+                capture.compress(Bitmap.CompressFormat.JPEG, 50, fos);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            Toast.makeText(this, "Item Added!", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, DisplayReadItemActivity.class);
+            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+            capture.compress(Bitmap.CompressFormat.JPEG, 50, bs);
+            i.putExtra("image", bs.toByteArray());
+            i.putExtra("name", iName);
+            i.putExtra("price", iPrice);
+            startActivity(i);
         } else {
-            Toast.makeText(this, "Invalid Item Tag", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill out at least name and price", Toast.LENGTH_SHORT).show();
         }
+
+        // update
+//        if (!iName.equals("") && !iPrice.equals("")) {
+//            db.open();
+//            Float price = Float.parseFloat(iPrice);
+//            Float hundred = 100.0F;
+//            db.updateItem(iId, namify(iName), Math.round(price * hundred) / hundred, iVendor, iSender, iType);
+//            db.close();
+//            Toast.makeText(this, "Item Scanned to DB", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(this, "Invalid Item Tag", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     protected String namify(String name) {

@@ -3,7 +3,7 @@
     package="com.example.luke.jocelyndressup">
 
     <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature
         android:name="android.hardware.nfc"
@@ -14,16 +14,16 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/icon"
         android:label="Dress Up"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
         android:largeHeap="true"
-        android:hardwareAccelerated="false">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:noHistory="false"
-            android:configChanges="orientation|keyboardHidden"></activity>
+            android:configChanges="orientation|keyboardHidden"
+            android:noHistory="false" />
         <activity android:name=".AboutActivity" />
         <activity
             android:name=".OutfitsActivity"
@@ -35,7 +35,7 @@
             android:name=".ItemDetailActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".BufferActivity"/>
+        <activity android:name=".BufferActivity" />
         <activity
             android:name=".ReadNFCItemActivity"
             android:screenOrientation="portrait" />
@@ -49,6 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DisplayReadItemActivity"></activity>
     </application>
 
 </manifest>
